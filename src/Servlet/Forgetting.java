@@ -34,7 +34,7 @@ public class Forgetting extends HttpServlet {
 
     public static final String VUESucess              = "/WEB-INF/Connection.jsp";
     public static final String VUE       			  = "/WEB-INF/Forgetting.jsp";
-	private static final String FICHIER 			  = "/WEB-INF/DAO/dao.mail";
+	private static final String FICHIER 			  = "/DAO/dao.mail";
 
     private String              resultat;
     private Map<String, String> erreurs          = new HashMap<String, String>();
@@ -95,9 +95,9 @@ public class Forgetting extends HttpServlet {
                 if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                     throw new FormValidationException( "Bad Email's Format." );
                 } 
-              else if ( userDao.find( email ) != null ) {
+              /*else if ( userDao.find( email ) != null ) {
                     throw new FormValidationException( "This email address is already in use." );
-                }
+                }*/
             } else {
                 throw new FormValidationException( "Thank you to enter an email address." );
             }
