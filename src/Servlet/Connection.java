@@ -2,6 +2,8 @@ package Servlet;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -11,8 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import DAO.AnnouncementDAO;
 import DAO.UserDAO;
+import Entities.Annonces;
 import Entities.User;
 import EntityManagerF.SingletonEntityManagerFactory;
 
@@ -39,9 +42,22 @@ public class Connection extends HttpServlet {
 		UserDAO user = new UserDAO();
 		User user_connexion = user.findUser(email, password);
 		
+		
 	
 		if (user_connexion!=null){
 			session.setAttribute("user", user_connexion);
+			AnnouncementDAO dao = new AnnouncementDAO();
+        	List<Annonces> annoucements = new ArrayList<>();
+        	
+        	annoucements = dao.getAnnoucement_user((User)session.getAttribute("user"));
+        	
+        	if (!annoucements.isEmpty()){
+        		System.out.println(annoucements.get(0).getName());
+        		session.setAttribute("annoucement_user", annoucements);
+        	}
+        	else{
+        		System.out.println("merdeeeeee");
+        	}
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		}
 		else{

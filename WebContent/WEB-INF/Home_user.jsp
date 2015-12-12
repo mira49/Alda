@@ -23,11 +23,31 @@
 					<td><input type="button" value="Profil"
 						onclick="window.location='user_Informations'" class="sansLabel" />
 					</td>
-					
+
 					<td><input type="button" value="Add an Announcement"
 						onclick="window.location='add_Announcement'" class="sansLabel" />
 					</td>
 				</tr>
+			</table>
+			<h1>Your list of announcement</h1>
+			<table>
+				<tr>
+					<th>name</th>
+					<th>surface</th>
+					<th>description</th>
+					<th>emplacement</th>
+				</tr>
+
+				<c:forEach var="annoucement" items="${ sessionScope.annoucement_user}">
+					<tr>
+						<td> <c:out value="${annoucement.name}"/> </td>
+						<td> <c:out value="${annoucement.surface}" /></td>
+						<td> <c:out value="${annoucement.description}" /></td>
+						<td> <c:out value="${annoucement.emplacement}" /></td>
+						<td> <input type="button" value="delete"
+						onclick="window.location='home_user.delete()'" class="sansLabel" /> </td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>
