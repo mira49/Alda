@@ -7,7 +7,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
     </head>
     <body>
-        <form method="post" action="Forgetting">
+        <form method="post" action="forgetting">
             <fieldset>
                 <legend>Regeneration password</legend>
                

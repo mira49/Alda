@@ -13,14 +13,14 @@ import javax.servlet.http.HttpSession;
 import DAO.UserDAO;
 import Entities.User;
 
-@WebServlet("/User_Informations")
+@WebServlet("/user_Informations")
 public class User_Informations extends HttpServlet{
 	
 	 public static final String VUE              = "/WEB-INF/User_Informations.jsp";
 	 public static final String VUESucess       			  = "/WEB-INF/Connection.jsp";
 	 public static final String VUEAfter              = "/WEB-INF/Home_user.jsp";
 	 
-	 @EJB
+	
 	 private UserDAO user_dao;
 	    
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -29,7 +29,8 @@ public class User_Informations extends HttpServlet{
 
         if ( session.getAttribute( "user" ) == null ) {
             /* Redirection vers la page publique */
-            response.sendRedirect( request.getContextPath() + VUESucess );
+
+            this.getServletContext().getRequestDispatcher(VUESucess).forward( request, response );
         } else {
             /* Affichage de la page restreinte */
             this.getServletContext().getRequestDispatcher(VUE).forward( request, response );

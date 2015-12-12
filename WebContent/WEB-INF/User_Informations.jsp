@@ -12,7 +12,7 @@
 	</div>
 
 	<div id="home">
-		<form method="post" action="User_Informations">
+		<form method="post" action="user_Informations">
 			<fieldset id="Field">
 				<legend>Informations</legend>
 				<output>Email:</output>
@@ -37,7 +37,7 @@
 			<br>
 		</form>
 
-		<form method="get" action="Home_user">
+		<form method="get" action="home_user">
 			<input type="submit" value="retour" />
 		</form>
 	</div>

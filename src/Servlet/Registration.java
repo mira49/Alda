@@ -15,7 +15,7 @@ import DAO.FormValidationException;
 import DAO.UserDAO;
 import Entities.User;
 
-@WebServlet("/Registration")
+@WebServlet("/registration")
 public class Registration extends HttpServlet {
 
     public static final String VUE              = "/WEB-INF/Inscription.jsp";
@@ -24,7 +24,7 @@ public class Registration extends HttpServlet {
     private String              resultat;
     private Map<String, String> erreurs          = new HashMap<String, String>();
     
-    @EJB
+  
     private UserDAO userDAO;
 	 public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 	        /* Affichage de la page d'inscription */
@@ -103,9 +103,9 @@ public class Registration extends HttpServlet {
             if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                 throw new FormValidationException( "Bad Email's Format." );
             } 
-            /*else if ( userDAO.find( email ) != null ) {
-                throw new Exception( "Cette adresse email est déjà  utilisée." );
-            }*/
+            else if ( userDAO.find( email ) != null ) {
+                throw new FormValidationException( "This email address is already in use." );
+            }
         } else {
             throw new FormValidationException( "Thank you to enter an email address." );
         }

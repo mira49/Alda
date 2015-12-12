@@ -18,14 +18,14 @@
 			<table id="home_table">
 				<tr>
 					<td><input type="button" value="Deconnection"
-						onclick="window.location='Deconnection'" class="sansLabel" /></td>
+						onclick="window.location='deconnection'" class="sansLabel" /></td>
 
 					<td><input type="button" value="Profil"
-						onclick="window.location='User_Informations'" class="sansLabel" />
+						onclick="window.location='user_Informations'" class="sansLabel" />
 					</td>
 					
 					<td><input type="button" value="Add an Announcement"
-						onclick="window.location='Add_Announcement'" class="sansLabel" />
+						onclick="window.location='add_Announcement'" class="sansLabel" />
 					</td>
 				</tr>
 			</table>
