@@ -17,7 +17,7 @@
 		</div>
 		
 		<div id="Inscription-form">
-		<form method="post" action="Registration">
+		<form method="post" action="registration">
 			<fieldset id="Fieldset">
 				<legend>Inscription</legend>
 

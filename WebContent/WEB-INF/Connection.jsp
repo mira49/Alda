@@ -19,7 +19,7 @@
 		</div>
 
 		
-		<form method="post" action="Connexion">
+		<form method="post" action="connexion">
 			<fieldset id="Field">
 				<legend>Connection</legend>
 

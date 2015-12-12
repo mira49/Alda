@@ -16,7 +16,7 @@ import DAO.UserDAO;
 import Entities.User;
 import EntityManagerF.SingletonEntityManagerFactory;
 
-@WebServlet("/Connexion")
+@WebServlet("/connexion")
 public class Connection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

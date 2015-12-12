@@ -71,7 +71,7 @@ public class UserDAO {
 		// boolean transactionOk = false;
 
 		// try{
-		find_user = em.createNativeQuery("select * from alda_user where email = ? and password = ?", User.class)
+		find_user = em.createNativeQuery("select * from alda_user where email = ? ", User.class)
 				.setParameter(1, email).getResultList();
 
 		if (find_user.isEmpty()) {

@@ -25,7 +25,8 @@ import javax.servlet.http.HttpSession;
 import DAO.FormValidationException;
 import DAO.UserDAO;
 import Entities.User;
-@WebServlet("/Forgetting")
+
+@WebServlet("/forgetting")
 public class Forgetting extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -33,18 +34,17 @@ public class Forgetting extends HttpServlet {
 
     public static final String VUESucess              = "/WEB-INF/Connection.jsp";
     public static final String VUE       			  = "/WEB-INF/Forgetting.jsp";
-	private static final String FICHIER 			  = "/DAO/dao.mail";
+	private static final String FICHIER 			  = "/WEB-INF/DAO/dao.mail";
 
     private String              resultat;
     private Map<String, String> erreurs          = new HashMap<String, String>();
     private UserDAO      userDao;
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-    
+        
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{   
 		System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
            
@@ -95,9 +95,9 @@ public class Forgetting extends HttpServlet {
                 if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                     throw new FormValidationException( "Bad Email's Format." );
                 } 
-              /*  else if ( userDao.find( email ) != null ) {
+              else if ( userDao.find( email ) != null ) {
                     throw new FormValidationException( "This email address is already in use." );
-                }*/
+                }
             } else {
                 throw new FormValidationException( "Thank you to enter an email address." );
             }

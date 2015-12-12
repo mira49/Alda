@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/Home_user")
+@WebServlet("/home_user")
 public class Home_user extends HttpServlet {
 	
 
     public static final String VUE              = "/WEB-INF/Home_user.jsp";
-    public static final String VUESucess       			  = "/WEB-INF/Connection.jsp";
+    public static final String VUESucess       	 = "/WEB-INF/Connection.jsp";
 
     
 	 public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {

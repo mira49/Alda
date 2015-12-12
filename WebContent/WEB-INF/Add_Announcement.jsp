@@ -14,7 +14,7 @@
 				<h1 id="Inscription-title">Here you can add an announcement</h1>
 			</div>
 			
-			<form method="post" action="Add_Announcement">
+			<form method="post" action="add_Announcement">
 				<fieldset id="Field">
 					<legend>Informations pour the annoucement</legend>
 
