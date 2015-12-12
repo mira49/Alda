@@ -70,8 +70,8 @@ public class Forgetting extends HttpServlet {
 	        }
 	        else {
 	        /* Stockage du formulaire et du bean dans l'objet request */
-	        request.setAttribute( resultat, resultat );
-	        request.setAttribute( erreurs, erreurs );
+	        request.setAttribute("resultat", resultat );
+	        request.setAttribute( "erreurs", erreurs );
 	        
 
 	        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
