@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -49,9 +50,6 @@ public class User {
   @Basic
   @Column(length = 20, nullable=true)
   private String phone;
-   
-  @OneToMany
-  private List<Annonces> annonces = new ArrayList<>();
   
   public User(){}
   
@@ -122,14 +120,4 @@ public void setPhone(String phone) {
 	this.phone = phone;
 }
 
-public List<Annonces> getAnnonces() {
-	return annonces;
-}
-
-public void setAnnonces(List<Annonces> annonces) {
-	this.annonces = annonces;
-}
-
-
-  
 }

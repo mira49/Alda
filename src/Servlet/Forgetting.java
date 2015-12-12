@@ -29,6 +29,7 @@ import Entities.User;
 public class Forgetting extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	
 
     public static final String VUESucess              = "/WEB-INF/Connection.jsp";
     public static final String VUE       			  = "/WEB-INF/Forgetting.jsp";
@@ -44,7 +45,9 @@ public class Forgetting extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	{   
+		System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+           
         String email = request.getParameter("email");
 		User user = new User();
 
@@ -92,9 +95,9 @@ public class Forgetting extends HttpServlet {
                 if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                     throw new FormValidationException( "Bad Email's Format." );
                 } 
-                else if ( userDao.find( email ) != null ) {
+              /*  else if ( userDao.find( email ) != null ) {
                     throw new FormValidationException( "This email address is already in use." );
-                }
+                }*/
             } else {
                 throw new FormValidationException( "Thank you to enter an email address." );
             }
@@ -165,7 +168,7 @@ public class Forgetting extends HttpServlet {
            message.setSubject(subject);  
            message.setContent(msg, "text/plain");  
            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));  
-
+        
            transport.connect();  
            Transport.send(message);  
            transport.close();

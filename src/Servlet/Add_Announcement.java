@@ -45,7 +45,8 @@ public class Add_Announcement extends HttpServlet {
 		String emplacement = request.getParameter("Location");
 		int Surface = Integer.parseInt(request.getParameter("Surface"));
 		String Description = request.getParameter("Description");
-
+		
+		User user = (User) session.getAttribute("user");
 		annoucement = new AnnouncementDAO();
 
 		Annonces a = new Annonces();
@@ -53,7 +54,7 @@ public class Add_Announcement extends HttpServlet {
 		a.setSurface(Surface);
 		a.setDescription(Description);
 		a.setEmplacement(emplacement);
-		a.setUser_ID((User)session.getAttribute("user"));
+		a.setUser_ID(user);
 
 
 		annoucement.create(a);

@@ -59,7 +59,6 @@ public class UserDAO {
 		} else {
 			user = find_user.get(0);
 		}
-
 		return user;
 	}
 
@@ -80,7 +79,6 @@ public class UserDAO {
 		} else {
 			user = find_user.get(0);
 		}
-
 		return user;
 	}
 	

@@ -21,7 +21,7 @@ public class AnnouncementDAO {
 		em.getTransaction().begin();
 
 		try {
-			em.persist(n);
+			em.merge(n);
 			transactionOk = true;
 		} finally {
 			if (transactionOk) {
