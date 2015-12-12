@@ -63,6 +63,27 @@ public class UserDAO {
 		return user;
 	}
 
+	public User find(String email) {
+		List<User> find_user = new ArrayList <User>();
+		User user;
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		// boolean transactionOk = false;
+
+		// try{
+		find_user = em.createNativeQuery("select * from alda_user where email = ? and password = ?", User.class)
+				.setParameter(1, email).getResultList();
+
+		if (find_user.isEmpty()) {
+			user = null;
+		} else {
+			user = find_user.get(0);
+		}
+
+		return user;
+	}
+	
 	public void update_or_insert(User account_modify, User temp) {
 		
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
@@ -78,5 +99,10 @@ public class UserDAO {
 		
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	public static void UpdatePassword(User user, String to, String password) {
+		// TODO Auto-generated method stub
+		
 	}
 }

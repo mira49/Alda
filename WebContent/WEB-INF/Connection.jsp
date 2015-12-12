@@ -26,11 +26,17 @@
 				<output>Email:</output>
 				<input type="text" id="email" name="email" value="" size="20"
 					maxlength="60" placeholder="exemple@exemple.exemple" required="" />
-				<br />
+				<span id="error"class="erreur">${erreur['email']}</span>
+					<br />
 
 				<output>Password:</output>
 				<input type="password" id="password" name="password" value=""
-					size="20" maxlength="20" placeholder="password" required="" /> <br />
+					size="20" maxlength="20" placeholder="password" required="" />
+					<span id="error" class="erreur">${erreur['password']}</span>
+					<a href="forgetting"> Forgotten password ? </a>
+					 <br />
+                <a  href="registration" > register ? </a>
+                <br />
 				<input type="submit" value="Connexion" class="sansLabel" /> <br />
 			</fieldset>
 			<br>
