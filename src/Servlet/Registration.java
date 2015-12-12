@@ -103,9 +103,9 @@ public class Registration extends HttpServlet {
             if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
                 throw new FormValidationException( "Bad Email's Format." );
             } 
-            else if ( userDAO.find( email ) != null ) {
-                throw new FormValidationException( "This email address is already in use." );
-            }
+            /*else if ( userDAO.find( email ) != null ) {
+                throw new Exception( "Cette adresse email est déjà  utilisée." );
+            }*/
         } else {
             throw new FormValidationException( "Thank you to enter an email address." );
         }
