@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0">
+
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<servlet-class>Servlet.Registration</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Connection</servlet-name>
+		<servlet-class>Servlet.Connection</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Home_user</servlet-name>
+		<servlet-class>Servlet.Home_user</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>Servlet.Deconnexion</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	<servlet-name>Registration</servlet-name>
+	<url-pattern>/registration</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	<servlet-name>Connection</servlet-name>
+	<url-pattern>/connexion</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	<servlet-name>Home_user</servlet-name>
+	<url-pattern>/home_user</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+	<servlet-name>Deconnexion</servlet-name>
+	<url-pattern>/deconnexion</url-pattern>
+	</servlet-mapping>
+</web-app>
