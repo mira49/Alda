@@ -10,6 +10,10 @@
 		<servlet-class>Servlet.Registration</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Forgetting</servlet-name>
+		<servlet-class>Servlet.Forgetting</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Connection</servlet-name>
 		<servlet-class>Servlet.Connection</servlet-class>
 	</servlet>
@@ -37,7 +41,10 @@
 	<servlet-name>Registration</servlet-name>
 	<url-pattern>/registration</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+	<servlet-name>Forgetting</servlet-name>
+	<url-pattern>/forgetting</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 	<servlet-name>Connection</servlet-name>
 	<url-pattern>/connexion</url-pattern>
