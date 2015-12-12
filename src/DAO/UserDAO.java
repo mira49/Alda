@@ -98,7 +98,7 @@ public class UserDAO {
 		em.getTransaction().commit();
 		em.close();
 	}
-
+	
 	public static void UpdatePassword(User user, String to, String password) {
 		// TODO Auto-generated method stub
 		
