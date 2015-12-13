@@ -58,7 +58,7 @@ public class Annonces {
 	private String image3;
 
 	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "email", referencedColumnName = "email")
+	@JoinColumn(name = "email", referencedColumnName = "name")
 	private User User_ID;
 	
 	

@@ -40,7 +40,6 @@ public class Home_user extends HttpServlet {
 	        	annoucements = dao.getAnnoucement_user((User)session.getAttribute("user"));
 	        	
 	        	if (!annoucements.isEmpty()){
-	        		System.out.println(annoucements.get(0).getName());
 	        		session.setAttribute("annoucement_user", annoucements);
 	        	}
 	        	

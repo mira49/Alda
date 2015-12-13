@@ -55,9 +55,7 @@ public class Connection extends HttpServlet {
         		System.out.println(annoucements.get(0).getName());
         		session.setAttribute("annoucement_user", annoucements);
         	}
-        	else{
-        		System.out.println("merdeeeeee");
-        	}
+
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		}
 		else{
