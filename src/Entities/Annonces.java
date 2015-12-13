@@ -1,6 +1,7 @@
 package Entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.joda.time.DateTime;
+
 @Entity
 public class Annonces {
 
@@ -24,6 +27,10 @@ public class Annonces {
 	@Basic
 	@Column(length = 30, nullable = false)
 	private String name;
+	
+	@Basic
+	@Column(length = 50, nullable = false)
+    private String date;
 
 	@Basic
 	@Column(length = 30, nullable = false)
@@ -151,5 +158,15 @@ public class Annonces {
 	public void setUser_ID(User user_ID) {
 		User_ID = user_ID;
 	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String dt) {
+		this.date = dt;
+	}
+	
+	
 
 }

@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 
 import DAO.AnnouncementDAO;
 import DAO.UserDAO;
@@ -73,7 +74,11 @@ public class Add_Announcement extends HttpServlet {
 
 		Annonces a = new Annonces();
       
+		 String format = "dd/MM/yy H:mm:ss"; 
 
+	        java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format ); 
+	        java.util.Date dt = new java.util.Date(); 
+	        String dateFormatee = formater.format(dt); 
 		a.setName(Name);
 		a.setSurface(Surface);
 		a.setDescription(Description);
@@ -84,6 +89,7 @@ public class Add_Announcement extends HttpServlet {
 		a.setImage2(picture2);	
 		a.setImage3(picture3);
 		a.setUser_ID(user);
+		a.setDate(dateFormatee);
 		
 
 
