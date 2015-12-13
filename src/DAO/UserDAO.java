@@ -99,8 +99,17 @@ public class UserDAO {
 		em.close();
 	}
 	
-	public static void UpdatePassword(User user, String to, String password) {
-		// TODO Auto-generated method stub
+	public void UpdatePassword(String email,  String password) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		
+		User account = em.find(User.class, em.createNativeQuery("select * from alda_user where email = ? ", User.class)
+				.setParameter(1, email).getResultList());
+
+		account.setPassword(password);
+		
+		em.getTransaction().commit();
+		em.close();		
 	}
 }

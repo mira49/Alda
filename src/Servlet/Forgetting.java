@@ -50,11 +50,15 @@ public class Forgetting extends HttpServlet {
            
         String email = request.getParameter("email");
 		User user = new User();
+		
 
 	        try {
 		            traiteEmail( email, user);
 		            if ( erreurs.isEmpty() ) {
-		            	postMail(email, user);
+		            	SecureRandom random = new SecureRandom();
+		            	String password = new BigInteger(40, random).toString(32);
+		            	//userDao.UpdatePassword(email, password);
+		            	postMail(email, user, password);
 		                resultat = "Succès.";
 		            } else {
 		                resultat = "échec de la regénération.";
@@ -109,12 +113,8 @@ public class Forgetting extends HttpServlet {
     	}
         
         
-        public void postMail(String to, User user) throws Exception {
-        	SecureRandom random = new SecureRandom();
-        	String password = new BigInteger(40, random).toString(32);
-            
-            user.setPassword( password );
-            UserDAO.UpdatePassword(user, to, password);
+        public void postMail(String to, User user, String password) throws Exception {
+        
             
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream fichierProperties = classLoader.getResourceAsStream( FICHIER );

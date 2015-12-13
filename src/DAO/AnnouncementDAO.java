@@ -53,7 +53,7 @@ public class AnnouncementDAO {
 		return announcement;
 	}
 
-	public void delete(String id) {
+	public void delete(Long id) {
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		boolean transactionOk = false;

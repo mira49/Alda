@@ -41,10 +41,10 @@
 				<h4>My announcements</h4>
 			<table class="table">
 				<tr>
-					<th>name</th>
-					<th>surface</th>
-					<th>description</th>
-					<th>emplacement</th>
+					<th>Name</th>
+					<th>Surface</th>
+					<th>Postal code</th>
+					<th>Price</th>
 					<th>Delete</th>
 				</tr>
 				<form action="home_user" method="post">
@@ -53,10 +53,13 @@
 						<tr>
 							<td><c:out value="${annoucement.name}" /></td>
 							<td><c:out value="${annoucement.surface}" /></td>
-							<td><c:out value="${annoucement.description}" /></td>
+							<td><c:out value="${annoucement.postal_code}" /></td>
 							<td><c:out value="${annoucement.price}" /></td>
-							<td><button type="submit" name="delete"
-									value="${annoucement.id}">delete</button></td>
+							<td>
+									<input type="image" name="delete"
+									value="${annoucement.id}" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" />.
+									</td>
+								
 						</tr>
 					</c:forEach>
 				</form>
