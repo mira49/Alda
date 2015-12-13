@@ -30,20 +30,39 @@ public class Annonces {
 	private int surface;
 
 	@Basic
+	@Column(length = 30, nullable = false)
+	private int price;
+	
+	@Basic
+	@Column(length = 5, nullable = false)
+	private int postal_code;
+	
+	@Basic
 	@Column(length = 3000, nullable = true)
 	private String description;
 
 	@Basic
 	@Column(length = 30, nullable = false)
-	private String emplacement;
+	private String town;
+
+	@Basic
+	@Column(length = 50, nullable = false)
+	private String image1;
+
+	@Basic
+	@Column(length = 50, nullable = false)
+	private String image2;
 	
-	@Column(nullable =true)
-	private List<String> img = new ArrayList<>();
+	@Basic
+	@Column(length = 50, nullable = true)
+	private String image3;
 
 	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "email", referencedColumnName = "email")
 	private User User_ID;
-
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,20 +95,53 @@ public class Annonces {
 		this.description = description;
 	}
 
-	public String getEmplacement() {
-		return emplacement;
+	
+	public int getPrice() {
+		return price;
 	}
 
-	public void setEmplacement(String emplacement) {
-		this.emplacement = emplacement;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
-	public List<String> getImg() {
-		return img;
+	public int getPostal_code() {
+		return postal_code;
 	}
 
-	public void setImg(List<String> img) {
-		this.img = img;
+	public void setPostal_code(int postal_code) {
+		this.postal_code = postal_code;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	public String getImage1() {
+		return image1;
+	}
+
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	public String getImage2() {
+		return image2;
+	}
+
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+
+	public String getImage3() {
+		return image3;
+	}
+
+	public void setImage3(String image3) {
+		this.image3 = image3;
 	}
 
 	public User getUser_ID() {
