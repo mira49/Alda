@@ -1,0 +1,15 @@
+EntityManagerF\SingletonEntityManagerFactory.class
+Servlet\User_Informations.class
+Servlet\Forgetting.class
+DAO\AnnouncementDAO.class
+Servlet\Add_Announcement.class
+Entities\Annonces.class
+Entities\User.class
+Servlet\Home_user.class
+DAO\DAOException.class
+Servlet\Forgetting$1.class
+Servlet\Deconnexion.class
+Servlet\Connection.class
+DAO\UserDAO.class
+DAO\FormValidationException.class
+Servlet\Registration.class

@@ -51,4 +51,25 @@ public class AnnouncementDAO {
 		
 		return announcement;
 	}
+	
+	public void delete(String id){
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		boolean transactionOk = false;
+		em.getTransaction().begin();
+		try {
+			em.createNativeQuery("delete from Annonces where id = ?")
+            .setParameter(1, id)
+            .executeUpdate();
+			transactionOk = true;
+		} finally {
+			if (transactionOk) {
+				em.getTransaction().commit();
+			} else {
+				System.out.println("error in delete announcement");
+				em.getTransaction().rollback();
+			}
+		}
+	}
+	
 }

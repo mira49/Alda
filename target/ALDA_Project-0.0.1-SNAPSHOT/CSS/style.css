@@ -67,7 +67,16 @@ form input.sansLabel {
 
 /************************************************************Home ************************************************/
 
-#body-application{
-	border:1px solid black;
-	width:750px;
+#home{
+	margin:auto;
+	width:60%;
+	padding:20px;
+}
+
+div{
+	padding:10px;
+}
+
+#home_table{
+	margin-left:30%;
 }
