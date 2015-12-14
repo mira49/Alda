@@ -38,11 +38,8 @@ public class Registration extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String confirmation = request.getParameter("confirmation");
-
-		
-		
-		userDAO = new UserDAO();
-		User user = new User();
+    	userDAO = new UserDAO();
+   		User user = new User();
 		        try {
 	            traiteEmail( email, user );
 	            traitePassword( password, confirmation, user );
@@ -60,8 +57,6 @@ public class Registration extends HttpServlet {
 	            e.printStackTrace();
 	        }
 		        
-                System.out.println(resultat);
-                System.out.println(erreurs);
 
 		        
 		        if("Succès de l'inscription.".equals(resultat)) {

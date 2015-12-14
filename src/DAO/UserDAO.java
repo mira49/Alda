@@ -97,21 +97,6 @@ public class UserDAO {
 		em.close();
 	}
 
-	public void UpdatePassword(String email, String password) {
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-
-		User user = (User) em.createNativeQuery("select * from alda_user where email = ? ", User.class)
-				.setParameter(1, email).getSingleResult();
-
-		User account = em.find(User.class, user.getId());
-		account.setPassword(password);
-
-		em.getTransaction().commit();
-		em.close();
-	}
-
 	public String[] findFactor(String email) {
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
@@ -173,5 +158,17 @@ public class UserDAO {
 		
 		System.out.println(sql);
 		return sql;
+}
+	
+	public void UpdatePassword(User account_modify, User temp) {
+			
+			emf = Persistence.createEntityManagerFactory("persistenceUnit");
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			User account = em.find(User.class, account_modify.getId());
+			account.setPassword(temp.getPassword());
+			em.getTransaction().commit();
+			em.close();
+
 	}
 }

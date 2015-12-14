@@ -16,7 +16,7 @@
 				<h1 id="Inscription-title">Here you can add an announcement</h1>
 			</div>
 
-			<form method="post" action="add_Announcement">
+			<form method="post" action="add_Announcement" enctype="multipart/form-data">
 				<fieldset id="Field">
 					<legend>Informations pour the annoucement</legend>
 					<output>Name: <span class="requis">*</span></output>
@@ -41,14 +41,19 @@
 					<br />
 
 					<output>Picture 1: <span class="requis">*</span> </output>
-					<input type="file" required="" id="picture1" name="picture1" /> <br />
+					<input type="file" required="" id="picture1" name="picture1" /> 	
+					<span id="error"class="erreur">${erreur['picture1']}</span>
+					<br />
 					<output>Picture 2: <span class="requis">*</span></output>
-					<input type="file" required="" id="picture2" name="picture2" /><a>Click
-						here to Add a picture</a> <br />
+					<input type="file" required="" id="picture2" name="picture2" />
+					<span id="error"class="erreur">${erreur['picture2']}</span>
+					<a>Click here to Add a picture</a> <br />
 
 					<output id="picture3">Picture 3: </output>
-					<input type="file" id="picture3" name="picture3" /> <br /> <input
-						type="submit" value="Add" class="sansLabel" /> <br />
+					<input type="file" id="picture3" name="picture3" /> 
+					<span id="error"class="erreur">${erreur['picture3']}</span>
+					<br /> 
+					<input	type="submit" value="Add" class="sansLabel" /> <br />
 				</fieldset>
 				<br>
 			</form>
