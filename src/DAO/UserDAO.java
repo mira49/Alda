@@ -99,17 +99,15 @@ public class UserDAO {
 		em.close();
 	}
 	
-	public void UpdatePassword(String email,  String password) {
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+	public void UpdatePassword(User account_modify, User temp) {
+			
+			emf = Persistence.createEntityManagerFactory("persistenceUnit");
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			User account = em.find(User.class, account_modify.getId());
+			account.setPassword(temp.getPassword());
+			em.getTransaction().commit();
+			em.close();
 		
-		User account = em.find(User.class, em.createNativeQuery("select * from alda_user where email = ? ", User.class)
-				.setParameter(1, email).getResultList());
-
-		account.setPassword(password);
-		
-		em.getTransaction().commit();
-		em.close();		
 	}
 }

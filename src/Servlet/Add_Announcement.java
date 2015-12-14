@@ -44,7 +44,7 @@ import org.apache.commons.io.FilenameUtils;
 @WebServlet(name = "add_Announcement", urlPatterns = {"/add_Announcement"},
 initParams = {@WebInitParam(name="chemin", value="/fichiers/images/")})
 public class Add_Announcement extends HttpServlet {
-	
+    private String              resultat;
 	public static final String VUE = "/WEB-INF/Add_Announcement.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
     private Map<String, String> erreurs         = new HashMap<String, String>();
@@ -127,19 +127,40 @@ public class Add_Announcement extends HttpServlet {
 		    } catch (FileUploadException e) {
 		        throw new ServletException("Échec de l'analyse de la requête multipart.", e);
 		    }
-		     
+	        try {
 
-		User user = (User) session.getAttribute("user");
-		annoucement = new AnnouncementDAO();
-     	String format = "dd/MM/yy H:mm:ss"; 
-	    java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format ); 
-	    java.util.Date dt = new java.util.Date(); 
-	    String dateFormatee = formater.format(dt); 
-	    annonce.setUser_ID(user);
-	    annonce.setDate(dateFormatee);
-		annoucement.create(annonce);
-        request.setAttribute( "erreur", erreurs );
-		this.getServletContext().getRequestDispatcher(VUEAfter).forward(request, response);
+		  if ( erreurs.isEmpty() ) {
+              resultat = "Succès.";
+
+          } else {
+              resultat = "échec.";
+
+          }
+      } catch ( DAO.DAOException e ) {
+          resultat = "échec : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+          e.printStackTrace();
+      }
+	        if("Succès.".equals(resultat)) {
+	        	User user = (User) session.getAttribute("user");
+	    		annoucement = new AnnouncementDAO();
+	         	String format = "dd/MM/yy H:mm:ss"; 
+	    	    java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format ); 
+	    	    java.util.Date dt = new java.util.Date(); 
+	    	    String dateFormatee = formater.format(dt); 
+	    	    annonce.setUser_ID(user);
+	    	    annonce.setDate(dateFormatee);
+	    		annoucement.create(annonce);	        
+	            this.getServletContext().getRequestDispatcher( VUEAfter ).forward( request, response );
+	        }
+	        else {
+                request.setAttribute( "erreur", erreurs );
+                request.setAttribute( "resultat", resultat );
+
+	        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        
+	        }
+
+		
 
 	}
 	
