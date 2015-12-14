@@ -35,7 +35,7 @@
 					<span id="error" class="erreur">${erreur['password']}</span>
 					<a href="forgetting"> Forgotten password ? </a>
 					 <br />
-                <a  href="registration" > register ? </a>
+                <a  href="registration" > register ? </a>  <a  href="announcement" > skip login </a>
                 <br />
 				<input type="submit" value="Connexion" class="sansLabel" /> <br />
 			</fieldset>

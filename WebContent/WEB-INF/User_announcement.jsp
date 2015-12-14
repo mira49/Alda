@@ -17,64 +17,99 @@
 				${sessionScope.user.firstName} ${sessionScope.user.name}</h3>
 		</div>
 		<div id="home_content">
-		<div id="home_options">
-			<table id="home_table">
-				<tr>
-					<td><input type="button" value="Deconnection"
-						onclick="window.location='deconnection'" class="sansLabel" /></td>
-				 </tr>
+			<div id="home_options">
+				<table id="home_table">
+					<tr>
+						<td><input type="button" value="Deconnection"
+							onclick="window.location='deconnection'" class="sansLabel" /></td>
+					</tr>
 
-					<tr><td><input type="button" value="Profil"
-						onclick="window.location='user_Informations'" class="sansLabel" /></td>
-					 </tr>
+					<tr>
+						<td><input type="button" value="Profil"
+							onclick="window.location='user_Informations'" class="sansLabel" /></td>
+					</tr>
 
-					<tr><td><input type="button" value="Add announcement"
-						onclick="window.location='add_Announcement'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 <tr><td><input type="button" value="Announcements"
-						onclick="window.location='announcement'" class="sansLabel" /></td>
-					 </tr>
-			</table>
+					<tr>
+						<td><input type="button" value="Add announcement"
+							onclick="window.location='add_Announcement'" class="sansLabel" /></td>
+					</tr>
+
+					<tr>
+						<td><input type="button" value="Announcements"
+							onclick="window.location='announcement'" class="sansLabel" /></td>
+					</tr>
+				</table>
 			</div>
-			
-		
+
+
 			<div id="home_announcement">
 				<h4>Announcement</h4>
-				
-			<form method="post" action="announcement" name="announcement_Form">	
-			<select onchange= "document.announcement_Form.submit();" name="select_option">
-			<option value=All >All</option>
-			<option value=lower_Price>lower_Price</option>
-			<option value=higher_Price>higher_Price</option>
-			<option value=Location>Location</option>
-				</select>
-			</form>
-			<table class="table">
-				<tr>
-					<th>name</th>
-					<th>surface</th>
-					<th>description</th>
-					<th>Price</th>
-					<th>postal code</th>
-					<th>Delete</th>
-				</tr>
-				<form action="home_user" method="post">
-					<c:forEach var="annoucement"
-						items="${ sessionScope.annoucement_user}">
-						<tr>
-							<td><c:out value="${annoucement.name}" /></td>
-							<td><c:out value="${annoucement.surface}" /></td>
-							<td><c:out value="${annoucement.description}" /></td>
-							<td><c:out value="${annoucement.price}" /></td>
-							<td><c:out value="${annoucement.postal_code}" /></td>
-							<td><button type="submit" name="delete"
-									value="${annoucement.id}">delete</button></td>
-						</tr>
-					</c:forEach>
+
+				<form method="post" action="announcement" name="announcement_Form">
+					<select onchange="document.announcement_Form.submit();"
+						name="select_option">
+						<option value=All>All</option>
+						<option value=lower_Price>lower_Price</option>
+						<option value=higher_Price>higher_Price</option>
+						<option value=Location>Location</option>
+					</select>
 				</form>
-			</table>
+				<table class="table">
+					<tr>
+						<th>name</th>
+						<th>surface</th>
+						<th>description</th>
+						<th>Price</th>
+						<th>postal code</th>
+						<th>Delete</th>
+					</tr>
+					<form action="home_user" method="post">
+						<c:forEach var="annoucement"
+							items="${ sessionScope.annoucement_user}">
+							<tr>
+								<td><c:out value="${annoucement.name}" /></td>
+								<td><c:out value="${annoucement.surface}" /></td>
+								<td><c:out value="${annoucement.description}" /></td>
+								<td><c:out value="${annoucement.price}" /></td>
+								<td><c:out value="${annoucement.postal_code}" /></td>
+								<td><button type="submit" name="delete"
+										value="${annoucement.id}">delete</button></td>
+							</tr>
+						</c:forEach>
+					</form>
+				</table>
 			</div>
+		</div>
+		<div id="factor_announcement">
+
+			<h1>Factors of research</h1>
+			<form action="announcement" method="post">
+				<table>
+					<tr>
+						<td><output>Price lower</output></td>
+					</tr>
+					<tr>
+						<td><input type="text" id="factor_lower_price" name="factor_lower_price" size="20"
+							maxlength="60" required="" value=${sessionScope.factor[0]}></input></td>
+					</tr>
+
+					<tr>
+						<td><output>Price higher</output></td>
+					</tr>
+					<tr>
+						<td><input type="text" id="factor_higher_price" name="factor_higher_price" size="20"
+							maxlength="60" required="" value=${sessionScope.factor[1]}></input></td>
+					</tr>
+					<tr>
+						<td><output>Location</output></td>
+					</tr>
+					<tr>
+						<td><input type="text" id="factor_location" name="factor_location" size="20"
+							maxlength="60" required="" value=${sessionScope.factor[2]}></input></td>
+					</tr>
+				</table>
+			</form>
+
 		</div>
 	</div>
 </body>

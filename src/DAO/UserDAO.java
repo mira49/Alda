@@ -43,7 +43,7 @@ public class UserDAO {
 	}
 
 	public User findUser(String email, String password) {
-		List<User> find_user = new ArrayList <User>();
+		List<User> find_user = new ArrayList<User>();
 		User user;
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
@@ -63,16 +63,14 @@ public class UserDAO {
 	}
 
 	public User find(String email) {
-		List<User> find_user = new ArrayList <User>();
+		List<User> find_user = new ArrayList<User>();
 		User user;
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		// boolean transactionOk = false;
 
-		// try{
-		find_user = em.createNativeQuery("select * from alda_user where email = ? ", User.class)
-				.setParameter(1, email).getResultList();
+		find_user = em.createNativeQuery("select * from alda_user where email = ? ", User.class).setParameter(1, email)
+				.getResultList();
 
 		if (find_user.isEmpty()) {
 			user = null;
@@ -81,35 +79,99 @@ public class UserDAO {
 		}
 		return user;
 	}
-	
+
 	public void update_or_insert(User account_modify, User temp) {
-		
+
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		
+
 		User account = em.find(User.class, account_modify.getId());
 
 		account.setFirstName(temp.getFirstName());
 		account.setName(temp.getName());
 		account.setAddress(temp.getAddress());
 		account.setPhone(temp.getPhone());
+
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	public void UpdatePassword(String email, String password) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+		User user = (User) em.createNativeQuery("select * from alda_user where email = ? ", User.class)
+				.setParameter(1, email).getSingleResult();
+
+		User account = em.find(User.class, user.getId());
+		account.setPassword(password);
+
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	public String[] findFactor(String email) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+		String[] factor = (String[]) em.createNativeQuery("select factor from alda_user where email = ? ", User.class)
+				.setParameter(1, email).getSingleResult();
+		return factor;
+	}
+
+	public void updateFactor(User user_tmp, User user) {
+		
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+		User account = em.find(User.class, user.getId());
+		account.setFactor(user_tmp.getFactor());
 		
 		em.getTransaction().commit();
 		em.close();
 	}
-	
-	public void UpdatePassword(String email,  String password) {
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		
-		User account = em.find(User.class, em.createNativeQuery("select * from alda_user where email = ? ", User.class)
-				.setParameter(1, email).getResultList());
 
-		account.setPassword(password);
+	public String sql_create_query(User user) {
+		String factor[] = user.getFactor();
+		String sql = "";
 		
-		em.getTransaction().commit();
-		em.close();		
+		if((factor[0]!= null || factor[0] != "") && (factor[1] == null || factor[1] == "" )&& (factor[2] == null || factor[2] == "")){
+			sql = "select * from Annonces where price >=" + factor[0];
+		}
+		
+		else if((factor[0]== null || factor[0] == "") && (factor[1] != null || factor[1] != "" )&& (factor[2] == null || factor[2] == "")){
+			sql = "select * from Annonces where price <=" + factor[1];
+		}
+		
+		else if((factor[0]== null || factor[0] == "") && (factor[1] == null || factor[1] == "" )&& (factor[2] != null || factor[2] != "")){
+			sql = "select * from Annonces where postal_code =" + factor[2];
+		}
+		
+		else if((factor[0]!= null || factor[0] != "") && (factor[1] != null || factor[1] != "" )&& (factor[2] == null || factor[2] == "")){
+			sql = "select * from Annonces where price between" + factor[0] + "AND" + factor[1];
+		}
+		
+		else if((factor[0]!= null || factor[0] != "") && (factor[1] == null || factor[1] == "" )&& (factor[2] != null || factor[2] != "")){
+			sql = "select * from Annonces where price >=" + factor[0] + "AND postal_code = " + factor[2];
+		}
+		
+		else if((factor[0]== null || factor[0] == "") && (factor[1] != null || factor[1] != "" )&& (factor[2] != null || factor[2] != "")){
+			sql = "select * from Annonces where price <=" + factor[1] + "AND postal_code = " + factor[2];
+		}
+		
+		else if((factor[0]!= null || factor[0] != "") && (factor[1] != null || factor[1] != "" )&& (factor[2] != null || factor[2] != "")){
+			sql = "select * from Annonces where price between" + factor[0] + "AND" + factor[1] + "AND postal_code = " + factor[2];
+		}
+		
+		else{
+			sql = "select * from Annonces";
+		}
+		
+		System.out.println(sql);
+		return sql;
 	}
 }

@@ -51,7 +51,19 @@ public class User {
   @Column(length = 20, nullable=true)
   private String phone;
   
-  public User(){}
+  @Basic
+  @Column(nullable=true)
+  private String factor[];
+  
+  public String[] getFactor() {
+	return factor;
+}
+
+public void setFactor(String[] factor) {
+	this.factor = factor;
+}
+
+public User(){}
   
   /*public User(int i, String name,String firstName,String email ,String password,String adress,String phone){
 	  this.id = (long) i;
