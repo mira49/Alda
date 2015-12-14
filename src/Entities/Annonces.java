@@ -66,9 +66,7 @@ public class Annonces {
 	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "email", referencedColumnName = "name")
 	private User User_ID;
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -85,6 +83,14 @@ public class Annonces {
 		this.name = name;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public int getSurface() {
 		return surface;
 	}
@@ -93,15 +99,6 @@ public class Annonces {
 		this.surface = surface;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	
 	public int getPrice() {
 		return price;
 	}
@@ -116,6 +113,14 @@ public class Annonces {
 
 	public void setPostal_code(int postal_code) {
 		this.postal_code = postal_code;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getTown() {
@@ -157,15 +162,4 @@ public class Annonces {
 	public void setUser_ID(User user_ID) {
 		User_ID = user_ID;
 	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String dt) {
-		this.date = dt;
-	}
-	
-	
-
 }

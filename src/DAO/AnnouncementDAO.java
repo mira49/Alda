@@ -23,15 +23,16 @@ public class AnnouncementDAO {
 		em = emf.createEntityManager();
 		boolean transactionOk = false;
 		em.getTransaction().begin();
-
+		
 		try {
 			em.merge(n);
 			transactionOk = true;
+			System.out.println("Le user ID est" + n.getUser_ID());
 		} finally {
 			if (transactionOk) {
 				em.getTransaction().commit();
 			} else {
-				System.out.println("Annonce déjà présente en bdd");
+				System.out.println("error create Announce");
 				em.getTransaction().rollback();
 			}
 		}
@@ -42,13 +43,12 @@ public class AnnouncementDAO {
 
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
-		List<Annonces> announcement = null;
+		List<Annonces> announcement = new ArrayList<>();
 
 		String name = user.getName();
 		em.getTransaction().begin();
 
-		announcement = em.createNativeQuery("select * from Annonces where email = ?", Annonces.class)
-				.setParameter(1, name).getResultList();
+		announcement = em.createNativeQuery("select * from Annonces where email = ?", Annonces.class).setParameter(1, name).getResultList();
 
 		return announcement;
 	}
@@ -80,6 +80,18 @@ public class AnnouncementDAO {
 		em.getTransaction().begin();
 
 		announcement = em.createNativeQuery("select * from Annonces", Annonces.class).getResultList();
+
+		return announcement;
+	}
+	
+	public List<Annonces> findByFactor(String query){
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		List<Annonces> announcement = null;
+
+		em.getTransaction().begin();
+
+		announcement = em.createNativeQuery(query, Annonces.class).getResultList();
 
 		return announcement;
 	}

@@ -3,17 +3,14 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
+
+import org.apache.commons.lang.StringUtils;
 
 import Entities.User;
-import EntityManagerF.SingletonEntityManagerFactory;
 
 @Stateless
 public class UserDAO {
@@ -102,7 +99,7 @@ public class UserDAO {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		User user_temp = new User();
-		String factor ="";
+		String factor = "";
 
 		user_temp = em.find(User.class, user.getId());
 		factor = user_temp.getFactor();
@@ -119,64 +116,52 @@ public class UserDAO {
 
 		User account = em.find(User.class, user.getId());
 		account.setFactor(user_tmp.getFactor());
-		
+
 		System.out.println(account.getFactor());
 		em.getTransaction().commit();
 		em.close();
 	}
 
+	public String sql_create_query(User user) {
 
-	  public String sql_create_query(User user) { 
-		 
 		String factor_user = user.getFactor();
-		String sql ="select * from Annonces";
+		String sql = "select * from Annonces";
 		String factor[] = new String[3];
 		factor = factor_user.split(";");
-		
-	    System.out.println(sql);
-	    
-	  if((!factor[0].equals(null) || !factor[0].equals(" ")) && (factor[1].equals(null) ||
-	  factor[1].equals(" ") )&& (factor[2].equals(null) || factor[2].equals(" "))){ 
-		  sql =
-	 "select * from Annonces where price >=" + factor[0];
-		  System.out.println("salut1");}
-	  
-	  else if((factor[0].equals(null) || factor[0].equals(" ")) && (!factor[1].equals(null) ||
-	  !factor[1].equals(" ") )&& (factor[2].equals(null) || factor[2].equals(" "))){ 
-		  sql =
-	 "select * from Annonces where price <=" + factor[1]; System.out.println("salut2");}
-	  
-	  
-	  else if((factor[0].equals(null) || factor[0].equals(" ")) && (factor[1].equals(null) ||
-	  factor[1].equals(" ") )&& (!factor[2].equals(null) || !factor[2].equals(" "))){ 
-		  sql =
-	 "select * from Annonces where postal_code =" + factor[2]; System.out.println("salut3");}
-	  
-	  else if((!factor[0].equals(null) || !factor[0].equals(" ")) && (!factor[1].equals(null) ||
-			  !factor[1].equals(" ") )&& (factor[2].equals(null) || factor[2].equals(" "))){ 
-				  sql =
-	 "select * from Annonces where price between " + factor[0] +" AND " +
-	  factor[1]; }
-	  
-	  else if((!factor[0].equals(null) || !factor[0].equals(" ")) && (factor[1].equals(null) ||
-			  factor[1].equals(" ") )&& (!factor[2].equals(null) || !factor[2].equals(" "))){ 
-				  sql =
-	 "select * from Annonces where price >=" + factor[0] +
-	 " AND postal_code =" + factor[2]; }
-	  
-	  else if((factor[0].equals(null) || factor[0].equals(" ")) && (!factor[1].equals(null) ||
-			 !factor[1].equals(" ") )&& (!factor[2].equals(null) || !factor[2].equals(" "))){ 
-				  sql =
-	 "select * from Annonces where price <=" + factor[1] +
-	 " AND postal_code =" + factor[2]; }
-	  
-	  else if((!factor[0].equals(null) || !factor[0].equals(" ")) && (!factor[1].equals(null) ||
-				 !factor[1].equals(" ") )&& (!factor[2].equals(null) || !factor[2].equals(" "))){ 
-					  sql =
-	"select * from Annonces where price between " + factor[0] +" AND " +
-	  factor[1] +" AND postal_code =" + factor[2]; }
-	  
-	  System.out.println("le sql" + sql); return sql; }
+		System.out.println(factor[0]);
+
+		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
+			sql = "select * from Annonces where price >=" + factor[0];
+		}
+
+		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
+			sql = "select * from Annonces where price <=" + factor[1];
+		}
+
+		if ((StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
+			sql = "select * from Annonces where postal_code =" + factor[2];
+		}
+
+		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
+			sql = "select * from Annonces where price between " + factor[0] + " AND " + factor[1];
+		}
+
+		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
+			sql = "select * from Annonces where price >=" + factor[0] + " AND postal_code =" + factor[2];
+		}
+
+		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
+			sql = "select * from Annonces where price <=" + factor[1] + " AND postal_code =" + factor[2];
+		}
+		  
+		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
+		  sql= "select * from Annonces where price between " + factor[0] +" AND " + factor[1] +" AND postal_code =" + factor[2];
+		 }
+
+		System.out.println("le sql" + sql);
+		return sql;
+
+	}
 
 	public void UpdatePassword(User account_modify, User temp) {
 

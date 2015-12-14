@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.ejb.EJB;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -36,6 +37,8 @@ public class Forgetting extends HttpServlet {
 
 	private String resultat;
 	private Map<String, String> erreurs = new HashMap<String, String>();
+	
+	@EJB
 	private UserDAO userDao = new UserDAO();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

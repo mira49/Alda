@@ -20,8 +20,8 @@ public class User_Informations extends HttpServlet{
 	 public static final String VUESucess       			  = "/WEB-INF/Connection.jsp";
 	 public static final String VUEAfter              = "/WEB-INF/Home_user.jsp";
 	 
-	
-	 private UserDAO user_dao;
+	 @EJB
+	 private UserDAO user_dao = new UserDAO();
 	    
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* Récupération de la session depuis la requête */
@@ -40,23 +40,14 @@ public class User_Informations extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		
-		String email = request.getParameter("email");
-		String Name = request.getParameter("Name");
-		String FirstName = request.getParameter("FirstName");
-		String Address = request.getParameter("Address");
-		String Phone = request.getParameter("Phone");
-		
-		
-		user_dao = new UserDAO();
-
+	
 		User u = new User();
 		
-		u.setName(Name);
-		u.setFirstName(FirstName);
-		u.setEmail(email);
-		u.setAddress(Address);
-		u.setPhone(Phone);
+		u.setName(request.getParameter("Name"));
+		u.setFirstName(request.getParameter("FirstName"));
+		u.setEmail(request.getParameter("email"));
+		u.setAddress(request.getParameter("Address"));
+		u.setPhone(request.getParameter("Phone"));
 		
 		user_dao.update_or_insert((User)session.getAttribute( "user" ),u);
 		

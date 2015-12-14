@@ -18,117 +18,108 @@ import Entities.User;
 @WebServlet("/registration")
 public class Registration extends HttpServlet {
 
-    public static final String VUE              = "/WEB-INF/Inscription.jsp";
-    public static final String VUESucess        = "/WEB-INF/Connection.jsp";
+	public static final String VUE = "/WEB-INF/Inscription.jsp";
+	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 
-    private String              resultat;
-    private Map<String, String> erreurs          = new HashMap<String, String>();
-    
-  
-    private UserDAO userDAO;
-	 public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-	        /* Affichage de la page d'inscription */
-	        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-	    }
+	private String resultat;
+	private Map<String, String> erreurs = new HashMap<String, String>();
+
+	@EJB
+	private UserDAO userDAO = new UserDAO();
+
+	private User user = new User();
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* Affichage de la page d'inscription */
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String confirmation = request.getParameter("confirmation");
-    	userDAO = new UserDAO();
-   		User user = new User();
-		        try {
-	            traiteEmail( email, user );
-	            traitePassword( password, confirmation, user );
-	           
 
-	            if ( erreurs.isEmpty() ) {
-	                resultat = "Succès de l'inscription.";
+		try {
+			traiteEmail(email, user);
+			traitePassword(password, confirmation, user);
 
-	            } else {
-	                resultat = "échec de l'inscription.";
+			if (erreurs.isEmpty()) {
+				resultat = "Succès de l'inscription.";
 
-	            }
-	        } catch ( DAO.DAOException e ) {
-	            resultat = "échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
-	            e.printStackTrace();
-	        }
-		        
+			} else {
+				resultat = "échec de l'inscription.";
 
-		        
-		        if("Succès de l'inscription.".equals(resultat)) {
-		        	user.setName("");
-		        	
-		        	String factor = " ; ; ";
-					user.setFactor(factor);
-	        		userDAO.create(user);
-	        		
-	        		
-		            this.getServletContext().getRequestDispatcher( VUESucess ).forward( request, response );
-		        }
-		        else {
-	                request.setAttribute( "erreur", erreurs );
-	                request.setAttribute( "resultat", resultat );
+			}
+		} catch (DAO.DAOException e) {
+			resultat = "échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+			e.printStackTrace();
+		}
 
-		        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-	        
-		        }
+		if ("Succès de l'inscription.".equals(resultat)) {
+			String factor = " ; ; ";
+			user.setFactor(factor);
+			user.setName("");
+			userDAO.create(user);
+
+			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
+		} else {
+			request.setAttribute("erreur", erreurs);
+			request.setAttribute("resultat", resultat);
+
+			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		}
 	}
-	
-    public void traiteEmail( String email, User user ) {
-        try {
-            validationEmail( email );
-        } catch ( FormValidationException e ) {
-            setErreur( "email", e.getMessage() );
-        }
-        user.setEmail( email );
-    }
 
+	public void traiteEmail(String email, User user) {
+		try {
+			validationEmail(email);
+		} catch (FormValidationException e) {
+			setErreur("email", e.getMessage());
+		}
+		user.setEmail(email);
+	}
 
-    public void traitePassword( String password, String confirmation, User user ) {
-        try {
-            validationMotsDePasse( password, confirmation );
-        } catch ( FormValidationException e ) {
-            setErreur( "password", e.getMessage() );
-            setErreur( "confirmation", null );
-        }   
+	public void traitePassword(String password, String confirmation, User user) {
+		try {
+			validationMotsDePasse(password, confirmation);
+		} catch (FormValidationException e) {
+			setErreur("password", e.getMessage());
+			setErreur("confirmation", null);
+		}
 
-        user.setPassword( password );
-    }
+		user.setPassword(password);
+	}
 
-    public void validationEmail( String email ) throws FormValidationException {
-        if ( email != null ) {
-            if ( !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-                throw new FormValidationException( "Bad Email's Format." );
-            } 
-            else if ( userDAO.find( email ) != null ) {
-                throw new FormValidationException( "This email address is already in use." );
-            }
-        } else {
-            throw new FormValidationException( "Thank you to enter an email address." );
-        }
-    }
+	public void validationEmail(String email) throws FormValidationException {
+		if (email != null) {
+			if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+				throw new FormValidationException("Bad Email's Format.");
+			} else if (userDAO.find(email) != null) {
+				throw new FormValidationException("This email address is already in use.");
+			}
+		} else {
+			throw new FormValidationException("Thank you to enter an email address.");
+		}
+	}
 
-    public void validationMotsDePasse( String motDePasse, String confirmation ) throws FormValidationException {
-        if ( motDePasse != null && confirmation != null ) {
-            if ( !(motDePasse.equals( confirmation )) ) {
-                throw new FormValidationException( "Entered passwords are different." );
-            } else if ( motDePasse.length() < 7 ) {
-                throw new FormValidationException( "Too less password ." );
-            }else if ( motDePasse.length() > 20 ) {
-                throw new FormValidationException( "Too long password ." );
-            }
-        } else {
-            throw new FormValidationException( "Thank you to enter and confirm your password." );
-        }
-    }
+	public void validationMotsDePasse(String motDePasse, String confirmation) throws FormValidationException {
+		if (motDePasse != null && confirmation != null) {
+			if (!(motDePasse.equals(confirmation))) {
+				throw new FormValidationException("Entered passwords are different.");
+			} else if (motDePasse.length() < 7) {
+				throw new FormValidationException("Too less password .");
+			} else if (motDePasse.length() > 20) {
+				throw new FormValidationException("Too long password .");
+			}
+		} else {
+			throw new FormValidationException("Thank you to enter and confirm your password.");
+		}
+	}
 
-
-
-    public void setErreur( String champ, String message ) {
-        erreurs.put( champ, message );
+	public void setErreur(String champ, String message) {
+		erreurs.put(champ, message);
 	}
 }

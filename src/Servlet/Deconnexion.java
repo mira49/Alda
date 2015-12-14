@@ -11,22 +11,22 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/deconnection")
 public class Deconnexion extends HttpServlet {
-	  public static final String VUE = "/WEB-INF/Connection.jsp";
+	public static final String VUE = "/WEB-INF/Connection.jsp";
 
-	    public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-	        /* Récupération et destruction de la session en cours */
-	        HttpSession session = request.getSession();
-	        session.invalidate();
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* Récupération et destruction de la session en cours */
+		HttpSession session = request.getSession();
+		session.invalidate();
 
-	        /* Affichage de la page de connexion */
-	        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-	    }
-	    
+		/* Affichage de la page de connexion */
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération et destruction de la session en cours */		
+		/* Récupération et destruction de la session en cours */
 		HttpSession session = request.getSession();
 		session.invalidate();
 		/* Affichage de la page de connexion */
-		this.getServletContext().getRequestDispatcher( VUE ).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 }

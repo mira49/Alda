@@ -24,6 +24,7 @@ public class Announcement extends HttpServlet {
 
 	@EJB
 	private AnnouncementDAO dao = new AnnouncementDAO();
+	@EJB
 	private UserDAO user_dao = new UserDAO();
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,9 +32,13 @@ public class Announcement extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String select_option = request.getParameter("select_option");
-		System.out.println(select_option);
+		System.out.println("select_option :" + select_option);
+		
+		
 		List<Annonces> announcement = new ArrayList<>();
-		announcement = dao.findAll();
+		String sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
+		System.out.println("sql_request:" + sql_request);
+		announcement = dao.findByFactor(sql_request);
 		
 		String factor[] = new String[3];
 		factor = user_dao.findFactor((User) session.getAttribute("user"));
@@ -47,17 +52,15 @@ public class Announcement extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
+		User user_connexion = (User) session.getAttribute("user");
 		String select_option = request.getParameter("select_option");
 		List<Annonces> announcement = new ArrayList<>();
 		announcement = dao.findAll();
-
 
 		User user = new User();
 		
 		user.setFactor(request.getParameter("factor_lower_price") + " ; " + request.getParameter("factor_higher_price") + "; " + request.getParameter("factor_location"));
 		user_dao.updateFactor(user, (User)session.getAttribute("user"));
-		
 		
 		String sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
 		
@@ -71,7 +74,13 @@ public class Announcement extends HttpServlet {
 			} 
 		}
 		
+		
 		session.setAttribute("annoucement_user", announcement);
+		
+		session.invalidate();
+		HttpSession session2 = request.getSession();
+		session2.setAttribute("user", user_connexion);
+		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 }
