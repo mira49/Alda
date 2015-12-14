@@ -53,13 +53,13 @@ public class User {
   
   @Basic
   @Column(nullable=true)
-  private String factor[];
+  private String factor;
   
-  public String[] getFactor() {
+  public String getFactor() {
 	return factor;
 }
 
-public void setFactor(String[] factor) {
+public void setFactor(String factor) {
 	this.factor = factor;
 }
 

@@ -9,6 +9,7 @@ Servlet\Home_user.class
 DAO\DAOException.class
 Servlet\Forgetting$1.class
 Servlet\Deconnexion.class
+Servlet\Announcement.class
 Servlet\Connection.class
 DAO\UserDAO.class
 DAO\FormValidationException.class

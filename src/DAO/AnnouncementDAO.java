@@ -84,7 +84,7 @@ public class AnnouncementDAO {
 		return announcement;
 	}
 
-	public List<Annonces> findByLowerPrice() {
+	public List<Annonces> findByLowerPrice(String sql_request) {
 
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
@@ -92,13 +92,26 @@ public class AnnouncementDAO {
 
 		em.getTransaction().begin();
 
-		announcement = em.createNativeQuery("select * from Annonces order by price ASC", Annonces.class)
+		announcement = em.createNativeQuery(sql_request + "order by price ASC", Annonces.class).getResultList();
+
+		return announcement;
+	}
+
+	public List<Annonces> findByHigherPrice(String sql_request) {
+
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		List<Annonces> announcement = null;
+
+		em.getTransaction().begin();
+
+		announcement = em.createNativeQuery(sql_request + "order by price DESC", Annonces.class)
 				.getResultList();
 
 		return announcement;
 	}
 
-	public List<Annonces> findByHigherPrice() {
+	public List<Annonces> findByPostalCode(String sql_request) {
 
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
@@ -106,21 +119,7 @@ public class AnnouncementDAO {
 
 		em.getTransaction().begin();
 
-		announcement = em.createNativeQuery("select * from Annonces order by price DESC", Annonces.class)
-				.getResultList();
-
-		return announcement;
-	}
-
-	public List<Annonces> findByPostalCode() {
-
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		List<Annonces> announcement = null;
-
-		em.getTransaction().begin();
-
-		announcement = em.createNativeQuery("select * from Annonces order by postal_code", Annonces.class)
+		announcement = em.createNativeQuery(sql_request + "order by postal_code", Annonces.class)
 				.getResultList();
 
 		return announcement;

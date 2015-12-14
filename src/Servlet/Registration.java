@@ -61,7 +61,12 @@ public class Registration extends HttpServlet {
 		        
 		        if("Succès de l'inscription.".equals(resultat)) {
 		        	user.setName("");
+		        	
+		        	String factor = " ; ; ";
+					user.setFactor(factor);
 	        		userDAO.create(user);
+	        		
+	        		
 		            this.getServletContext().getRequestDispatcher( VUESucess ).forward( request, response );
 		        }
 		        else {

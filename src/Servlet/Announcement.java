@@ -34,8 +34,10 @@ public class Announcement extends HttpServlet {
 		System.out.println(select_option);
 		List<Annonces> announcement = new ArrayList<>();
 		announcement = dao.findAll();
-
-		String factor[] = user_dao.findFactor((String) session.getAttribute("user.email"));
+		
+		String factor[] = new String[3];
+		factor = user_dao.findFactor((User) session.getAttribute("user"));
+		
 		session.setAttribute("factor", factor);
 
 		session.setAttribute("annoucement_user", announcement);
@@ -48,27 +50,27 @@ public class Announcement extends HttpServlet {
 
 		String select_option = request.getParameter("select_option");
 		List<Annonces> announcement = new ArrayList<>();
+		announcement = dao.findAll();
 
-		String factor_tmp[] = new String[2];
-		factor_tmp[0] = request.getParameter("factor_lower_price");
-		factor_tmp[1] = request.getParameter("factor_higher_price");
-		factor_tmp[2] = request.getParameter("factor_location");
 
 		User user = new User();
-		user.setFactor(factor_tmp);
-		user_dao.updateFactor(user, (User)session.getAttribute("user.email"));
-		String sql_request = user_dao.sql_create_query((User)session.getAttribute("user"));
 		
-		if (select_option.equals("lower_Price")) {
-			announcement = dao.findByLowerPrice();
-		} else if (select_option.equals("higher_Price")) {
-			announcement = dao.findByHigherPrice();
-		} else if (select_option.equals("Location")) {
-			announcement = dao.findByPostalCode();
-		} else {
-			announcement = dao.findAll();
+		user.setFactor(request.getParameter("factor_lower_price") + " ; " + request.getParameter("factor_higher_price") + "; " + request.getParameter("factor_location"));
+		user_dao.updateFactor(user, (User)session.getAttribute("user"));
+		
+		
+		String sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
+		
+		if( select_option != null){
+			if (select_option.equals("lower_Price")) {
+				announcement = dao.findByLowerPrice(sql_request);
+			} else if (select_option.equals("higher_Price")) {
+				announcement = dao.findByHigherPrice(sql_request);
+			} else if (select_option.equals("Location")) {
+				announcement = dao.findByPostalCode(sql_request);
+			} 
 		}
-
+		
 		session.setAttribute("annoucement_user", announcement);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}

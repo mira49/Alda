@@ -166,12 +166,12 @@ public class Add_Announcement extends HttpServlet {
 	
 	
 	private void traiterImage( HttpServletRequest request, String chemin, String nom,  InputStream co, String nomChamp) {
-        String image = null;
+      /*  String image = null;
         try {
             image = validationImage( request, chemin , nom, co, nomChamp);
         } catch ( FormValidationException e ) {
             setErreur( nomChamp, e.getMessage() );
-        }
+        }*/
     }
 
    

@@ -26,7 +26,7 @@ form input {
 }
 
 form input.sansLabel {
-    margin-left: 200px;
+    width:150px;
 }
 
 /* Styles et couleurs */
@@ -69,14 +69,41 @@ form input.sansLabel {
 
 #home{
 	margin:auto;
-	width:60%;
+	width:70%;
+	min-height :500px;
 	padding:20px;
 }
 
-div{
-	padding:10px;
+
+#home_user{
+	background-color : lightgrey;
+	height:70px;
+	padding:20px;
 }
 
+#home_announcement{
+	float:right;
+	width:77%;
+	padding : 10px;
+}
+
+#home_content{
+	min-height :300px;
+	border:1px solid lightgrey;
+}
 #home_table{
-	margin-left:30%;
+	padding:10px;
+	border-right: 1px solid lightgrey;
+	float:left;
+	min-height :300px;
+	width:20%;
+}
+
+h1{
+	text-align: center;
+}
+
+input .home_input {
+	width:100%;
+	margin:auto;
 }

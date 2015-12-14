@@ -89,23 +89,31 @@
 						<td><output>Price lower</output></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="factor_lower_price" name="factor_lower_price" size="20"
-							maxlength="60" required="" value=${sessionScope.factor[0]}></input></td>
+						<td><input type="text" id="factor_lower_price"
+							name="factor_lower_price" size="20" maxlength="60" 
+							value=${sessionScope.factor[0]}></input></td>
 					</tr>
 
 					<tr>
 						<td><output>Price higher</output></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="factor_higher_price" name="factor_higher_price" size="20"
-							maxlength="60" required="" value=${sessionScope.factor[1]}></input></td>
+						<td><input type="text" id="factor_higher_price"
+							name="factor_higher_price" size="20" maxlength="60" 
+							value=${sessionScope.factor[1]}></input></td>
 					</tr>
 					<tr>
 						<td><output>Location</output></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="factor_location" name="factor_location" size="20"
-							maxlength="60" required="" value=${sessionScope.factor[2]}></input></td>
+						<td><input type="text" id="factor_location"
+							name="factor_location" size="20" maxlength="60" 
+							value=${sessionScope.factor[2]}></input></td>
+					</tr>
+
+					<tr>
+						<td><button type="submit" name="factor"
+								value="">Search</button></td>
 					</tr>
 				</table>
 			</form>
