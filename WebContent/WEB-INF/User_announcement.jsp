@@ -80,6 +80,7 @@
 				</table>
 			</div>
 		</div>
+		<c:if test="${sessionScope.factor != null}">
 		<div id="factor_announcement">
 
 			<h1>Factors of research</h1>
@@ -119,6 +120,7 @@
 			</form>
 
 		</div>
+		</c:if>
 	</div>
 </body>
 </html>
