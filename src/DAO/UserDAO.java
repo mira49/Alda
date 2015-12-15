@@ -2,6 +2,7 @@ package DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -39,6 +40,23 @@ public class UserDAO {
 		em.close();
 	}
 
+	public void delete(Long id) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		boolean transactionOk = false;
+		em.getTransaction().begin();
+		try {
+			em.createNativeQuery("delete from alda_user where id = ?").setParameter(1, id).executeUpdate();
+			transactionOk = true;
+		} finally {
+			if (transactionOk) {
+				em.getTransaction().commit();
+			} else {
+				System.out.println("error in delete announcement");
+				em.getTransaction().rollback();
+			}
+		}
+	}
 	public User findUser(String email, String password) {
 		List<User> find_user = new ArrayList<User>();
 		User user;
@@ -57,6 +75,21 @@ public class UserDAO {
 			user = find_user.get(0);
 		}
 		return user;
+	}
+	
+	public List<User>  getUsers() {
+		List<User> find_user = new ArrayList<User>();
+		User user;
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		// boolean transactionOk = false;
+
+		// try{
+		find_user = em.createNativeQuery("select * from alda_user", User.class)
+				.getResultList();
+
+		return find_user;
 	}
 
 	public User find(String email) {

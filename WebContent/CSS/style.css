@@ -20,6 +20,37 @@ form output {
     margin: 3px 0px 0px 0px;
 }
 
+
+
+
+table{
+	width:80%;
+	margin-left:10%;
+	border-collapse: collapse;
+}
+tr.pair{
+	background-color: #efefef;
+}
+tr.impair{
+	background-color: #fff;	
+}
+th{
+	color: #0568CD;
+	border: 1px solid #0568CD;
+	padding: 5px;
+}
+th.action{
+	border: 1px solid #900;
+	color: #900;
+}
+td{
+	border: 1px solid #ddd;
+	padding: 5px;
+}
+td.action{
+	text-align: center;
+}
+
 form input {
     margin: 3px 3px 0px 0px;
     border: 1px #999 solid;
@@ -121,3 +152,98 @@ input .home_input {
 	text-align: center;
 }
 
+div#menu{
+ position: fixed;
+ 	border: 1px solid #0568CD;
+	width:10%;
+	padding: 10px;
+	margin: 10px;
+	top:0;
+	left:0;
+}
+div#corpsDa{
+	
+	margin-top:7%;
+ 	margin-left:20%;
+	
+}
+
+div#dash{
+	margin-left:7%;
+	 margin-top:2%;
+}
+
+div#option{
+	
+	margin-right:0.5%; margin-left:79%; margin-top:-2%; text-color:#40abfd; 
+}
+
+.composantCentre{
+width:80%;  
+margin-left:10%;
+}
+.liste{
+  height:90%; width:16.9%; 
+  position:fixed;
+	top:80px;
+}
+
+.welcome {
+	margin-top:10%;
+}
+.image{
+	padding:2px; margin-left:25%;
+}
+.access{
+color:#40abfd; text-align:center;
+}
+
+.connection{
+	
+	border:solid #eee; 
+	width:30%;  
+	margin-left:35%;
+	box-shadow: 1px 1px 12px #a9a9a9; 
+	margin-top:11%;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.liste a:link{text-decoration:none; color:#7a7a7a;}
+.liste a{color:#7a7a7a;}
+.liste a:hover{color:#40abfd;}
+.headerr{
+	
+	z-index: 1;
+	 position:fixed;
+	top:0;
+	left:0;
+	height:75px;
+	width:100%;
+	background: white; color:#7a7a7a; box-shadow:  1px 1px 12px #a9a9a9;
+}
+
+.headerr a:link{text-decoration:none; color:#7a7a7a;}
+.headerr a{color:#7a7a7a;}
+.headerr a:hover{color:#40abfd;}
+
+.menuP{
+font-size:20px; margin-left:30%;
+}
+
+.menuLi{
+font-size:16px; 
+}
+div#deco{
+	position: fixed;
+	border: 1px solid #0568CD;
+	width:10%;
+	padding: 10px;
+	margin: 10px;
+	
+	top:0;
+	right:0;
+}
+div#corps{
+	margin: 10px;
+}
