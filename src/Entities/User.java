@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="ALDA_user")
-public class User {
+public class User  implements Serializable{
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -54,6 +55,9 @@ public class User {
   @Basic
   @Column(nullable=true)
   private String factor;
+  
+  @OneToMany(mappedBy="user")
+	List<Annonces> announcements;
   
   public String getFactor() {
 	return factor;

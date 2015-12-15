@@ -147,7 +147,7 @@ public class Add_Announcement extends HttpServlet {
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 			java.util.Date dt = new java.util.Date();
 			String dateFormatee = formater.format(dt);
-			annonce.setUser_ID((User) session.getAttribute("user"));
+			annonce.setUser((User) session.getAttribute("user"));
 			annonce.setDate(dateFormatee);
 			annoucement.create(annonce);
 			System.out.println("salut annonce");

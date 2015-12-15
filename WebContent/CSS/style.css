@@ -107,3 +107,17 @@ input .home_input {
 	width:100%;
 	margin:auto;
 }
+
+/************************************************************Message-Content ************************************************/
+#message_content{
+	border:1px solid black;
+	height:200px;
+	margin-top:25px;
+	width:100%;
+}
+
+#message_form{
+	margin:auto;
+	text-align: center;
+}
+

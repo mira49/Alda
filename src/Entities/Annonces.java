@@ -1,23 +1,21 @@
 package Entities;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 @Entity
-public class Annonces {
+public class Annonces  implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,8 +62,8 @@ public class Annonces {
 	private String image3;
 
 	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "email", referencedColumnName = "name")
-	private User User_ID;
+	@JoinColumn(name = "email", referencedColumnName = "name" )
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -155,11 +153,12 @@ public class Annonces {
 		this.image3 = image3;
 	}
 
-	public User getUser_ID() {
-		return User_ID;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_ID(User user_ID) {
-		User_ID = user_ID;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
 }

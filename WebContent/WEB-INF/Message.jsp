@@ -36,38 +36,29 @@
 						onclick="window.location='announcement'" class="sansLabel" /></td>
 					 </tr>
 					 
-					 <tr><td><input type="button" value="Message"
+					  <tr><td><input type="button" value="Message"
 						onclick="window.location='messages_user'" class="sansLabel" /></td>
 					 </tr>
 					 
-					 
+					 <tr><td><input type="button" value="Home"
+						onclick="window.location='home_user'" class="sansLabel" /></td>
+					 </tr>
 			</table>
 			</div>
 			<div id="home_announcement">
-				<h4>My announcements</h4>
+				<h4>Messages</h4>
 			<table class="table">
 				<tr>
 					<th>Name</th>
-					<th>Surface</th>
-					<th>Postal code</th>
-					<th>Price</th>
-					<th>Delete</th>
+					<th>Message </th>
 				</tr>
-				<form action="home_user" method="post">
-					<c:forEach var="annoucement"
-						items="${ sessionScope.annoucement_user}">
+					<c:forEach var="message"
+						items="${ message_user}">
 						<tr>
-							<td><c:out value="${annoucement.name}" /></td>
-							<td><c:out value="${annoucement.surface}" /></td>
-							<td><c:out value="${annoucement.postal_code}" /></td>
-							<td><c:out value="${annoucement.price}" /></td>
-							<td>
-									<input type="image" name="delete"
-									value="${annoucement.id}" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" />.
-									</td>	
+							<td><c:out value="${message.sender_message}" /></td>
+							<td><c:out value="${message.message}" /></td>	
 						</tr>
 					</c:forEach>
-				</form>
 			</table>
 			</div>
 		</div>

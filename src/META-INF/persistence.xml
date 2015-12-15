@@ -7,6 +7,7 @@
   <persistence-unit name="persistenceUnit">
     <class>Entities.User</class>
     <class>Entities.Annonces</class>
+    <class>Entities.Messages</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/alda" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

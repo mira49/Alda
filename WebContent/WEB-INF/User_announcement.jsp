@@ -61,65 +61,71 @@
 						<th>description</th>
 						<th>Price</th>
 						<th>postal code</th>
-						<th>Delete</th>
+						<th>Contact</th>
 					</tr>
-					<form action="home_user" method="post">
-						<c:forEach var="annoucement"
-							items="${ sessionScope.annoucement_user}">
-							<tr>
+					
+						
+							<c:forEach var="annoucement"
+								items="${ sessionScope.annoucement_user}">
+								<tr>
+								<form action="home_user" method="post">
 								<td><c:out value="${annoucement.name}" /></td>
 								<td><c:out value="${annoucement.surface}" /></td>
 								<td><c:out value="${annoucement.description}" /></td>
 								<td><c:out value="${annoucement.price}" /></td>
 								<td><c:out value="${annoucement.postal_code}" /></td>
-								<td><button type="submit" name="delete"
-										value="${annoucement.id}">delete</button></td>
-							</tr>
-						</c:forEach>
-					</form>
+								</form>
+								
+								<form method="get" action="contact" id="contact_Form">
+									<td><button type="submit" name="contact" value="${annoucement.id}"> Contact </button></td>
+								</form>
+								</tr>
+							</c:forEach>
+						
+						
+						
 				</table>
 			</div>
 		</div>
 		<c:if test="${sessionScope.factor != null}">
-		<div id="factor_announcement">
+			<div id="factor_announcement">
 
-			<h1>Factors of research</h1>
-			<form action="announcement" method="post">
-				<table>
-					<tr>
-						<td><output>Price lower</output></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="factor_lower_price"
-							name="factor_lower_price" size="20" maxlength="60" 
-							value=${sessionScope.factor[0]}></input></td>
-					</tr>
+				<h1>Factors of research</h1>
+				<form action="announcement" method="post">
+					<table>
+						<tr>
+							<td><output>Price lower</output></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="factor_lower_price"
+								name="factor_lower_price" size="20" maxlength="60"
+								value=${sessionScope.factor[0]}></input></td>
+						</tr>
 
-					<tr>
-						<td><output>Price higher</output></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="factor_higher_price"
-							name="factor_higher_price" size="20" maxlength="60" 
-							value=${sessionScope.factor[1]}></input></td>
-					</tr>
-					<tr>
-						<td><output>Location</output></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="factor_location"
-							name="factor_location" size="20" maxlength="60" 
-							value=${sessionScope.factor[2]}></input></td>
-					</tr>
+						<tr>
+							<td><output>Price higher</output></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="factor_higher_price"
+								name="factor_higher_price" size="20" maxlength="60"
+								value=${sessionScope.factor[1]}></input></td>
+						</tr>
+						<tr>
+							<td><output>Location</output></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="factor_location"
+								name="factor_location" size="20" maxlength="60"
+								value=${sessionScope.factor[2]}></input></td>
+						</tr>
 
-					<tr>
-						<td><button type="submit" name="factor"
-								value="">Search</button></td>
-					</tr>
-				</table>
-			</form>
+						<tr>
+							<td><button type="submit" name="factor" value="">Search</button></td>
+						</tr>
+					</table>
+				</form>
 
-		</div>
+			</div>
 		</c:if>
 	</div>
 </body>

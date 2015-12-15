@@ -27,7 +27,6 @@ public class AnnouncementDAO {
 		try {
 			em.merge(n);
 			transactionOk = true;
-			System.out.println("Le user ID est" + n.getUser_ID());
 		} finally {
 			if (transactionOk) {
 				em.getTransaction().commit();
@@ -135,6 +134,17 @@ public class AnnouncementDAO {
 				.getResultList();
 
 		return announcement;
+	}
+
+	public Annonces findById(String annonce_id) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		Annonces annonce = new Annonces();
+		annonce = (Annonces) em.createNativeQuery("select * from Annonces where id=" + annonce_id, Annonces.class)
+				.getSingleResult();
+		return annonce;
 	}
 
 }
