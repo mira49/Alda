@@ -6,41 +6,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Connection</title>
+<link href="<c:url value="/CSS/bootstrap.min.css"/>" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
 
-	<div>
-		<h1 id="Inscription-title"> Sign in</h1>
-	</div>
-	<div id="Inscription-form">
-		<div id="error">
-			${error}
-		</div>
+<div  class="connection"  >
 
-		
-		<form method="post" action="connexion">
-			<fieldset id="Field">
-				<legend>Connection</legend>
-
-				<output>Email:</output>
-				<input type="text" id="email" name="email" value="" size="20"
-					maxlength="60" placeholder="exemple@exemple.exemple" required="" />
-				<span id="error"class="erreur">${erreur['email']}</span>
-					<br />
-
-				<output>Password:</output>
-				<input type="password" id="password" name="password" value=""
-					size="20" maxlength="20" placeholder="password" required="" />
-					<span id="error" class="erreur">${erreur['password']}</span>
-					<a href="forgetting"> Forgotten password ? </a>
+      <form class="form-signin"  action="<c:url value="/connexion"/>" method="post">
+       <h3 class="access" > ACCESS PLATEFORM</h3> <br>
+        <input type="text"   maxlength="60" class="form-control composantCentre" name="email"  placeholder="exemple@exemple.exemple" required autofocus> <br>
+       <input type="password"   maxlength="20" class="form-control composantCentre" name="password" placeholder="Password" required>
+		<a class="composantCentre" href="forgetting"> Forgotten password ? </a>
 					 <br />
-                <a  href="registration" > register ? </a>  <a  href="announcement" > skip login </a>
-                <br />
-				<input type="submit" value="Connexion" class="sansLabel" /> <br />
-			</fieldset>
-			<br>
-		</form>
-	</div>
+                <a  class=" composantCentre" href="registration" > register ? </a>
+		<div>					<span id="error" class=" composantCentre erreur">${error}</span>		</div> <br> <br>                      
+        <button class="btn btn-lg btn-primary btn-block composantCentre"  type="submit">Sign in</button><br>
+      </form>
+
+ </div>
+    
+
+
 </body>
 </html>

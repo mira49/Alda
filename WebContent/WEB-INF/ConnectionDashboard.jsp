@@ -16,6 +16,7 @@
        <h3 class="access" > ACCESS DASHBOARD</h3> <br>
         <input type="text"  class="form-control composantCentre" name="Pseudo"  placeholder="Pseudo" required autofocus> <br>
        <input type="password"  class="form-control composantCentre" name="Password" placeholder="Password" required>
+		<div>					<span id="error" class=" composantCentre erreur">${error}</span>		</div>
 		 <br> <br>                      
         <button class="btn btn-lg btn-primary btn-block composantCentre"  type="submit">Sign in</button><br>
       </form>
