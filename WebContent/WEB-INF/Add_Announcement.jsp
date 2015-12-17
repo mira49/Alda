@@ -31,6 +31,9 @@
 		<label > Picture 1 : <span class="requis">*</span> </label><input type="file" name="picture1"  required><br> 
 		<label > Picture 2 : <span class="requis">*</span> </label><input type="file" name="picture2"  required>				
 			<a>Click here to Add a picture</a> <br />
+					<span id="error"class="erreur">${erreur['picture1']}</span>
+					<span id="error"class="erreur">${erreur['picture2']}</span>
+					<span id="error"class="erreur">${erreur['picture3']}</span>
 
 		<label id="picture3"  > Picture 3 :  </label><input id="picture3"  type="file" name="picture3"  >	<br>
 	<button class="btn register"  type="submit" >Register</button> 
