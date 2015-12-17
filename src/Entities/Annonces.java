@@ -12,9 +12,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Annonces.AnnouncementUser",
+                query="SELECT u FROM Annonces u WHERE u.user.name = :email"),
+    @NamedQuery(name="Annonces.deleteAnnounce",
+    query="delete from Annonces u where u.id = :id"),
+    @NamedQuery(name="Annonces.findAll",
+    query="SELECT u FROM Annonces u where u.sold = 0"),
+}) 
 public class Annonces  implements Serializable {
 
 	@Id
@@ -78,7 +88,7 @@ public class Annonces  implements Serializable {
 	@Column(length = 50, nullable = true)
 	private String image3;
 
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name = "email", referencedColumnName = "name" )
 	private User user;
 

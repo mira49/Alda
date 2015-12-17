@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -16,32 +17,15 @@ import Entities.User;
 @Stateless
 public class UserDAO {
 
-	EntityManagerFactory emf;
-	EntityManager em;
+	@PersistenceContext(unitName ="persistenceUnit")
+	private EntityManager em; 
 
 	public void create(User user) {
-
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		boolean transactionOk = false;
-		em.getTransaction().begin();
-
-		try {
-			em.persist(user);
-			transactionOk = true;
-		} finally {
-			if (transactionOk) {
-				em.getTransaction().commit();
-			} else {
-				System.out.println("utilisateur déjà présent en bdd");
-				em.getTransaction().rollback();
-			}
-		}
-		em.close();
+		em.persist(user);
 	}
 
 	public void delete(Long id) {
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		boolean transactionOk = false;
 		em.getTransaction().begin();
@@ -55,31 +39,23 @@ public class UserDAO {
 				System.out.println("error in delete announcement");
 				em.getTransaction().rollback();
 			}
-		}
+		}*/
 	}
 	public User findUser(String email, String password) {
-		List<User> find_user = new ArrayList<User>();
-		User user;
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		// boolean transactionOk = false;
-
-		// try{
-		find_user = em.createNativeQuery("select * from alda_user where email = ? and password = ?", User.class)
-				.setParameter(1, email).setParameter(2, password).getResultList();
-
-		if (find_user.isEmpty()) {
-			user = null;
-		} else {
-			user = find_user.get(0);
-		}
+		User user = null;
+		try{
+			user = (User) em.createNamedQuery("User.findUserConnexion")
+					.setParameter("email", email)
+					.setParameter("password", password)
+					.getSingleResult();
+		}catch(Exception e){}
+		
 		return user;
 	}
 	
 	public List<User>  getUsers() {
 		List<User> find_user = new ArrayList<User>();
-		User user;
+		/*User user;
 		emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -88,15 +64,15 @@ public class UserDAO {
 		// try{
 		find_user = em.createNativeQuery("select * from alda_user", User.class)
 				.getResultList();
-
+*/
 		return find_user;
 	}
 
 
 	public User find(String email) {
 		List<User> find_user = new ArrayList<User>();
-		User user;
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		User user = null;
+		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -107,15 +83,12 @@ public class UserDAO {
 			user = null;
 		} else {
 			user = find_user.get(0);
-		}
+		}*/
 		return user;
 	}
 
-	public void update_or_insert(User account_modify, User temp) {
+	public User update_or_insert(User account_modify, User temp) {
 
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 
 		User account = em.find(User.class, account_modify.getId());
 
@@ -123,15 +96,13 @@ public class UserDAO {
 		account.setName(temp.getName());
 		account.setAddress(temp.getAddress());
 		account.setPhone(temp.getPhone());
-
-		em.getTransaction().commit();
-		em.close();
+		
+		return account;
 	}
 
 	public String[] findFactor(User user) {
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		
+	
 		User user_temp = new User();
 		String factor = "";
 
@@ -143,7 +114,7 @@ public class UserDAO {
 	}
 
 	public void updateFactor(User user_tmp, User user) {
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+	/*	emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 
@@ -151,42 +122,42 @@ public class UserDAO {
 		account.setFactor(user_tmp.getFactor());
 
 		em.getTransaction().commit();
-		em.close();
+		em.close();*/
 	}
 
 	public String sql_create_query(User user) {
 
 		String factor_user = user.getFactor();
-		String sql = "select * from Annonces where sold = 0";
+		String sql = "SELECT u FROM Annonces u where u.sold = 0";
 		String factor[] = new String[3];
 		factor = factor_user.split(";");
 
 		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price >=" + factor[0] + " AND sold = 0";
+			sql = "SELECT u FROM Annonces u where u.price >=" + factor[0] + " AND u.sold = 0";
 		}
 
 		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price <=" + factor[1] + " AND sold = 0";
+			sql = "SELECT u FROM Annonces u where u.price <=" + factor[1] + " AND u.sold = 0";
 		}
 
 		if ((StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where postal_code =" + factor[2]+ " AND sold = 0";
+			sql = "SELECT u FROM Annonces u where u.postal_code =" + factor[2]+ " AND u.sold = 0";
 		}
 
 		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price between " + factor[0] + " AND " + factor[1]+ " AND sold = 0";
+			sql = "SELECT u FROM Annonces u where u.price between " + factor[0] + " AND " + factor[1]+ " AND u.sold = 0";
 		}
 
 		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price >=" + factor[0] + " AND postal_code =" + factor[2]+ " AND sold = 0";
+			sql = "SELECT u FROM Annonces u where u.price >=" + factor[0] + " AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
 		}
 
 		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price <=" + factor[1] + " AND postal_code =" + factor[2]+ " AND sold = 0";
+			sql = "SELECT u FROM Annonces u where u.price <=" + factor[1] + " AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
 		}
 		  
 		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-		  sql= "select * from Annonces where price between " + factor[0] +" AND " + factor[1] +" AND postal_code =" + factor[2]+ " AND sold = 0";
+		  sql= "SELECT u FROM Annonces u where u.price between " + factor[0] +" AND " + factor[1] +" AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
 		 }
 
 		
@@ -196,14 +167,20 @@ public class UserDAO {
 
 	public void UpdatePassword(User account_modify, User temp) {
 
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		User account = em.find(User.class, account_modify.getId());
 		account.setPassword(temp.getPassword());
 		em.getTransaction().commit();
-		em.close();
+		em.close();*/
 
+	}
+
+	public User findByUser(User user) {
+		
+		User u = em.find(User.class, user.getId());
+		return u;
 	}
 
 }

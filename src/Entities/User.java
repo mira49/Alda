@@ -14,12 +14,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="User.findAll",
+                query="SELECT u FROM User u"),
+    @NamedQuery(name="User.findUserConnexion",
+                query="SELECT u FROM User u WHERE u.email = :email AND u.password = :password"),
+}) 
 @Table(name="ALDA_user")
 public class User  implements Serializable{
 

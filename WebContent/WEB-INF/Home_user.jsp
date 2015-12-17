@@ -14,7 +14,7 @@
 	<div id="home">
 		<div id="home_user">
 			<h3 id="Inscription-title">Welcome on your account
-				${sessionScope.user.firstName} ${sessionScope.user.name}</h3>
+				${sessionScope.user.firstName} ${sessionScope.user.name} </h3>
 		</div>
 		<div id="home_content">
 		<div id="home_options">
@@ -57,17 +57,17 @@
 					<th>Price</th>
 					<th>Delete</th>
 				</tr>
-				<form action="home_user" method="post">
+				<form action="home_user" method="post" name="announcement_Form">
 					<c:forEach var="annoucement"
-						items="${ sessionScope.annoucement_user}">
+						items="${ annoucement_user}">
 						<tr>
 							<td><c:out value="${annoucement.name}" /></td>
 							<td><c:out value="${annoucement.surface}" /></td>
 							<td><c:out value="${annoucement.postal_code}" /></td>
 							<td><c:out value="${annoucement.price}" /></td>
 							<td>
-									<input type="image" name="delete"
-									value="${annoucement.id}" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" />.
+									<button type="submit" name="delete"
+									value="${annoucement.id}"  onclick="document.announcement_Form.submit();" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" /> delete</button>.
 									</td>	
 							<td>
 									<button type="submit" name="sold" value="${annoucement.id}" class="sansLabel"> Sold </button>

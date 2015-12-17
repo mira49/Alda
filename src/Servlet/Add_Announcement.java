@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.ejb.EJB;
 import javax.mail.Part;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -41,6 +43,7 @@ public class Add_Announcement extends HttpServlet {
 	private static final int TAILLE_TAMPON = 10240;// 10ko
 	private String filename;
 
+	@EJB
 	private AnnouncementDAO annoucement = new AnnouncementDAO();;
 
 	@Override
@@ -64,6 +67,9 @@ public class Add_Announcement extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		
+		System.out.println(session.getAttribute("user"));
+		
 		Annonces annonce = new Annonces();
 		try {
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -147,11 +153,14 @@ public class Add_Announcement extends HttpServlet {
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 			java.util.Date dt = new java.util.Date();
 			String dateFormatee = formater.format(dt);
+			
+			
+			
 			annonce.setUser((User) session.getAttribute("user"));
+			
 			annonce.setDate(dateFormatee);
 			annonce.setSold(0);
 			annoucement.create(annonce);
-			System.out.println("salut annonce");
 			this.getServletContext().getRequestDispatcher(VUEAfter).forward(request, response);
 		} else {
 			request.setAttribute("erreur", erreurs);

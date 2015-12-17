@@ -31,6 +31,9 @@ public class Connection extends HttpServlet {
     @EJB
     UserDAO user = new UserDAO();
     
+    @EJB
+    AnnouncementDAO dao = new AnnouncementDAO();
+    
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
     
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
@@ -43,16 +46,18 @@ public class Connection extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User user_connexion = user.findUser(email, password);
-		
 	
-		if (user_connexion!=null){
-			session.setAttribute("user", user_connexion);
-			AnnouncementDAO dao = new AnnouncementDAO();
-        	List<Annonces> annoucements = new ArrayList<>();
-        	annoucements = dao.getAnnoucement_user((User)session.getAttribute("user"));
-        	
-        	session.setAttribute("annoucement_user", annoucements);
+		if (user_connexion != null){
+			
+			List<Annonces> annoucements = new ArrayList<>();
+			
+			annoucements = dao.getAnnoucement_user(user_connexion);
 
+			if (!annoucements.isEmpty()) {
+				request.setAttribute("annoucement_user", annoucements);
+			}
+			
+			session.setAttribute("user", user_connexion);
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		}
 		else{

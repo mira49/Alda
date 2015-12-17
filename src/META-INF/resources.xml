@@ -1,0 +1,9 @@
+<resources>
+  <Resource id="jdbc/alda" type="javax.sql.DataSource">
+    JdbcDriver = com.mysql.jdbc.Driver
+    JdbcUrl = jdbc:mysql://localhost/alda
+    UserName = root
+    Password = root
+    JtaManaged = true
+  </Resource>
+</resources>

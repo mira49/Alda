@@ -26,28 +26,26 @@ public class Home_user extends HttpServlet {
 	@EJB
 	private AnnouncementDAO dao = new AnnouncementDAO();
 	
-
+	@EJB
+	private UserDAO user_dao = new UserDAO();
+	
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
-
+		
 		if (session.getAttribute("user") == null) {
 			/* Redirection vers la page publique */
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		} else {
-
+			
+			User user =user_dao.findByUser((User)session.getAttribute("user"));
 			List<Annonces> annoucements = new ArrayList<>();
-			
-			annoucements = dao.getAnnoucement_user((User) session.getAttribute("user"));
-
+			annoucements = dao.getAnnoucement_user(user);
 			if (!annoucements.isEmpty()) {
-				session.setAttribute("annoucement_user", annoucements);
+				request.setAttribute("annoucement_user", annoucements);
 			}
-			
-		
-			
-			
-			/* Affichage de la page restreinte */
+			session.setAttribute("user", user);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 	}
@@ -56,21 +54,28 @@ public class Home_user extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		User user_connexion = (User) session.getAttribute("user");
+		
 		String idA = request.getParameter("delete");
+		
+		User user =user_dao.findByUser((User)session.getAttribute("user"));
+		
+		
 		if (idA != null) {
 			Long id = Long.parseLong(idA);
-			dao.delete(id);
-			session.invalidate();
-			HttpSession session2 = request.getSession();
-
-			session2.setAttribute("user", user_connexion);
+			dao.delete(id);	
 		}
 		
 		if(request.getParameter("sold")!= null){
 			dao.setAnnounceSold(request.getParameter("sold"));
 		}
-	
+		
+		List<Annonces> annoucements = new ArrayList<>();
+		annoucements = dao.getAnnoucement_user(user);
+		if (!annoucements.isEmpty()) {
+			request.setAttribute("annoucement_user", annoucements);
+		}
+		
+		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 	}

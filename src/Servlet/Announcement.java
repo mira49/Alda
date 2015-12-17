@@ -30,27 +30,27 @@ public class Announcement extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
+		
 		String select_option = request.getParameter("select_option");
 		String sql_request = null;
 		
 		List<Annonces> announcement = new ArrayList<>();
+		
 		if((User)session.getAttribute("user") != null){
-			sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
+			User user = user_dao.findByUser((User)session.getAttribute("user"));
+			sql_request = user_dao.sql_create_query(user) + " ";
 			String factor[] = new String[3];
-			factor = user_dao.findFactor((User) session.getAttribute("user"));
-			session.setAttribute("factor", factor);
+			factor = user_dao.findFactor(user);
+			request.setAttribute("factor", factor);
 		}
 		else{
-			sql_request = "select * from Annonces where sold = 0";
+			sql_request = "SELECT u FROM Annonces u where u.sold = 0";
 			System.out.println("sql_request:" + sql_request);
 		}
 		
 		
 		announcement = dao.findByFactor(sql_request);
 		
-		
-
 		session.setAttribute("annoucement_user", announcement);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}

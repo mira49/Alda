@@ -16,7 +16,7 @@
        <h3 class="access" > REGISTRATION</h3> <br>
         <input type="text"   maxlength="60" class="form-control composantCentre" name="email"  placeholder="exemple@exemple.exemple" required autofocus> <br>
        <input type="password"   maxlength="20" class="form-control composantCentre" name="password" placeholder="Password" required> <br>
-	    <input type="password"   maxlength="20" class="form-control composantCentre" name="password" placeholder="password Confirmation" required>
+	    <input type="password"   maxlength="20" class="form-control composantCentre" name="password_confirm" placeholder="password Confirmation" required>
 	      
 	      <a  class=" composantCentre" href="connexion" > Sign in ? </a>
 		<div><span id="error" class=" composantCentre erreur">${erreur['email']}</span>		</div>
