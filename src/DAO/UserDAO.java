@@ -91,6 +91,21 @@ public class UserDAO {
 
 		return find_user;
 	}
+	
+	public List<User>  getUsers() {
+		List<User> find_user = new ArrayList<User>();
+		User user;
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		// boolean transactionOk = false;
+
+		// try{
+		find_user = em.createNativeQuery("select * from alda_user", User.class)
+				.getResultList();
+
+		return find_user;
+	}
 
 	public User find(String email) {
 		List<User> find_user = new ArrayList<User>();
