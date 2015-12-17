@@ -46,8 +46,25 @@ public class Annonces  implements Serializable {
 	private String description;
 
 	@Basic
-	@Column(length = 30, nullable = false)
+	@Column(nullable = false)
+	private String favorite;
+	
+	public String getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+
+	@Basic
+	@Column(length = 30, nullable = true)
 	private String town;
+	
+	@Basic
+	@Column(length = 1, nullable = false)
+	private int sold;
+
 
 	@Basic
 	@Column(length = 50, nullable = false)
@@ -159,6 +176,15 @@ public class Annonces  implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+
+	public int getSold() {
+		return sold;
+	}
+
+	public void setSold(int sold) {
+		this.sold = sold;
 	}
 
 }

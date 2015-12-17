@@ -38,6 +38,10 @@
 						<td><input type="button" value="Announcements"
 							onclick="window.location='announcement'" class="sansLabel" /></td>
 					</tr>
+					
+					 <tr><td><input type="button" value="Home"
+						onclick="window.location='home_user'" class="sansLabel" /></td>
+					 </tr>
 				</table>
 			</div>
 
@@ -61,6 +65,7 @@
 						<th>description</th>
 						<th>Price</th>
 						<th>postal code</th>
+						<th>Favorite</th>
 						<th>Contact</th>
 					</tr>
 					
@@ -68,17 +73,19 @@
 							<c:forEach var="annoucement"
 								items="${ sessionScope.annoucement_user}">
 								<tr>
-								<form action="home_user" method="post">
+								<form action="announcement" method="post">
 								<td><c:out value="${annoucement.name}" /></td>
 								<td><c:out value="${annoucement.surface}" /></td>
 								<td><c:out value="${annoucement.description}" /></td>
 								<td><c:out value="${annoucement.price}" /></td>
 								<td><c:out value="${annoucement.postal_code}" /></td>
+								<td><button type="submit" name="favorite" value="${sessionScope.user.email};${annoucement.id}"> Add </button></td>
 								</form>
 								
 								<form method="get" action="contact" id="contact_Form">
 									<td><button type="submit" name="contact" value="${annoucement.id}"> Contact </button></td>
 								</form>
+								
 								</tr>
 							</c:forEach>
 						

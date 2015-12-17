@@ -32,7 +32,6 @@ public class Announcement extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String select_option = request.getParameter("select_option");
-		System.out.println("select_option :" + select_option);
 		String sql_request = null;
 		
 		List<Annonces> announcement = new ArrayList<>();
@@ -43,10 +42,11 @@ public class Announcement extends HttpServlet {
 			session.setAttribute("factor", factor);
 		}
 		else{
-			sql_request = "select * from Annonces";
+			sql_request = "select * from Annonces where sold = 0";
+			System.out.println("sql_request:" + sql_request);
 		}
 		
-		System.out.println("sql_request:" + sql_request);
+		
 		announcement = dao.findByFactor(sql_request);
 		
 		
@@ -69,9 +69,12 @@ public class Announcement extends HttpServlet {
 			sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
 		}
 		else{
-			sql_request =  "select * from Annonces" + " "; 
+			sql_request =  "select * from Annonces where sold = 0" + " "; 
 		}
-	
+		
+		if (request.getParameter("favorite") != null){
+			dao.addToFavoriteList(request.getParameter("favorite"));
+		}
 		
 		if( select_option != null){
 			if (select_option.equals("lower_Price")) {

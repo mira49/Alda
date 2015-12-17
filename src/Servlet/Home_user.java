@@ -44,6 +44,8 @@ public class Home_user extends HttpServlet {
 				session.setAttribute("annoucement_user", annoucements);
 			}
 			
+		
+			
 			
 			/* Affichage de la page restreinte */
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -63,6 +65,10 @@ public class Home_user extends HttpServlet {
 			HttpSession session2 = request.getSession();
 
 			session2.setAttribute("user", user_connexion);
+		}
+		
+		if(request.getParameter("sold")!= null){
+			dao.setAnnounceSold(request.getParameter("sold"));
 		}
 	
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

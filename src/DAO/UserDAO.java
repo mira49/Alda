@@ -91,21 +91,7 @@ public class UserDAO {
 
 		return find_user;
 	}
-	
-	public List<User>  getUsers() {
-		List<User> find_user = new ArrayList<User>();
-		User user;
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		// boolean transactionOk = false;
 
-		// try{
-		find_user = em.createNativeQuery("select * from alda_user", User.class)
-				.getResultList();
-
-		return find_user;
-	}
 
 	public User find(String email) {
 		List<User> find_user = new ArrayList<User>();
@@ -153,7 +139,6 @@ public class UserDAO {
 		factor = user_temp.getFactor();
 
 		String factor_temp[] = factor.split(";");
-		System.out.println(factor_temp.length);
 		return factor_temp;
 	}
 
@@ -165,7 +150,6 @@ public class UserDAO {
 		User account = em.find(User.class, user.getId());
 		account.setFactor(user_tmp.getFactor());
 
-		System.out.println(account.getFactor());
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -173,40 +157,39 @@ public class UserDAO {
 	public String sql_create_query(User user) {
 
 		String factor_user = user.getFactor();
-		String sql = "select * from Annonces";
+		String sql = "select * from Annonces where sold = 0";
 		String factor[] = new String[3];
 		factor = factor_user.split(";");
-		System.out.println(factor[0]);
 
 		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price >=" + factor[0];
+			sql = "select * from Annonces where price >=" + factor[0] + " AND sold = 0";
 		}
 
 		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price <=" + factor[1];
+			sql = "select * from Annonces where price <=" + factor[1] + " AND sold = 0";
 		}
 
 		if ((StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where postal_code =" + factor[2];
+			sql = "select * from Annonces where postal_code =" + factor[2]+ " AND sold = 0";
 		}
 
 		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price between " + factor[0] + " AND " + factor[1];
+			sql = "select * from Annonces where price between " + factor[0] + " AND " + factor[1]+ " AND sold = 0";
 		}
 
 		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price >=" + factor[0] + " AND postal_code =" + factor[2];
+			sql = "select * from Annonces where price >=" + factor[0] + " AND postal_code =" + factor[2]+ " AND sold = 0";
 		}
 
 		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "select * from Annonces where price <=" + factor[1] + " AND postal_code =" + factor[2];
+			sql = "select * from Annonces where price <=" + factor[1] + " AND postal_code =" + factor[2]+ " AND sold = 0";
 		}
 		  
 		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-		  sql= "select * from Annonces where price between " + factor[0] +" AND " + factor[1] +" AND postal_code =" + factor[2];
+		  sql= "select * from Annonces where price between " + factor[0] +" AND " + factor[1] +" AND postal_code =" + factor[2]+ " AND sold = 0";
 		 }
 
-		System.out.println("le sql" + sql);
+		
 		return sql;
 
 	}

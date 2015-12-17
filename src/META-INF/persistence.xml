@@ -7,18 +7,17 @@
   <persistence-unit name="persistenceUnit">
     <class>Entities.User</class>
     <class>Entities.Annonces</class>
+     <class>Entities.Messages</class>
     <class>Entities.Administrator</class>
       <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/alda" />
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
       <property name="javax.persistence.jdbc.user" value="root" />
-      <property name="javax.persistence.jdbc.password" value="mira25" />
+      <property name="javax.persistence.jdbc.password" value="root" />
       <property name="openjpa.jdbc.DBDictionary" value="mysql" />
       <!-- Cette propriété active la log des requêtes SQL réalisées par OpenJPA -->
       <property name="openjpa.Log" value="SQL=Trace" />
       <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-      <property name="openjpa.DynamicEnhancementAgent" value="true"/>
-	  <property name="openjpa.RuntimeUnenhancedClasses" value="supported" />
     </properties>
   </persistence-unit>
 </persistence>

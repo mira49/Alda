@@ -149,6 +149,7 @@ public class Add_Announcement extends HttpServlet {
 			String dateFormatee = formater.format(dt);
 			annonce.setUser((User) session.getAttribute("user"));
 			annonce.setDate(dateFormatee);
+			annonce.setSold(0);
 			annoucement.create(annonce);
 			System.out.println("salut annonce");
 			this.getServletContext().getRequestDispatcher(VUEAfter).forward(request, response);

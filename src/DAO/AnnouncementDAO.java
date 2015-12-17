@@ -78,7 +78,7 @@ public class AnnouncementDAO {
 
 		em.getTransaction().begin();
 
-		announcement = em.createNativeQuery("select * from Annonces", Annonces.class).getResultList();
+		announcement = em.createNativeQuery("select * from Annonces where sold = 0", Annonces.class).getResultList();
 
 		return announcement;
 	}
@@ -145,6 +145,45 @@ public class AnnouncementDAO {
 		annonce = (Annonces) em.createNativeQuery("select * from Annonces where id=" + annonce_id, Annonces.class)
 				.getSingleResult();
 		return annonce;
+	}
+
+	public void setAnnounceSold(String parameter) {
+		
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		Annonces annonce = em.find(Annonces.class, parameter);
+		
+		annonce.setSold(1);
+		
+		em.getTransaction().commit();
+		
+	}
+
+	public void addToFavoriteList(String parameter) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		String factor[] = new String[2];
+		factor = parameter.split(";");
+		
+		Annonces annonce = findById(factor[1]);
+		
+		annonce.setFavorite(factor[0] + ";");
+
+		em.getTransaction().commit();
+	}
+
+	public List<Annonces> findAllByFavorite(User user) {
+		emf = Persistence.createEntityManagerFactory("persistenceUnit");
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		List<Annonces> announces = null;
+		announces = em.createNativeQuery("SELECT * FROM annonces WHERE favorite LIKE '%" + user.getEmail() + "%'", Annonces.class).getResultList();
+		return announces;
 	}
 
 }
