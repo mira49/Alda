@@ -9,13 +9,13 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
     </head>
     <body>
-        <c:import url="/CSS/header.jsp" />
+        <c:import url="/inc/header.jsp" />
           <h1   class="welcome" >Welcome</h1>
 		  <br>
  <a href="<c:url value="/annonceList"/>"  >
- <img class="image"  src="<c:url value="/CSS/annonce.png"/>"   onMouseOver="changeimage('<c:url value='/CSS/adh.png'/>',this);" onMouseOut="changeimage('<c:url value='/CSS/annonce.png'/>',this);" /></a>
+ <img class="image"  src="<c:url value="/inc/annonce.png"/>"   onMouseOver="changeimage('<c:url value='/inc/adh.png'/>',this);" onMouseOut="changeimage('<c:url value='/inc/annonce.png'/>',this);" /></a>
  <a href="<c:url value="/userList"/>"  >
- <img   src="<c:url value="/CSS/user.png"/>"  onMouseOver="changeimage('<c:url value='/CSS/userh.png'/>',this);" onMouseOut="changeimage('<c:url value='/CSS/user.png'/>',this);" /></a>
+ <img   src="<c:url value="/inc/user.png"/>"  onMouseOver="changeimage('<c:url value='/inc/userh.png'/>',this);" onMouseOut="changeimage('<c:url value='/inc/user.png'/>',this);" /></a>
  
  <script type="text/javascript">
 

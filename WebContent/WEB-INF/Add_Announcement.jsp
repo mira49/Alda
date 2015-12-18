@@ -11,8 +11,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     </head>
     <body>
-        <c:import url="/CSS/headerUser.jsp" />      
-          <c:import url="/CSS/menuUser.jsp" />
+        <c:import url="/inc/headerUser.jsp" />      
+          <c:import url="/inc/menuUser.jsp" />
           <div id="corpsDa">
 	<div>
 		<h1 id="Inscription-title">Here you can add an announcement</h1>

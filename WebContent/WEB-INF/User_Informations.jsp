@@ -9,8 +9,8 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
     </head>
     <body>
-        <c:import url="/CSS/headerUser.jsp" />      
-          <c:import url="/CSS/menuUser.jsp" />
+        <c:import url="/inc/headerUser.jsp" />      
+          <c:import url="/inc/menuUser.jsp" />
           <div id="corpsDa">
 	<div>
 		<h1 id="Inscription-title">Add informations or change it</h1>

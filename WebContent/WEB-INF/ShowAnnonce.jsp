@@ -10,8 +10,8 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
     </head>
     <body>
-    	 <c:import url="/CSS/header.jsp" />
-        <c:import url="/CSS/menu.jsp" />
+    	 <c:import url="/inc/header.jsp" />
+        <c:import url="/inc/menu.jsp" />
         <div id="corpsDa">
         <c:choose>
             <c:when test="${ empty annoucement_user }">
