@@ -28,7 +28,6 @@ public static final String VUE = "/WEB-INF/Favorite.jsp";
 		HttpSession session = request.getSession();
 		
 		
-		
 		List <Annonces> announces_favorite = dao.findAllByFavorite((User)session.getAttribute("user"));
 		
 		request.setAttribute("annoucement_user", announces_favorite);

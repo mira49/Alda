@@ -20,6 +20,8 @@
 					<table>
 					<input type="hidden" id="annonces" name="annonces" value="${current_announce.id}"> </input>
 						<tr><td><output>Announce:</td><td> ${current_announce.name}</output></td></tr>
+						<tr><td><output>Solder:</td><td> ${current_announce.user.name}</output></td></tr>
+						<tr><td><output>Description:</td><td> ${current_announce.description}</output></td></tr>
 						<tr><td><output>Message:</output></td>
 						<td><input type="text" id="Message" name="Message" maxlength="600"
 							required="" value=""> </input>

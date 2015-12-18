@@ -49,7 +49,7 @@ public class AnnouncementDAO {
 		List<Annonces> announcement = null;
 
 		try{
-			em.createNamedQuery("Annonces.findAll").getResultList();
+			announcement = em.createNamedQuery("Annonces.findAll").getResultList();
 		}catch(Exception e){}
 		
 		return announcement;
@@ -58,88 +58,73 @@ public class AnnouncementDAO {
 	public List<Annonces> findByFactor(String query){
 
 		List<Annonces> announcement = null;
-
+		System.out.println("query :" + query);
 		announcement = em.createQuery(query, Annonces.class).getResultList();
 
 		return announcement;
 	}
 
-	public List<Annonces> findByLowerPrice(String sql_request) {
-		System.out.println(sql_request);
-		List<Annonces> announcement = null;
+	public String findByLowerPrice(String sql_request) {
+		sql_request = sql_request + "order by u.price ASC";
 
-		announcement = em.createQuery(sql_request + "order by price ASC", Annonces.class).getResultList();
-
-		return announcement;
+		return sql_request;
 	}
 
-	public List<Annonces> findByHigherPrice(String sql_request) {
+	public String findByHigherPrice(String sql_request) {
 
 		List<Annonces> announcement = null;
 
-		announcement = em.createQuery(sql_request + "order by u.price DESC", Annonces.class)
-				.getResultList();
+		sql_request =sql_request + "order by u.price DESC";
 
-		return announcement;
+		return sql_request;
 	}
 
-	public List<Annonces> findByPostalCode(String sql_request) {
+	public String findByPostalCode(String sql_request) {
 
 		List<Annonces> announcement = null;
 
-		announcement = em.createQuery(sql_request + "order by u.postal_code", Annonces.class)
-				.getResultList();
+		sql_request = sql_request + "order by u.postal_code";
 
-		return announcement;
+		return sql_request;
 	}
 
 	public Annonces findById(String annonce_id) {
-		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();*/
-		
+		Long id = Long.parseLong(annonce_id); 
 		Annonces annonce = new Annonces();
-		/*annonce = (Annonces) em.createNativeQuery("select * from Annonces where id=" + annonce_id, Annonces.class)
-				.getSingleResult();*/
+		try{
+			annonce = (Annonces) em.createNamedQuery("Annonces.findByID")
+					.setParameter("id", id).getSingleResult();
+		}catch(Exception e){}
 		return annonce;
 	}
 
 	public void setAnnounceSold(String parameter) {
 		
-	/*	emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();*/
 		
 		Annonces annonce = em.find(Annonces.class, parameter);
 		
 		annonce.setSold(1);
-		
-		//em.getTransaction().commit();
-		
+	
 	}
 
 	public void addToFavoriteList(String parameter) {
-	/*	emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();*/
-		
+
+	
 		String factor[] = new String[2];
 		factor = parameter.split(";");
 		
 		Annonces annonce = findById(factor[1]);
-		
+		System.out.println(annonce.getName());
 		annonce.setFavorite(factor[0] + ";");
-
-		//em.getTransaction().commit();
 	}
 
 	public List<Annonces> findAllByFavorite(User user) {
-		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();*/
 		
 		List<Annonces> announces = null;
-		//announces = em.createNativeQuery("SELECT * FROM annonces WHERE favorite LIKE '%" + user.getEmail() + "%'", Annonces.class).getResultList();
+		try{
+			announces = (List<Annonces>) em.createNamedQuery("Annonces.findAllByFavorite")
+					.setParameter("email", "%" + user.getEmail()+ "%").getResultList();
+		}catch(Exception e){}
 		return announces;
 	}
 

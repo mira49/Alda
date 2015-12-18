@@ -30,28 +30,24 @@ public class Announcement extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		
+
 		String select_option = request.getParameter("select_option");
 		String sql_request = null;
-		
+		User user = user_dao.findByUser((User) session.getAttribute("user"));
 		List<Annonces> announcement = new ArrayList<>();
-		
-		if((User)session.getAttribute("user") != null){
-			User user = user_dao.findByUser((User)session.getAttribute("user"));
+
+		if (user != null) {
 			sql_request = user_dao.sql_create_query(user) + " ";
 			String factor[] = new String[3];
 			factor = user_dao.findFactor(user);
 			request.setAttribute("factor", factor);
-		}
-		else{
+		} else {
 			sql_request = "SELECT u FROM Annonces u where u.sold = 0";
-			System.out.println("sql_request:" + sql_request);
 		}
-		
-		
+
 		announcement = dao.findByFactor(sql_request);
-		
-		session.setAttribute("annoucement_user", announcement);
+		request.setAttribute("annoucement_user", announcement);
+		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
@@ -60,34 +56,43 @@ public class Announcement extends HttpServlet {
 		HttpSession session = request.getSession();
 		String select_option = request.getParameter("select_option");
 		List<Annonces> announcement = new ArrayList<>();
-		User user = new User();
-		String sql_request = "";
-		
-		if((User) session.getAttribute("user") != null){
-			user.setFactor(request.getParameter("factor_lower_price") + " ; " + request.getParameter("factor_higher_price") + "; " + request.getParameter("factor_location"));
-			user_dao.updateFactor(user, (User)session.getAttribute("user"));
-			sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
+		User user = user_dao.findByUser((User) session.getAttribute("user"));
+		User user_tmp = new User();
+		String factor[] = new String[3];
+
+		String sql_request = "SELECT u FROM Annonces u where u.sold = 0";
+
+		if (request.getParameter("factor_lower_price") != null || request.getParameter("factor_higher_price") != null
+				|| request.getParameter("factor_location") != null) {
+			user_tmp.setFactor(request.getParameter("factor_lower_price") + " ; "
+					+ request.getParameter("factor_higher_price") + "; " + request.getParameter("factor_location"));
+			user = user_dao.updateFactor(user_tmp, user);
+			sql_request = user_dao.sql_create_query(user) + " ";
+		} else {
+			sql_request = user_dao.sql_create_query(user);
 		}
-		else{
-			sql_request =  "select * from Annonces where sold = 0" + " "; 
-		}
-		
-		if (request.getParameter("favorite") != null){
+
+		if (request.getParameter("favorite") != null) {
 			dao.addToFavoriteList(request.getParameter("favorite"));
 		}
-		
-		if( select_option != null){
+
+		if (select_option != null) {
 			if (select_option.equals("lower_Price")) {
-				announcement = dao.findByLowerPrice(sql_request);
+				sql_request = dao.findByLowerPrice(sql_request);
 			} else if (select_option.equals("higher_Price")) {
-				announcement = dao.findByHigherPrice(sql_request);
+				sql_request = dao.findByHigherPrice(sql_request);
 			} else if (select_option.equals("Location")) {
-				announcement = dao.findByPostalCode(sql_request);
-			} 
+				sql_request = dao.findByPostalCode(sql_request);
+			}
 		}
-		
-		session.setAttribute("annoucement_user", announcement);
-		
+
+		announcement = dao.findByFactor(sql_request);
+		factor = user_dao.findFactor(user);
+
+		request.setAttribute("factor", factor);
+		request.setAttribute("annoucement_user", announcement);
+		session.setAttribute("user", user);
+
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 }

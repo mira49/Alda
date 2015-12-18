@@ -9,8 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Messages.getAllByUser",
+                query="SELECT u FROM Messages u WHERE u.receiver_message = :name"),
+}) 
 public class Messages {
 	
 	@Id
@@ -42,7 +48,7 @@ public class Messages {
 	}
 
 	public void setMessage(String message) {
-		message = message;
+		this.message = message;
 	}
 
 	public String getSender_message() {

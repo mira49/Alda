@@ -71,7 +71,7 @@
 					
 						
 							<c:forEach var="annoucement"
-								items="${ sessionScope.annoucement_user}">
+								items="${annoucement_user}">
 								<tr>
 								<form action="announcement" method="post">
 								<td><c:out value="${annoucement.name}" /></td>
@@ -94,7 +94,7 @@
 				</table>
 			</div>
 		</div>
-		<c:if test="${sessionScope.factor != null}">
+		<c:if test="${factor != null}">
 			<div id="factor_announcement">
 
 				<h1>Factors of research</h1>

@@ -1,6 +1,8 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -25,6 +27,11 @@ public class contact extends HttpServlet{
 	@EJB
 	AnnouncementDAO dao = new AnnouncementDAO();
 	
+	@EJB
+	UserDAO user_dao = new UserDAO();
+	
+	@EJB
+	MessageDAO msg = new MessageDAO();
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -46,9 +53,16 @@ public class contact extends HttpServlet{
 		
 		Annonces annonce = dao.findById(request.getParameter("annonces"));
 		
-		MessageDAO msg = new MessageDAO();
+		User user = user_dao.findByUser((User)session.getAttribute("user"));
 		
-		msg.create((User)session.getAttribute("user"), messages, annonce);
+		List<Annonces> annoucements = new ArrayList<>();
+		annoucements = dao.getAnnoucement_user(user);
+		if (!annoucements.isEmpty()) {
+			request.setAttribute("annoucement_user", annoucements);
+		}
+		
+		msg.create(user, messages, annonce);
+		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE_retour).forward(request, response);
 	}
 }

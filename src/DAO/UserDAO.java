@@ -25,22 +25,9 @@ public class UserDAO {
 	}
 
 	public void delete(Long id) {
-		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		boolean transactionOk = false;
-		em.getTransaction().begin();
-		try {
-			em.createNativeQuery("delete from alda_user where id = ?").setParameter(1, id).executeUpdate();
-			transactionOk = true;
-		} finally {
-			if (transactionOk) {
-				em.getTransaction().commit();
-			} else {
-				System.out.println("error in delete announcement");
-				em.getTransaction().rollback();
-			}
-		}*/
+			em.createNamedQuery("User.deleteUser").setParameter(1, id).executeUpdate();
 	}
+	
 	public User findUser(String email, String password) {
 		User user = null;
 		try{
@@ -55,16 +42,9 @@ public class UserDAO {
 	
 	public List<User>  getUsers() {
 		List<User> find_user = new ArrayList<User>();
-		/*User user;
-		emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		// boolean transactionOk = false;
 
-		// try{
-		find_user = em.createNativeQuery("select * from alda_user", User.class)
-				.getResultList();
-*/
+		find_user = em.createNamedQuery("User.findAll", User.class).getResultList();
+
 		return find_user;
 	}
 
@@ -113,16 +93,12 @@ public class UserDAO {
 		return factor_temp;
 	}
 
-	public void updateFactor(User user_tmp, User user) {
-	/*	emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+	public User updateFactor(User user_tmp, User user) {
 
 		User account = em.find(User.class, user.getId());
 		account.setFactor(user_tmp.getFactor());
-
-		em.getTransaction().commit();
-		em.close();*/
+		
+		return account;
 	}
 
 	public String sql_create_query(User user) {
@@ -160,20 +136,14 @@ public class UserDAO {
 		  sql= "SELECT u FROM Annonces u where u.price between " + factor[0] +" AND " + factor[1] +" AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
 		 }
 
-		
 		return sql;
 
 	}
 
 	public void UpdatePassword(User account_modify, User temp) {
 
-		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 		User account = em.find(User.class, account_modify.getId());
 		account.setPassword(temp.getPassword());
-		em.getTransaction().commit();
-		em.close();*/
 
 	}
 

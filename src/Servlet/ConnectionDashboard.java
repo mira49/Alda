@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,10 @@ public class ConnectionDashboard extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/ConnectionDashboard.jsp";
 	public static final String VUESucess = "/WEB-INF/Dashboard.jsp";
+	
+	@EJB
 	AdministratorDAO dao = new AdministratorDAO();
+	boolean instance = false;
 	Administrator admin = new Administrator();
 
 
@@ -39,10 +43,11 @@ public class ConnectionDashboard extends HttpServlet {
 		
 		if(pseudo.equals(password) && pseudo.equals("admin")){
 		
-			if(dao.instance==false){
+			if(!instance){
 				admin.setPassword(password);
 				admin.setPseudo(pseudo);
 				dao.create(admin);
+				instance = true;
 			}
 		} 
 		

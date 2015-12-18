@@ -24,6 +24,10 @@ import javax.persistence.NamedQuery;
     query="delete from Annonces u where u.id = :id"),
     @NamedQuery(name="Annonces.findAll",
     query="SELECT u FROM Annonces u where u.sold = 0"),
+    @NamedQuery(name="Annonces.findByID",
+    query="SELECT u FROM Annonces u where u.id = :id"),
+    @NamedQuery(name="Annonces.findAllByFavorite",
+    query="SELECT u FROM Annonces u where u.favorite LIKE :email "),
 }) 
 public class Annonces  implements Serializable {
 

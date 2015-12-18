@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,7 @@ public class UserList extends HttpServlet {
 	public static final String VUE = "/WEB-INF/ShowUsers.jsp";
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
 
+	@EJB
 	UserDAO userDao= new UserDAO();
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

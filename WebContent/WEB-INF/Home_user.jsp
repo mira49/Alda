@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -69,8 +69,13 @@
 									<button type="submit" name="delete"
 									value="${annoucement.id}"  onclick="document.announcement_Form.submit();" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" /> delete</button>.
 									</td>	
-							<td>
-									<button type="submit" name="sold" value="${annoucement.id}" class="sansLabel"> Sold </button>
+						
+									 <c:if test="${annoucement.sold=='0'}">
+										<td><button type="submit" name="sold" value="${annoucement.id}" class="sansLabel"> Sold </button></td>
+									</c:if>
+									 <c:if test="${annoucement.sold=='1'}">
+										<td> vendu </td>
+									</c:if>
 						</tr>
 					</c:forEach>
 				</form>
