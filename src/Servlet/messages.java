@@ -23,7 +23,7 @@ public class messages extends HttpServlet{
 	public static final String VUE = "/WEB-INF/Message.jsp";
 	
 	@EJB
-	MessageDAO mess_dao = new MessageDAO();
+	MessageDAO mess_dao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

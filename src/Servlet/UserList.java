@@ -22,7 +22,7 @@ public class UserList extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
 
 	@EJB
-	UserDAO userDao= new UserDAO();
+	UserDAO userDao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();

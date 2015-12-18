@@ -24,7 +24,8 @@ public class ConnectionDashboard extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/Dashboard.jsp";
 	
 	@EJB
-	AdministratorDAO dao = new AdministratorDAO();
+	AdministratorDAO dao;
+	
 	boolean instance = false;
 	Administrator admin = new Administrator();
 

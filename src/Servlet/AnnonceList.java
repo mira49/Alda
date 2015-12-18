@@ -25,9 +25,10 @@ public class AnnonceList extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
 
 	@EJB
-	private AnnouncementDAO dao = new AnnouncementDAO();
+	private AnnouncementDAO dao;
 	
-	private UserDAO user_dao = new UserDAO();	
+	@EJB
+	private UserDAO user_dao;	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("admin") == null) {

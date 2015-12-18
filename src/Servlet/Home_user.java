@@ -24,10 +24,10 @@ public class Home_user extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 
 	@EJB
-	private AnnouncementDAO dao = new AnnouncementDAO();
+	private AnnouncementDAO dao;
 	
 	@EJB
-	private UserDAO user_dao = new UserDAO();
+	private UserDAO user_dao;
 	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

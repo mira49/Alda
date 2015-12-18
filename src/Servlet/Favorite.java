@@ -21,7 +21,7 @@ public class Favorite extends HttpServlet{
 public static final String VUE = "/WEB-INF/Favorite.jsp";
 	
 	@EJB
-	AnnouncementDAO dao = new AnnouncementDAO();
+	AnnouncementDAO dao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

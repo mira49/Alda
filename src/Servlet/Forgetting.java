@@ -39,7 +39,7 @@ public class Forgetting extends HttpServlet {
 	private Map<String, String> erreurs = new HashMap<String, String>();
 	
 	@EJB
-	private UserDAO userDao = new UserDAO();
+	private UserDAO userDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

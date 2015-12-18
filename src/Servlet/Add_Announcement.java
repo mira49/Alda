@@ -44,7 +44,7 @@ public class Add_Announcement extends HttpServlet {
 	private String filename;
 
 	@EJB
-	private AnnouncementDAO annoucement = new AnnouncementDAO();;
+	private AnnouncementDAO annoucement;
 
 	@Override
 	public void init() throws ServletException {
@@ -67,8 +67,6 @@ public class Add_Announcement extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		
-		System.out.println(session.getAttribute("user"));
 		
 		Annonces annonce = new Annonces();
 		try {

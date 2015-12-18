@@ -28,7 +28,7 @@ public class User_Informations extends HttpServlet{
 	 private UserDAO user_dao = new UserDAO();
 	 
 	 @EJB
-	 private AnnouncementDAO dao = new AnnouncementDAO();
+	 private AnnouncementDAO dao;
 	 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* Récupération de la session depuis la requête */

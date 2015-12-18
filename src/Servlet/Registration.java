@@ -25,7 +25,7 @@ public class Registration extends HttpServlet {
 	private Map<String, String> erreurs = new HashMap<String, String>();
 	
 	@EJB
-	private UserDAO userDAO = new UserDAO();
+	private UserDAO userDAO;
 
 	private User user = new User();
 

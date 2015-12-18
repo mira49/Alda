@@ -23,9 +23,9 @@ public class Announcement extends HttpServlet {
 	public static final String VUE = "/WEB-INF/User_announcement.jsp";
 
 	@EJB
-	private AnnouncementDAO dao = new AnnouncementDAO();
+	private AnnouncementDAO dao;
 	@EJB
-	private UserDAO user_dao = new UserDAO();
+	private UserDAO user_dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

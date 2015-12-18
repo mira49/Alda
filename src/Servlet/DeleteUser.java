@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +24,12 @@ public class DeleteUser extends HttpServlet {
 	public static final String VUE = "/WEB-INF/ShowUsers.jsp";
 	public static final String VUE2 = "/WEB-INF/ShowAnnonce.jsp";
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
-	UserDAO dao = new UserDAO();
-	AnnouncementDAO dao2 = new AnnouncementDAO();
+	
+	@EJB
+	UserDAO dao;
+	
+	@EJB
+	AnnouncementDAO dao2;
 
 
 	

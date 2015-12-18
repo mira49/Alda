@@ -29,10 +29,10 @@ public class Connection extends HttpServlet {
     public static final String VUE       			  = "/WEB-INF/Connection.jsp";
 
     @EJB
-    UserDAO user = new UserDAO();
+    UserDAO user;
     
     @EJB
-    AnnouncementDAO dao = new AnnouncementDAO();
+    AnnouncementDAO dao;
     
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
     
