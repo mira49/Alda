@@ -10,7 +10,7 @@
      <class>Entities.Messages</class>
     <class>Entities.Administrator</class>
       <properties>
-   
+  
       <property name="openjpa.jdbc.DBDictionary" value="mysql" />
       <!-- Cette propriété active la log des requêtes SQL réalisées par OpenJPA -->
       <property name="openjpa.Log" value="SQL=Trace" />

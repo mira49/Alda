@@ -1,6 +1,32 @@
 body, p, legend, label, input {
     font: normal 8pt verdana, helvetica, sans-serif;
 }
+.infoperso  label{
+	
+	width: 300px;
+	float: left;
+	font-size: 17px;
+	
+}
+.register{
+	 color:white; background-color:#40abfd; float:right; 
+}
+.infoperso {
+position: relative;
+ font-family: open sans , Arial, Verdana, sans-serif;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 30px;
+  	width: 60%;
+  	margin-left:20%;
+  
+}
+
+ 
+.infoperso textarea{ width: 225px; height:70px;  }
+.infoperso input{height:30px; width: 225px;}
 
 /* Forms  */
 fieldset {
@@ -183,7 +209,7 @@ width:80%;
 margin-left:10%;
 }
 .liste{
-  height:90%; width:16.9%; 
+  height:90%; width:17%; 
   position:fixed;
 	top:80px;
 }
@@ -232,7 +258,7 @@ font-size:20px; margin-left:30%;
 }
 
 .menuLi{
-font-size:16px; 
+font-size:15px; 
 }
 div#deco{
 	position: fixed;
