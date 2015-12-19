@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>message</title>
+        <title>Announcement</title>
            <link href="<c:url value="/CSS/bootstrap.min.css"/>" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
 <script
