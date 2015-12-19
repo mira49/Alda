@@ -17,7 +17,7 @@
  <a href="<c:url value="/add_Announcement"/>"  >
  <img  src="<c:url value="/inc/adda.png"/>"   onMouseOver="changeimage('<c:url value="/inc/addah.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/adda.png"/>',this);" /></a>
  <br>
- <a href="<c:url value="/announcement"/>"  >
+ <a href="<c:url value="/myAnnouncements"/>"  >
  <img   src="<c:url value="/inc/myan.png"/>"  onMouseOver="changeimage('<c:url value="/inc/myanh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/myan.png"/>',this);" /></a>
  <br> 
  <a href="<c:url value="/messages_user"/>"  >

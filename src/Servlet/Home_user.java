@@ -39,44 +39,10 @@ public class Home_user extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		} else {
 			
-			User user =user_dao.findByUser((User)session.getAttribute("user"));
-			List<Annonces> annoucements = new ArrayList<>();
-			annoucements = dao.getAnnoucement_user(user);
-			if (!annoucements.isEmpty()) {
-				request.setAttribute("annoucement_user", annoucements);
-			}
-			session.setAttribute("user", user);
+		
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
-
-		
-		String idA = request.getParameter("delete");
-		
-		User user =user_dao.findByUser((User)session.getAttribute("user"));
-		
-		
-		if (idA != null) {
-			Long id = Long.parseLong(idA);
-			dao.delete(id);	
-		}
-		
-		if(request.getParameter("sold")!= null){
-			dao.setAnnounceSold(request.getParameter("sold"));
-		}
-		
-		List<Annonces> annoucements = new ArrayList<>();
-		annoucements = dao.getAnnoucement_user(user);
-		if (!annoucements.isEmpty()) {
-			request.setAttribute("annoucement_user", annoucements);
-		}
-		
-		session.setAttribute("user", user);
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-
-	}
+	
 }

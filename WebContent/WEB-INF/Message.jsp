@@ -23,11 +23,11 @@ any message received.</p>
             <c:otherwise>
 	<div>
 		<h1 id="Inscription-title">received messages</h1>
-	</div>
+	</div>	<br><br>
 
- 		</table>
-			</div>
-			<div id="home_announcement">
+ 		
+			
+			
 			
 			<table >
 				<tr>
@@ -41,7 +41,9 @@ any message received.</p>
 							<td><c:out value="${message.message}" /></td>	
 						</tr>
 					</c:forEach>
-			</table>  </c:otherwise>
+			</table>  
+			</c:otherwise>
         </c:choose>
+        </div>
 </body>
 </html>

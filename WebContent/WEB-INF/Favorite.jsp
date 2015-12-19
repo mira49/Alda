@@ -21,7 +21,9 @@
 No registered favorite.</p>
             </c:when>
             <c:otherwise>
-				<h4>Favorite</h4>
+				<div>
+		<h1 id="Inscription-title">Favorite</h1>
+	</div>	<br><br>
 			<table >
 				<tr>
 					<th>Name</th>
