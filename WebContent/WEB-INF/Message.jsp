@@ -1,53 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
-<link type="text/css" rel="stylesheet" href="CSS/style.css" />
-<link type="text/css" rel="stylesheet" href="CSS/bootstrap.css" />
-</head>
-<body>
-	<div id="home">
-		<div id="home_user">
-			<h3 id="Inscription-title">Welcome on your account
-				${sessionScope.user.firstName} ${sessionScope.user.name}</h3>
-		</div>
-		<div id="home_content">
-		<div id="home_options">
-			<table id="home_table">
-				<tr>
-					<td><input type="button" value="Deconnection"
-						onclick="window.location='deconnection'" class="sansLabel" /></td>
-				 </tr>
+    <head>
+        <meta charset="utf-8" />
+        <title>message</title>
+           <link href="<c:url value="/CSS/bootstrap.min.css"/>" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <c:import url="/inc/headerUser.jsp" />      
+          <c:import url="/inc/menuUser.jsp" />
+          <div id="corpsDa">
+          
+        <c:choose>
+            <c:when test="${ empty message_user }">
+                <p class="erreur">
+any message received.</p>
+            </c:when>
+            <c:otherwise>
+	<div>
+		<h1 id="Inscription-title">received messages</h1>
+	</div>
 
-					<tr><td><input type="button" value="Profil"
-						onclick="window.location='user_Informations'" class="sansLabel" /></td>
-					 </tr>
-
-					<tr><td><input type="button" value="Add announcement"
-						onclick="window.location='add_Announcement'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 <tr><td><input type="button" value="Announcements"
-						onclick="window.location='announcement'" class="sansLabel" /></td>
-					 </tr>
-					 
-					  <tr><td><input type="button" value="Message"
-						onclick="window.location='messages_user'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 <tr><td><input type="button" value="Home"
-						onclick="window.location='home_user'" class="sansLabel" /></td>
-					 </tr>
-			</table>
+ 		</table>
 			</div>
 			<div id="home_announcement">
-				<h4>Messages</h4>
-			<table class="table">
+			
+			<table >
 				<tr>
 					<th>Name</th>
 					<th>Message </th>
@@ -59,9 +41,7 @@
 							<td><c:out value="${message.message}" /></td>	
 						</tr>
 					</c:forEach>
-			</table>
-			</div>
-		</div>
-	</div>
+			</table>  </c:otherwise>
+        </c:choose>
 </body>
 </html>

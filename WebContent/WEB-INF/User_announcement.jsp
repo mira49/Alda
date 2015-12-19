@@ -1,53 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
-<link type="text/css" rel="stylesheet" href="CSS/style.css" />
-<link type="text/css" rel="stylesheet" href="CSS/bootstrap.css" />
-</head>
-<body>
-	<div id="home">
-		<div id="home_user">
-			<h3 id="Inscription-title">Welcome on your account
-				${sessionScope.user.firstName} ${sessionScope.user.name}</h3>
-		</div>
-		<div id="home_content">
-			<div id="home_options">
-				<table id="home_table">
-					<tr>
-						<td><input type="button" value="Deconnection"
-							onclick="window.location='deconnection'" class="sansLabel" /></td>
-					</tr>
+    <head>
+        <meta charset="utf-8" />
+        <title>message</title>
+           <link href="<c:url value="/CSS/bootstrap.min.css"/>" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <c:import url="/inc/headerUser.jsp" />      
+          <c:import url="/inc/menuUser.jsp" />
+          <div id="corpsDa">
 
-					<tr>
-						<td><input type="button" value="Profil"
-							onclick="window.location='user_Informations'" class="sansLabel" /></td>
-					</tr>
+		
+<c:if test="${factor != null}">
+			<div id="factor_announcement">
 
-					<tr>
-						<td><input type="button" value="Add announcement"
-							onclick="window.location='add_Announcement'" class="sansLabel" /></td>
-					</tr>
-
-					<tr>
-						<td><input type="button" value="Announcements"
-							onclick="window.location='announcement'" class="sansLabel" /></td>
-					</tr>
+				<h1>Announcement</h1>
+				<form action="announcement" method="post">
 					
-					 <tr><td><input type="button" value="Home"
-						onclick="window.location='home_user'" class="sansLabel" /></td>
-					 </tr>
-				</table>
+							<label style ="padding:15px;">Filter</label>
+							<input type="text" id="factor_lower_price"
+								name="factor_lower_price" size="20"  placeholder="Price lower" maxlength="60"
+								value=${factor[0]}></input>
+					
+
+						
+						<input type="text" id="factor_higher_price"
+								name="factor_higher_price" size="20" placeholder="Price higher" maxlength="60"
+								value=${factor[1]}></input><input type="text" id="factor_location"
+								name="factor_location" size="20"  placeholder="Location"  maxlength="60"
+								value=${factor[2]}></input><button type="submit" name="factor" value="">Search</button>
+				</form>
+
 			</div>
+		</c:if>
 
-
-			<div id="home_announcement">
-				<h4>Announcement</h4>
+			<div >
 
 				<form method="post" action="announcement" name="announcement_Form">
 					<select onchange="document.announcement_Form.submit();"
@@ -58,7 +50,7 @@
 						<option value=Location>Location</option>
 					</select>
 				</form>
-				<table class="table">
+				<table >
 					<tr>
 						<th>name</th>
 						<th>surface</th>
@@ -93,47 +85,7 @@
 						
 				</table>
 			</div>
-		</div>
-		<c:if test="${factor != null}">
-			<div id="factor_announcement">
-
-				<h1>Factors of research</h1>
-				<form action="announcement" method="post">
-					<table>
-						<tr>
-							<td><output>Price lower</output></td>
-						</tr>
-						<tr>
-							<td><input type="text" id="factor_lower_price"
-								name="factor_lower_price" size="20" maxlength="60"
-								value=${factor[0]}></input></td>
-						</tr>
-
-						<tr>
-							<td><output>Price higher</output></td>
-						</tr>
-						<tr>
-							<td><input type="text" id="factor_higher_price"
-								name="factor_higher_price" size="20" maxlength="60"
-								value=${factor[1]}></input></td>
-						</tr>
-						<tr>
-							<td><output>Location</output></td>
-						</tr>
-						<tr>
-							<td><input type="text" id="factor_location"
-								name="factor_location" size="20" maxlength="60"
-								value=${factor[2]}></input></td>
-						</tr>
-
-						<tr>
-							<td><button type="submit" name="factor" value="">Search</button></td>
-						</tr>
-					</table>
-				</form>
-
-			</div>
-		</c:if>
+		
 	</div>
 </body>
 </html>

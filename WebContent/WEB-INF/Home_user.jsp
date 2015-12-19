@@ -1,87 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home</title>
-<link type="text/css" rel="stylesheet" href="CSS/style.css" />
-<link type="text/css" rel="stylesheet" href="CSS/bootstrap.css" />
-</head>
-<body>
-	<div id="home">
-		<div id="home_user">
-			<h3 id="Inscription-title">Welcome on your account
-				${sessionScope.user.firstName} ${sessionScope.user.name} </h3>
-		</div>
-		<div id="home_content">
-		<div id="home_options">
-			<table id="home_table">
-				<tr>
-					<td><input type="button" value="Deconnection"
-						onclick="window.location='deconnection'" class="sansLabel" /></td>
-				 </tr>
+    <head>
+        <meta charset="utf-8" />
+        <title>Home</title>
+           <link href="<c:url value="/CSS/bootstrap.min.css"/>" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/style.css"/>" />
+    </head>
+    <body>
+        <c:import url="/inc/headerUser.jsp" />
+          <h1   class="welcome" >Welcome on your account
+				${sessionScope.user.firstName} ${sessionScope.user.name} </h1>
+		  <br>
+		  <center>
+ <a href="<c:url value="/add_Announcement"/>"  >
+ <img  src="<c:url value="/inc/adda.png"/>"   onMouseOver="changeimage('<c:url value="/inc/addah.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/adda.png"/>',this);" /></a>
+ <br>
+ <a href="<c:url value="/announcement"/>"  >
+ <img   src="<c:url value="/inc/myan.png"/>"  onMouseOver="changeimage('<c:url value="/inc/myanh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/myan.png"/>',this);" /></a>
+ <br> 
+ <a href="<c:url value="/messages_user"/>"  >
+ <img   src="<c:url value="/inc/msg.png"/>"  onMouseOver="changeimage('<c:url value="/inc/msgh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/msg.png"/>',this);" /></a>
+<br>
+  <a href="<c:url value="/favorite"/>"  >
+ <img   src="<c:url value="/inc/actu.png"/>"  onMouseOver="changeimage('<c:url value="/inc/actuh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/actu.png"/>',this);" /></a>
+ <br></center>
+ <script type="text/javascript">
 
-					<tr><td><input type="button" value="Profil"
-						onclick="window.location='user_Informations'" class="sansLabel" /></td>
-					 </tr>
+function changeimage(url,obj){
 
-					<tr><td><input type="button" value="Add announcement"
-						onclick="window.location='add_Announcement'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 <tr><td><input type="button" value="Announcements"
-						onclick="window.location='announcement'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 <tr><td><input type="button" value="Message"
-						onclick="window.location='messages_user'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 <tr><td><input type="button" value="Favorite"
-						onclick="window.location='favorite'" class="sansLabel" /></td>
-					 </tr>
-					 
-					 
-			</table>
-			</div>
-			<div id="home_announcement">
-				<h4>My announcements</h4>
-			<table class="table">
-				<tr>
-					<th>Name</th>
-					<th>Surface</th>
-					<th>Postal code</th>
-					<th>Price</th>
-					<th>Delete</th>
-				</tr>
-				<form action="home_user" method="post" name="announcement_Form">
-					<c:forEach var="annoucement"
-						items="${ annoucement_user}">
-						<tr>
-							<td><c:out value="${annoucement.name}" /></td>
-							<td><c:out value="${annoucement.surface}" /></td>
-							<td><c:out value="${annoucement.postal_code}" /></td>
-							<td><c:out value="${annoucement.price}" /></td>
-							<td>
-									<button type="submit" name="delete"
-									value="${annoucement.id}"  onclick="document.announcement_Form.submit();" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" /> delete</button>.
-									</td>	
-						
-									 <c:if test="${annoucement.sold=='0'}">
-										<td><button type="submit" name="sold" value="${annoucement.id}" class="sansLabel"> Sold </button></td>
-									</c:if>
-									 <c:if test="${annoucement.sold=='1'}">
-										<td> vendu </td>
-									</c:if>
-						</tr>
-					</c:forEach>
-				</form>
-			</table>
-			</div>
-		</div>
-	</div>
-</body>
+obj.src=url; 
+}
+</script>
+    </body>
 </html>

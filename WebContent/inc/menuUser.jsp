@@ -6,8 +6,10 @@
    <div style="background-color: #efefef;" class=" sidebar col-sm-3 col-md-2 liste">
             <ul class="nav nav-sidebar">
             <li class="menuP">  Menu</li>
-            <li class="menuLi"><a href="<c:url value=""/>">My announcements </a></li>
+            <li class="menuLi"><a href="<c:url value="/announcement"/>">My announcements </a></li>
             <li class="menuLi"><a href="<c:url value="/messages_user"/>">My messages </a></li>
+            <li class="menuLi"><a href="<c:url value="/favorite"/>">Favorite </a></li>
+            
             <li class="menuLi"><a href="<c:url value="/"/>">Actuality </a></li>
             
            
