@@ -19,7 +19,7 @@ import Entities.Annonces;
 import Entities.User;
 
 @WebServlet("/annonceList")
-public class AnnonceList extends HttpServlet {
+public class AnnonceList extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/ShowAnnonce.jsp";
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
@@ -61,7 +61,7 @@ public class AnnonceList extends HttpServlet {
 		if((User) session.getAttribute("user") != null){
 			user.setFactor(request.getParameter("factor_lower_price") + " ; " + request.getParameter("factor_higher_price") + "; " + request.getParameter("factor_location"));
 			user_dao.updateFactor(user, (User)session.getAttribute("user"));
-			sql_request = user_dao.sql_create_query((User)session.getAttribute("user")) + " ";
+			sql_request = sql_create_query((User)session.getAttribute("user")) + " ";
 		}
 		else{
 			sql_request =  "select * from Annonces" + " "; 

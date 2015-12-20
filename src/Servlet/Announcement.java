@@ -18,7 +18,7 @@ import Entities.Annonces;
 import Entities.User;
 
 @WebServlet("/announcement")
-public class Announcement extends HttpServlet {
+public class Announcement extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/User_announcement.jsp";
 
@@ -37,7 +37,7 @@ public class Announcement extends HttpServlet {
 		List<Annonces> announcement = new ArrayList<>();
 
 		if (user != null) {
-			sql_request = user_dao.sql_create_query(user) + " ";
+			sql_request = sql_create_query(user) + " ";
 			String factor[] = new String[3];
 			factor = user_dao.findFactor(user);
 			request.setAttribute("factor", factor);
@@ -67,9 +67,9 @@ public class Announcement extends HttpServlet {
 			user_tmp.setFactor(request.getParameter("factor_lower_price") + " ; "
 					+ request.getParameter("factor_higher_price") + "; " + request.getParameter("factor_location"));
 			user = user_dao.updateFactor(user_tmp, user);
-			sql_request = user_dao.sql_create_query(user) + " ";
+			sql_request = sql_create_query(user) + " ";
 		} else {
-			sql_request = user_dao.sql_create_query(user);
+			sql_request = sql_create_query(user);
 		}
 
 		if (request.getParameter("favorite") != null) {

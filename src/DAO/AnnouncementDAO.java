@@ -29,7 +29,7 @@ public class AnnouncementDAO {
 
 		try{
 			announcement =  (List<Annonces>) em.createNamedQuery("Annonces.AnnouncementUser")
-					.setParameter("email", user.getName())
+					.setParameter("email", user.getEmail())
 					.getResultList();
 		}catch(Exception e){}
 		

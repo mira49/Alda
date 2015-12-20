@@ -49,9 +49,7 @@ public class Home_user extends HttpServlet {
 			request.setAttribute("notifications", new_notification);
 
 			List<Annonces> annonce = announceDAO.findAll();
-			System.out.println("coucou1");
 			String news = newAnnouncewithFactorUser(annonce, (User) session.getAttribute("user"));
-			System.out.println("coucou2");
 			if (news.equals("news")) {
 				request.setAttribute("news", news);
 			}
@@ -66,13 +64,10 @@ public class Home_user extends HttpServlet {
 		String answear = "";
 
 		for (Annonces a : announce) {
-			System.out.println("user annonce" + a.getUser().getEmail());
-			System.out.println("user courant" + user.getEmail());
 			if(!(a.getUser().getEmail().equals(user.getEmail()))){
 				boolean check = true;
 				if (a.getDate().compareTo(user.getDate_connexion()) > 0) {
 					String factor[] = user.getFactor().split(";");
-					System.out.println("Nom de lannonce" + a.getName());
 					if (!StringUtils.isBlank(factor[0])) {
 						if (Integer.parseInt(factor[0]) > a.getPrice()) {
 							check = false;

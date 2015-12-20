@@ -102,45 +102,6 @@ public class UserDAO {
 		return account;
 	}
 
-	public String sql_create_query(User user) {
-
-		String factor_user = user.getFactor();
-		String sql = "SELECT u FROM Annonces u where u.sold = 0";
-		String factor[] = new String[3];
-		factor = factor_user.split(";");
-
-		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price >=" + factor[0] + " AND u.sold = 0";
-		}
-
-		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price <=" + factor[1] + " AND u.sold = 0";
-		}
-
-		if ((StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.postal_code =" + factor[2]+ " AND u.sold = 0";
-		}
-
-		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price between " + factor[0] + " AND " + factor[1]+ " AND u.sold = 0";
-		}
-
-		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price >=" + factor[0] + " AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
-		}
-
-		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price <=" + factor[1] + " AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
-		}
-		  
-		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-		  sql= "SELECT u FROM Annonces u where u.price between " + factor[0] +" AND " + factor[1] +" AND u.postal_code =" + factor[2]+ " AND u.sold = 0";
-		 }
-
-		return sql;
-
-	}
-
 	public void UpdatePassword(User account_modify, User temp) {
 
 		User account = em.find(User.class, account_modify.getId());

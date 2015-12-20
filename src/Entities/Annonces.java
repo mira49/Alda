@@ -20,7 +20,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name="Annonces.AnnouncementUser",
-                query="SELECT u FROM Annonces u WHERE u.user.name = :email"),
+                query="SELECT u FROM Annonces u WHERE u.user.email = :email"),
     @NamedQuery(name="Annonces.deleteAnnounce",
     query="delete from Annonces u where u.id = :id"),
     @NamedQuery(name="Annonces.findAll",
@@ -94,7 +94,7 @@ public class Annonces  implements Serializable {
 	private String image3;
 
 	@ManyToOne(cascade = { CascadeType.ALL})
-	@JoinColumn(name = "email", referencedColumnName = "name" )
+	@JoinColumn(name = "email", referencedColumnName = "email" )
 	private User user;
 
 	public Long getId() {
