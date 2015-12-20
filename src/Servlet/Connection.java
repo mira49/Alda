@@ -54,6 +54,12 @@ public class Connection extends HttpServlet {
 	
 		if (user_connexion != null){
 			
+			String format = "dd/MM/yy H:mm:ss";
+			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
+			java.util.Date dt = new java.util.Date();
+			
+			user.updateDate(user_connexion, dt);
+			
 			List<Annonces> annoucements = new ArrayList<>();
 			
 			annoucements = dao.getAnnoucement_user(user_connexion);

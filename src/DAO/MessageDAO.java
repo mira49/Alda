@@ -25,7 +25,7 @@ public class MessageDAO {
 	
 		Messages msg = new Messages();
 		msg.setMessage(message);
-		msg.setReceiver_message((attribute.getUser().getName()));
+		msg.setReceiver_message((attribute.getUser().getEmail()));
 		msg.setSender_message(user.getName());
 		
 		em.merge(msg);

@@ -3,6 +3,7 @@ package Entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -66,7 +67,31 @@ public class User  implements Serializable{
   @Column(nullable=true)
   private String factor;
   
-  @OneToMany(mappedBy="user")
+  @Basic
+	@Column(length = 50, nullable = true)
+  private Date date_connexion;
+  
+  @Basic
+  @Column(length = 50, nullable = true)
+  private Date date_deconnection;
+  
+  public Date getDate_connexion() {
+	return date_connexion;
+}
+
+public void setDate_connexion(Date date_connexion) {
+	this.date_connexion = date_connexion;
+}
+
+public Date getDate_deconnection() {
+	return date_deconnection;
+}
+
+public void setDate_deconnection(Date date_deconnection) {
+	this.date_deconnection = date_deconnection;
+}
+
+@OneToMany(mappedBy="user")
 	List<Annonces> announcements;
   
   public String getFactor() {

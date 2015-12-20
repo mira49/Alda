@@ -1,6 +1,7 @@
 package DAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -151,6 +152,16 @@ public class UserDAO {
 		
 		User u = em.find(User.class, user.getId());
 		return u;
+	}
+
+	public void updateDate(User user_connexion, Date dt) {
+		user_connexion.setDate_connexion(dt);
+		em.merge(user_connexion);
+	}
+
+	public void updateDateDeco(User user, Date dateFormatee) {
+		user.setDate_deconnection(dateFormatee);
+		em.merge(user);	
 	}
 
 }

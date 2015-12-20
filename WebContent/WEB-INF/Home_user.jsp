@@ -15,6 +15,10 @@
 				<c:if test= "${(notifications gt 0) && (notifications) != null}">
 					<h3> You have ${notifications} notifications. Check your messages.</h3>
 				</c:if>
+				
+				<c:if test= "${(news) != null}">
+					<h3> One or more announcement for your factors found</h3>
+				</c:if>
 		  <br>
 		  <center>
  <a href="<c:url value="/add_Announcement"/>"  >

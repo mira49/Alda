@@ -150,13 +150,10 @@ public class Add_Announcement extends HttpServlet {
 			String format = "dd/MM/yy H:mm:ss";
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 			java.util.Date dt = new java.util.Date();
-			String dateFormatee = formater.format(dt);
-			
-			
-			
+	
 			annonce.setUser((User) session.getAttribute("user"));
 			
-			annonce.setDate(dateFormatee);
+			annonce.setDate(dt);
 			annonce.setSold(0);
 			annoucement.create(annonce);
 			this.getServletContext().getRequestDispatcher(VUEAfter).forward(request, response);

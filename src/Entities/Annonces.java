@@ -1,6 +1,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -41,7 +42,7 @@ public class Annonces  implements Serializable {
 	
 	@Basic
 	@Column(length = 50, nullable = false)
-    private String date;
+    private Date date;
 
 	@Basic
 	@Column(length = 30, nullable = false)
@@ -60,7 +61,7 @@ public class Annonces  implements Serializable {
 	private String description;
 
 	@Basic
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String favorite;
 	
 	public String getFavorite() {
@@ -112,11 +113,11 @@ public class Annonces  implements Serializable {
 		this.name = name;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
