@@ -28,6 +28,8 @@ import javax.persistence.TemporalType;
                 query="SELECT u FROM User u"),
     @NamedQuery(name="User.findUserConnexion",
                 query="SELECT u FROM User u WHERE u.email = :email AND u.password = :password"),
+    @NamedQuery(name="User.findUserByEmail",
+    query="SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name="User.deleteUser",
     query="SELECT u FROM User u WHERE u.id = :id"),
 }) 

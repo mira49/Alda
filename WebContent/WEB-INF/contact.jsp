@@ -27,6 +27,11 @@
 							required="" value=""> </input>
 						 <button type="submit" value="send message" class="sansLabel"> Send Message </button></td></tr>
 					 </table>
+					 
+					 <table>
+					 		<tr><td><output>Email:</td><td> ${current_announce.user.email}</output></td></tr>
+					 		<tr><td><output>Phone:</td><td> ${current_announce.user.phone}</output></td></tr>
+					 </table>
 				</form>
 				</div>
 			</div>

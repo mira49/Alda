@@ -51,16 +51,13 @@ public class UserDAO {
 
 
 	public User find(String email) {
-		List<User> find_user = new ArrayList<User>();
+		User find_user = new User();
 		User user = null;
-		/*emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
 
-		find_user = em.createNativeQuery("select * from alda_user where email = ?", User.class).setParameter(1, email)
-				.getResultList();
+		find_user = em.createNamedQuery("User.findUserByEmail", User.class).setParameter(1, email)
+				.getSingleResult();
 
-		if (find_user.isEmpty()) {
+		/*if (find_user.isEmpty()) {
 			user = null;
 		} else {
 			user = find_user.get(0);
