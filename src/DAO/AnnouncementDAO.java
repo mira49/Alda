@@ -98,12 +98,14 @@ public class AnnouncementDAO {
 		return annonce;
 	}
 
-	public void setAnnounceSold(String parameter) {
+	public Annonces setAnnounceSold(String parameter) {
 		
 		
 		Annonces annonce = em.find(Annonces.class, parameter);
 		
 		annonce.setSold(1);
+		
+		return annonce;
 	
 	}
 

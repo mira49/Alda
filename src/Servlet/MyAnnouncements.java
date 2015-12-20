@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.AnnouncementDAO;
+import DAO.MessageDAO;
 import DAO.UserDAO;
 import Entities.Annonces;
+import Entities.Messages;
 import Entities.User;
 @WebServlet("/myAnnouncements")
 public class MyAnnouncements extends HttpServlet {
@@ -28,6 +30,8 @@ public class MyAnnouncements extends HttpServlet {
 	@EJB
 	private UserDAO user_dao;
 	
+	@EJB
+	private MessageDAO message_dao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session depuis la requête */
@@ -65,7 +69,7 @@ public class MyAnnouncements extends HttpServlet {
 		}
 		
 		if(request.getParameter("sold")!= null){
-			dao.setAnnounceSold(request.getParameter("sold"));
+			sendMessages(dao.setAnnounceSold(request.getParameter("sold")));
 		}
 		
 		List<Annonces> annoucements = new ArrayList<>();
@@ -77,6 +81,20 @@ public class MyAnnouncements extends HttpServlet {
 		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
+	}
+	
+	public void sendMessages(Annonces annonce){
+		
+		String[] favorites = annonce.getFavorite().split(";");
+		
+		for(String f: favorites){
+			Messages m = new Messages();
+			m.setMessage("L'annonce de " + annonce.getUser().getName() + ": " + annonce.getName()+ " à été vendu"  );
+			m.setReceiver_message(f);
+			m.setSender_message("No reply");
+			m.setNotification(1);
+			message_dao.create(m);
+		}
 	}
 
 }

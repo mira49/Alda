@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.AnnouncementDAO;
+import DAO.MessageDAO;
 import DAO.UserDAO;
 import Entities.Annonces;
 import Entities.User;
@@ -33,6 +34,10 @@ public class Connection extends HttpServlet {
     
     @EJB
     AnnouncementDAO dao;
+ 
+    @EJB
+    MessageDAO message_dao;
+    
     
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
     
@@ -57,6 +62,8 @@ public class Connection extends HttpServlet {
 				request.setAttribute("annoucement_user", annoucements);
 			}
 			
+			long new_notification = message_dao.findAnnouncementSold(email);
+			request.setAttribute("notifications", new_notification);
 			session.setAttribute("user", user_connexion);
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.jms.Message;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,11 +28,11 @@ public class MessageDAO {
 		msg.setReceiver_message((attribute.getUser().getName()));
 		msg.setSender_message(user.getName());
 		
-		System.out.println("le user est" + msg.getMessage() );
-		System.out.println("l'annonce est" + msg.getReceiver_message());
-		System.out.println("le message est" + msg.getSender_message());
-		
 		em.merge(msg);
+	}
+	
+	public void create(Messages messages){
+		em.persist(messages);
 	}
 
 	public List<Messages> findAllByUser(User user) {
@@ -39,10 +40,28 @@ public class MessageDAO {
 		
 		try{
 			list_message =  em.createNamedQuery("Messages.getAllByUser")
-					.setParameter("name", user.getName())
+					.setParameter("email", user.getEmail())
 					.getResultList();
 		}catch(Exception e){}
 		 
 		return list_message;
+	}
+	
+	public long findAnnouncementSold(String email){
+		
+		long count = 0;
+		System.out.println(email);
+		try{
+			count =  (long) em.createNamedQuery("Messages.CountSoldAnnouncement").setParameter("email", email).getSingleResult();
+		}catch(Exception e){}
+		return count;	
+	}
+
+	public void update(Messages message) {
+		
+		System.out.println(" l'ID du message est" + message.getId());
+		Messages mess = em.find(Messages.class, message.getId());
+		mess.setNotification(0);
+		em.persist(mess);
 	}
 }

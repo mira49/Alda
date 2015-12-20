@@ -15,8 +15,10 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name="Messages.getAllByUser",
-                query="SELECT u FROM Messages u WHERE u.receiver_message = :name"),
-}) 
+                query="SELECT u FROM Messages u WHERE u.receiver_message = :email"),
+    @NamedQuery(name="Messages.CountSoldAnnouncement",
+    query="SELECT count(u.id) FROM Messages u WHERE u.receiver_message = :email AND u.notification = 1"),
+})
 public class Messages {
 	
 	@Id
@@ -35,6 +37,18 @@ public class Messages {
 	@Column(length = 90, nullable = false)
 	private String receiver_message;
 	
+	@Basic
+	@Column(length = 1, nullable = true)
+	private int notification;
+	
+	public int getNotification() {
+		return notification;
+	}
+
+	public void setNotification(int notification) {
+		this.notification = notification;
+	}
+
 	public Long getId() {
 		return id;
 	}

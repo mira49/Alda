@@ -12,6 +12,9 @@
         <c:import url="/inc/headerUser.jsp" />
           <h1   class="welcome" >Welcome on your account
 				${sessionScope.user.firstName} ${sessionScope.user.name} </h1>
+				<c:if test= "${(notifications gt 0) && (notifications) != null}">
+					<h3> You have ${notifications} notifications. Check your messages.</h3>
+				</c:if>
 		  <br>
 		  <center>
  <a href="<c:url value="/add_Announcement"/>"  >

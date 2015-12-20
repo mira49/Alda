@@ -92,7 +92,7 @@ public class Annonces  implements Serializable {
 	@Column(length = 50, nullable = true)
 	private String image3;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL})
 	@JoinColumn(name = "email", referencedColumnName = "name" )
 	private User user;
 
