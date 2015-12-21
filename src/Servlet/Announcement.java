@@ -34,6 +34,7 @@ public class Announcement extends AbstactQueryClass {
 		String select_option = request.getParameter("select_option");
 		String sql_request = null;
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
+	
 		List<Annonces> announcement = new ArrayList<>();
 
 		if (user != null) {
@@ -44,8 +45,15 @@ public class Announcement extends AbstactQueryClass {
 		} else {
 			sql_request = "SELECT u FROM Annonces u where u.sold = 0";
 		}
-
+		List<Boolean> liste = new ArrayList<>();
 		announcement = dao.findByFactor(sql_request);
+		for(Annonces annonce: announcement)
+		{
+			String parameter;
+			parameter= user.getEmail()+";"+annonce.getId();
+			liste.add(dao.findFavorite(parameter));
+		}
+		request.setAttribute("liste", liste);
 		request.setAttribute("annoucement_user", announcement);
 		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -73,8 +81,19 @@ public class Announcement extends AbstactQueryClass {
 		}
 
 		if (request.getParameter("favorite") != null) {
+			
 			dao.addToFavoriteList(request.getParameter("favorite"));
+			
+
 		}
+		
+		if (request.getParameter("favoriteRemove") != null) {
+	
+			dao.removeToFavoriteList(request.getParameter("favoriteRemove"));
+			
+
+		}
+		
 
 		if (select_option != null) {
 			if (select_option.equals("lower_Price")) {
@@ -88,7 +107,15 @@ public class Announcement extends AbstactQueryClass {
 
 		announcement = dao.findByFactor(sql_request);
 		factor = user_dao.findFactor(user);
-
+		List<Boolean> liste = new ArrayList<>();
+		announcement = dao.findByFactor(sql_request);
+		for(Annonces annonce: announcement)
+		{
+			String parameter;
+			parameter= user.getEmail()+";"+annonce.getId();
+			liste.add(dao.findFavorite(parameter));
+		}
+		request.setAttribute("liste", liste);
 		request.setAttribute("factor", factor);
 		request.setAttribute("annoucement_user", announcement);
 		session.setAttribute("user", user);

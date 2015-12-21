@@ -23,7 +23,7 @@
 				<h1>Announcement</h1>
 				<form action="announcement" method="post">
 
-					<label style="padding: 15px;">Filter</label> <input type="text"
+					<label style="padding: 15px;">Enter your criteria</label> <input type="text"
 						id="factor_lower_price" name="factor_lower_price" size="20"
 						placeholder="Price lower" maxlength="60" value=${factor[0]}></input>
 
@@ -34,12 +34,17 @@
 						maxlength="60" value=${factor[1]}></input><input type="text"
 						id="factor_location" name="factor_location" size="20"
 						placeholder="Location" maxlength="60" value=${factor[2]}></input>
-					<button type="submit" name="factor" value="">Search</button>
+					<button type="submit" name="factor" value="">Save</button>
 				</form>
 
 			</div>
 		</c:if>
-
+    <c:choose>
+            <c:when test="${ empty annoucement_user }">
+                <p class="erreur">
+no annonce published.</p>
+            </c:when>
+            <c:otherwise>
 		<div>
 
 			<form method="post" action="announcement" name="announcement_Form">
@@ -63,7 +68,7 @@
 				</tr>
 
 
-				<c:forEach var="annoucement" items="${annoucement_user}">
+				<c:forEach var="annoucement" items="${annoucement_user}" varStatus="status">
 					<tr>
 						<form action="announcement" method="post">
 							<td><c:out value="${annoucement.name}" /></td>
@@ -73,10 +78,20 @@
 							<td><c:out value="${annoucement.postal_code}" /></td>
 							
 							<c:if test="${annoucement.user.email != sessionScope.user.email}">
-							<td><button type="submit" name="favorite"
-									value="${sessionScope.user.email};${annoucement.id}">
-									Add</button>							
-							</td>
+						<c:if test="${liste[status.index] == false}">
+								<td>
+									<input type="image" name="favorite"
+									value="${sessionScope.user.email};${annoucement.id}"  src="<c:url value="/inc/add.jpg"/>" alt="Add" /> 
+									</td>
+									</c:if>
+									
+										<c:if test="${liste[status.index] == true}">
+								<td>
+									<input type="image" name="favoriteRemove"
+									value="${sessionScope.user.email};${annoucement.id}"  src="<c:url value="/inc/remove.jpg"/>" alt="Remove" /> 
+									</td>
+									</c:if>
+									
 						</form>
 
 						<form method="get" action="contact" id="contact_Form">
@@ -95,8 +110,18 @@
 
 
 			</table>
+			
+			  </c:otherwise>
+        </c:choose>
 		</div>
 
 	</div>
+	<script type="text/javascript">
+
+function changeimage(url,obj){
+
+obj.src=url; 
+}
+</script>
 </body>
 </html>

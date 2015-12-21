@@ -111,15 +111,45 @@ public class AnnouncementDAO {
 
 	public void addToFavoriteList(String parameter) {
 
-	
 		String factor[] = new String[2];
 		factor = parameter.split(";");
 		
 		Annonces annonce = findById(factor[1]);
-		System.out.println(annonce.getName());
-		annonce.setFavorite(factor[0] + ";");
+		String fav =annonce.getFavorite();
+		annonce.setFavorite(fav +factor[0] + ";");
+		
 	}
 
+	public Boolean findFavorite (String parameter){
+		
+		String factor[] = new String[2];
+		factor = parameter.split(";");
+		Boolean res = false; 
+		Annonces annonce = findById(factor[1]);
+		String factor2[] ;
+		factor2 = annonce.getFavorite().split(";");
+		for(String fact : factor2){
+		if(fact.equals(factor[0])) res=true;
+		}
+		return res;
+	}
+
+	public void removeToFavoriteList(String parameter) {
+		
+		String factor[] = new String[2];
+		factor = parameter.split(";");
+		String newfavortie = "";
+		Annonces annonce = findById(factor[1]);
+		System.out.println(annonce.getName());
+		String factor2[] ;
+		factor2 = annonce.getFavorite().split(";");
+		for(String fact : factor2){
+		if(fact.equals(factor[1]))
+		newfavortie += fact + ";" ;
+		}
+		annonce.setFavorite(newfavortie);
+	}
+	
 	public List<Annonces> findAllByFavorite(User user) {
 		
 		List<Annonces> announces = null;

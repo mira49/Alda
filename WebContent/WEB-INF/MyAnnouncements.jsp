@@ -44,8 +44,8 @@ no annonce published.</p>
 							<td><c:out value="${annoucement.postal_code}" /></td>
 							<td><c:out value="${annoucement.price}" /></td>
 							<td>
-									<button type="submit" name="delete"
-									value="${annoucement.id}"  onclick="document.announcement_Form.submit();" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" /> delete</button>.
+									<input type="image" name="delete"
+									value="${annoucement.id}" onclick="document.announcement_Form.submit();" src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" /> 
 									</td>	
 						
 									 <c:if test="${annoucement.sold=='0'}">
