@@ -144,8 +144,11 @@ public class AnnouncementDAO {
 		String factor2[] ;
 		factor2 = annonce.getFavorite().split(";");
 		for(String fact : factor2){
-		if(fact.equals(factor[1]))
-		newfavortie += fact + ";" ;
+
+		if(!fact.equals(factor[0])){
+			newfavortie += fact + ";" ;
+
+		}
 		}
 		annonce.setFavorite(newfavortie);
 	}
