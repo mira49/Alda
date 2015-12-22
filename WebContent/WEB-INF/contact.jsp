@@ -14,24 +14,21 @@
         <c:import url="/inc/headerUser.jsp" />      
           <c:import url="/inc/menuUser.jsp" />
           <div id="corpsDa">
-			<h3 id="Inscription-title">Contact</h3>
+			<h1 id="Inscription-title">Contact</h1>
 			
 			 <br>
- <a id="mail"   >
- <img class="image"  src="<c:url value="/inc/mail.png"/>"  /></a>
- 	 <c:if test="${current_announce.user.phone != null}">
+<div class="contactImage">
+  <a id="mail" ><img  title="Post by email" src="<c:url value="/inc/mail.png"/>"  /></a>
 										
-							
- <a id="phone" >
-  <img   src="<c:url value="/inc/tel.jpg"/>"  /></a>		</c:if>
-  <a   >
- <img   src="<c:url value="/inc/chat.png"/>"  /></a>
+					<c:if test="${current_announce.user.phone != null}">
+						  <a id="phone" > <img  title="Post by phone" src="<c:url value="/inc/tel.jpg"/>"  /></a>
+						  				</c:if>		
+
+	  <a   > <img  title="Post by chat, The seller is online" src="<c:url value="/inc/chat.png"/>"  /></a>
  
+ </div>
  
- <h3 id="mail">Email :  ${current_announce.user.email} </h3>
-  <h3 id="phone">Phone :  ${current_announce.user.phone} </h3>
- 
- <form  role="form" method="post" action="contact"  >
+ <form class="contact" role="form" method="post" action="contact"  >
 <fieldset id="Field">
 				<legend>Contact by post</legend>
  <label  > Announce :  </label><input  name="Name" value="${current_announce.name}" disabled ><br> <br>
@@ -40,7 +37,9 @@
 </fieldset>
 </form>
 		
-			
+		
+ <h3 id="mail">Email :  ${current_announce.user.email} </h3>
+  <h3 id="phone">Phone :  ${current_announce.user.phone} </h3>	
 	</div>
 	<script>
 		jQuery(document).ready(function() {

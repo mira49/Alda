@@ -223,6 +223,9 @@ margin-left:10%;
 .image{
 	padding:2px; margin-left:25%;
 }
+.image2{
+	padding:5px; margin-left:35%;
+}
 .access{
 color:#40abfd; text-align:center;
 }
@@ -275,4 +278,12 @@ div#deco{
 }
 div#corps{
 	margin: 10px;
+}
+
+.contact{
+	width:60%;
+}
+
+.contactImage{
+	float:right; margin-right:8%;
 }

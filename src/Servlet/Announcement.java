@@ -40,8 +40,13 @@ public class Announcement extends AbstactQueryClass {
 		if (user != null) {
 			sql_request = sql_create_query(user) + " ";
 			String factor[] = new String[3];
-			factor = user_dao.findFactor(user);
+			String factorBeta=null;
+			
+			if(!user_dao.findFactorBeta(user).equals(";;")) 	{ factor=null;}
+			else{
+			factor = user_dao.findFactor(user);}
 			request.setAttribute("factor", factor);
+
 		} else {
 			sql_request = "SELECT u FROM Annonces u where u.sold = 0";
 		}

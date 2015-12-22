@@ -17,28 +17,29 @@
 	<div id="corpsDa">
 
 
-		<c:if test="${factor != null}">
-			<div id="factor_announcement">
-
-				<h1>Announcement</h1>
+<h1>Actuality</h1>
 				<form action="announcement" method="post">
-
-					<label style="padding: 15px;">Enter your criteria</label> <input type="text"
+ <c:if test="${empty factor}">
+    <label style="padding: 15px;">Enter your criteria</label>
+    </c:if>    
+<c:if test="${!empty factor}">   <label style="padding: 15px;">Edit your criteria</label>
+    </c:if>
+	
+						<input type="text"
 						id="factor_lower_price" name="factor_lower_price" size="20"
-						placeholder="Price lower" maxlength="60" value=${factor[0]}></input>
+						placeholder="Price lower" maxlength="60" value="${factor[0]}"></input>
 
 
 
 					<input type="text" id="factor_higher_price"
 						name="factor_higher_price" size="20" placeholder="Price higher"
-						maxlength="60" value=${factor[1]}></input><input type="text"
+						maxlength="60" value="${factor[1]}"></input><input type="text"
 						id="factor_location" name="factor_location" size="20"
-						placeholder="Location" maxlength="60" value=${factor[2]}></input>
+						placeholder="Location" maxlength="60" value="${factor[2]}"></input>
 					<button type="submit" name="factor" value="">Save</button>
 				</form>
 
-			</div>
-		</c:if>
+	
     <c:choose>
             <c:when test="${ empty annoucement_user }">
                 <p class="erreur">

@@ -10,7 +10,7 @@
             <li class="menuLi"><a href="<c:url value="/messages_user"/>">My messages </a></li>
             <li class="menuLi"><a href="<c:url value="/favorite"/>">Favorite </a></li>
             
-            <li class="menuLi"><a href="<c:url value="/announcement"/>">Announcement </a></li>
+            <li class="menuLi"><a href="<c:url value="/announcement"/>">Actuality </a></li>
             
            
           </ul>
