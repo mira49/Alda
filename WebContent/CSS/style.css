@@ -8,6 +8,9 @@ body, p, legend, label, input {
 	font-size: 17px;
 	
 }
+#imghome {
+	margin-bottom:3px;
+}
 .register{
 	 color:white; background-color:#40abfd; float:right; 
 }

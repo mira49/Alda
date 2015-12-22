@@ -22,16 +22,19 @@
 		  <br>
 		  <center>
  <a href="<c:url value="/add_Announcement"/>"  >
- <img  src="<c:url value="/inc/adda.png"/>"   onMouseOver="changeimage('<c:url value="/inc/addah.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/adda.png"/>',this);" /></a>
+ <img  id="imghome" src="<c:url value="/inc/adda.png"/>"   onMouseOver="changeimage('<c:url value="/inc/addah.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/adda.png"/>',this);" /></a>
  <br>
  <a href="<c:url value="/myAnnouncements"/>"  >
- <img   src="<c:url value="/inc/myan.png"/>"  onMouseOver="changeimage('<c:url value="/inc/myanh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/myan.png"/>',this);" /></a>
+ <img   id="imghome" src="<c:url value="/inc/myan.png"/>"  onMouseOver="changeimage('<c:url value="/inc/myanh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/myan.png"/>',this);" /></a>
  <br> 
  <a href="<c:url value="/messages_user"/>"  >
- <img   src="<c:url value="/inc/msg.png"/>"  onMouseOver="changeimage('<c:url value="/inc/msgh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/msg.png"/>',this);" /></a>
+ <img  id="imghome" src="<c:url value="/inc/msg.png"/>"  onMouseOver="changeimage('<c:url value="/inc/msgh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/msg.png"/>',this);" /></a>
 <br>
+  <a href="<c:url value="/announcement"/>"  >
+ <img  id="imghome" src="<c:url value="/inc/actu.png"/>"  onMouseOver="changeimage('<c:url value="/inc/actuh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/actu.png"/>',this);" /></a>
+ <br>
   <a href="<c:url value="/favorite"/>"  >
- <img   src="<c:url value="/inc/actu.png"/>"  onMouseOver="changeimage('<c:url value="/inc/actuh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/actu.png"/>',this);" /></a>
+ <img  id="imghome" src="<c:url value="/inc/fav.png"/>"  onMouseOver="changeimage('<c:url value="/inc/favh.png"/>',this);" onMouseOut="changeimage('<c:url value="/inc/fav.png"/>',this);" /></a>
  <br></center>
  <script type="text/javascript">
 
