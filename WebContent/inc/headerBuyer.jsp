@@ -4,13 +4,12 @@
 	     <header class="headerr" >
 		
 		<div id="dash" >
-		<h4  > Dashboard</h4>  
+		<h4  > SALES OF ESTATE</h4>  
 		</div> 
 		<div id="option"  >
 		<h5>
-		<a  href="" > Profil</a>&nbsp;&nbsp;&nbsp;
-		<a  href="<c:url value="/dashboard"/>"> Home </a>&nbsp;&nbsp;
-		<a  href="<c:url value="/dashboarddeconnection"/>"> Deconnection </a>&nbsp;
+		<a  href="<c:url value="/connexion"/>"> Sing in </a>&nbsp;&nbsp;
+		<a  href="<c:url value="/registration"/>"> Sing up </a>&nbsp;
 		</h5>
 	    </div>
 	    </header>

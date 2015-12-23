@@ -19,7 +19,7 @@ import Entities.Administrator;
 import Entities.Annonces;
 import Entities.User;
 
-@WebServlet("/deleteUser")
+@WebServlet("/dashboarddeleteUser")
 public class DeleteUser extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/ShowUsers.jsp";
@@ -36,10 +36,7 @@ public class DeleteUser extends AbstactQueryClass {
 		/* Affichage de la page d'inscription */
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("admin") == null) {
-			/* Redirection vers la page publique */
-			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		} else {
+		
 			String idUser = request.getParameter("delete");
 
 			if (idUser != null) {
@@ -79,7 +76,7 @@ public class DeleteUser extends AbstactQueryClass {
 
 			}
 
-		}
+		
 	}
 
 	@Override

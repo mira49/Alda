@@ -18,7 +18,7 @@ import DAO.UserDAO;
 import Entities.Annonces;
 import Entities.User;
 
-@WebServlet("/annonceList")
+@WebServlet("/dashboardannonceList")
 public class AnnonceList extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/ShowAnnonce.jsp";
@@ -31,10 +31,7 @@ public class AnnonceList extends AbstactQueryClass {
 	private UserDAO user_dao;	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("admin") == null) {
-			/* Redirection vers la page publique */
-			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		} else {
+	
 		
 		List<Annonces> announcement = new ArrayList<>();
 		
@@ -44,7 +41,7 @@ public class AnnonceList extends AbstactQueryClass {
 
 		session.setAttribute("annoucement_user", announcement);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-	}}
+	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -54,4 +54,32 @@ public abstract class AbstactQueryClass extends HttpServlet {
 		return sql;
 
 	}
+	
+	public String sql_create_query_factor(String price_lower, String price_h, String location, String surface_lower, String surface_h) {
+		String sql = "SELECT u FROM Annonces u where u.sold = 0 ";
+		
+		if(!price_lower.equals(""))
+			{
+			if(!price_h .equals(""))
+				sql += "AND u.price between " + price_lower +" AND " + price_h ;
+			else sql += "AND u.price >=" + price_lower;
+			}
+		else {if(!price_h.equals(""))  sql += "AND u.price <=" + price_h;}
+		
+		if(!surface_lower.equals(""))
+			{
+			if(!surface_h.equals(""))
+							sql += "AND u.surface between " + surface_lower +" AND " + surface_h ;
+			else sql += "AND u.surface >=" + surface_lower;
+			}
+		else {if(!surface_h.equals(""))  sql += "AND u.surface <=" + surface_h;}
+		
+		if(!location.equals("")){
+			sql+= "AND u.postal_code =" + location;
+		}
+		
+	
+		return sql;
+
+	}
 }

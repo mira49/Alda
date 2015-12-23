@@ -17,7 +17,7 @@ import DAO.AnnouncementDAO;
 import Entities.Administrator;
 import Entities.Annonces;
 import Entities.User;
-@WebServlet("/connectionDashboard")
+@WebServlet("/dashboardconnection")
 public class ConnectionDashboard extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/ConnectionDashboard.jsp";

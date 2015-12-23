@@ -8,6 +8,9 @@ body, p, legend, label, input {
 	font-size: 17px;
 	
 }
+#imghome {
+	margin-bottom:3px;
+}
 .register{
 	 color:white; background-color:#40abfd; float:right; 
 }
@@ -194,6 +197,18 @@ div#corpsDa{
 	
 }
 
+div#corpsSa{
+	
+	
+ 	margin-left:20%;
+	
+}
+div#corpsSam{
+	
+	
+ 	margin-left:10%;
+	
+}
 div#dash{
 	margin-left:7%;
 	 margin-top:2%;
@@ -215,10 +230,13 @@ margin-left:10%;
 }
 
 .welcome {
-	margin-top:10%;
+	margin-top:7%;
 }
 .image{
 	padding:2px; margin-left:25%;
+}
+.image2{
+	padding:5px; margin-left:35%;
 }
 .access{
 color:#40abfd; text-align:center;
@@ -272,4 +290,12 @@ div#deco{
 }
 div#corps{
 	margin: 10px;
+}
+
+.contact{
+	width:60%;
+}
+
+.contactImage{
+	float:right; margin-right:8%;
 }

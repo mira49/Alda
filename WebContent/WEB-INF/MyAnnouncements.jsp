@@ -17,15 +17,18 @@
           
         <c:choose>
             <c:when test="${ empty annoucement_user }">
-                <p class="erreur">
-no annonce published.</p>
+              
+<h5 class="erreur">no annonce published.</h5>
+<a style="float:right" href="<c:url value="/add_Announcement"/>"><img src="<c:url value="/inc/add.png"/>" /><button type="button" class="btn btn-link">Add announcement</button></a>
+
             </c:when>
             <c:otherwise>
 	<div>
 		<h1 id="Inscription-title">My announcements</h1>
 	</div>
 	<br><br>
-
+<a style="float:right" href="<c:url value="/add_Announcement"/>"><img src="<c:url value="/inc/add.png"/>" /><button type="button" class="btn btn-link">Add announcement</button></a>
+    <br>
  		
 			<table >
 				<tr>
@@ -33,7 +36,7 @@ no annonce published.</p>
 					<th>Surface</th>
 					<th>Postal code</th>
 					<th>Price</th>
-					<th>Delete</th>
+					<th>Action</th>
 				</tr>
 				<form action="myAnnouncements" method="post" name="announcement_Form">
 					<c:forEach var="annoucement"
@@ -44,9 +47,13 @@ no annonce published.</p>
 							<td><c:out value="${annoucement.postal_code}" /></td>
 							<td><c:out value="${annoucement.price}" /></td>
 							<td>
-									<button type="submit" name="delete"
-									value="${annoucement.id}"  onclick="document.announcement_Form.submit();" src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" /> delete</button>.
-									</td>	
+							<input type="image" name="view"
+									value="${annoucement.id}" onclick="document.announcement_Form.submit();" src="<c:url value="/inc/loupe.png"/>" alt="View" /> 
+						
+									<input type="image" name="delete"
+									value="${annoucement.id}" onclick="document.announcement_Form.submit();" src="<c:url value="/inc/delete.png"/>" alt="Supprimer" /> 
+									<input type="image" name="edit"
+									value="${annoucement.id}" onclick="document.announcement_Form.submit();" src="<c:url value="/inc/edit.png"/>" alt="Edit" /> </td>	
 						
 									 <c:if test="${annoucement.sold=='0'}">
 										<td><button type="submit" name="sold" value="${annoucement.id}" class="sansLabel"> Sold </button></td>

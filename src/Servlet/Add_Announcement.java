@@ -55,13 +55,10 @@ public class Add_Announcement extends HttpServlet {
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("user") == null) {
-			/* Redirection vers la page publique */
-			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		} else {
+	
 			/* Affichage de la page restreinte */
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		}
+		
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -91,6 +91,17 @@ public class UserDAO {
 		return factor_temp;
 	}
 
+	public String findFactorBeta(User user) {
+		
+		
+		User user_temp = new User();
+		String factor = "";
+
+		user_temp = em.find(User.class, user.getId());
+		
+		return user_temp.getFactor();
+	}
+	
 	public User updateFactor(User user_tmp, User user) {
 
 		User account = em.find(User.class, user.getId());
