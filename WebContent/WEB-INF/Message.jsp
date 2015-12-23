@@ -25,10 +25,6 @@ any message received.</p>
 		<h1 id="Inscription-title">received messages</h1>
 	</div>	<br><br>
 
- 		
-			
-			
-			
 			<table >
 				<tr>
 					<th>Name</th>

@@ -31,7 +31,8 @@
  <form class="contact" role="form" method="post" action="contact"  >
 <fieldset id="Field">
 				<legend>Contact by post</legend>
- <label  > Announce :  </label><input  name="Name" value="${current_announce.name}" disabled ><br> <br>
+<label  > Announce :  </label><input  name="Name" value="${current_announce.name}" disabled ><br> <br>
+<input type="hidden"  name="annonces" value="${current_announce.id}">
 <label > Description :  </label><textarea style="width:60%;" type="text" name="Message" requiered> </textarea><br> 
  <button type="submit" value="send message" class="btn register"> Send Message </button>
 </fieldset>

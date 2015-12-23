@@ -51,17 +51,17 @@ public class UserDAO {
 
 
 	public User find(String email) {
-		User find_user = new User();
+		List<User> find_user = new ArrayList<>();
 		User user = null;
 
-		find_user = em.createNamedQuery("User.findUserByEmail", User.class).setParameter(1, email)
-				.getSingleResult();
+		find_user = (List<User>) em.createNamedQuery("User.findUserByEmail", User.class).setParameter("email", email)
+				.getResultList();
 
-		/*if (find_user.isEmpty()) {
+		if (find_user.isEmpty()) {
 			user = null;
 		} else {
 			user = find_user.get(0);
-		}*/
+		}
 		return user;
 	}
 

@@ -149,7 +149,6 @@ public class Add_Announcement extends HttpServlet {
 			java.util.Date dt = new java.util.Date();
 	
 			annonce.setUser((User) session.getAttribute("user"));
-			
 			annonce.setDate(dt);
 			annonce.setSold(0);
 			annoucement.create(annonce);
