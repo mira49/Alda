@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+
 import DAO.AnnouncementDAO;
 import DAO.MessageDAO;
 import DAO.UserDAO;
@@ -86,15 +88,15 @@ public class MyAnnouncements extends HttpServlet {
 	public void sendMessages(Annonces annonce){
 		
 		String[] favorites = annonce.getFavorite().split(";");
-		
-		for(String f: favorites){
-			Messages m = new Messages();
-			m.setMessage("L'annonce de " + annonce.getUser().getName() + ": " + annonce.getName()+ " à été vendu"  );
-			m.setReceiver_message(f);
-			m.setSender_message("No reply");
-			m.setNotification(1);
-			message_dao.create(m);
+			for(String f: favorites){
+				if (!(StringUtils.isBlank(f))){
+					Messages m = new Messages();
+					m.setMessage("L'annonce de " + annonce.getUser().getName() + ": " + annonce.getName()+ " à été vendu"  );
+					m.setReceiver_message(f);
+					m.setSender_message("No reply");
+					m.setNotification(1);
+					message_dao.create(m);
+				}
 		}
 	}
-
 }
