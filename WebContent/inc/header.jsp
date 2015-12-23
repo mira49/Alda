@@ -10,7 +10,7 @@
 		<h5>
 		<a  href="" > Profil</a>&nbsp;&nbsp;&nbsp;
 		<a  href="<c:url value="/dashboard"/>"> Home </a>&nbsp;&nbsp;
-		<a  href="<c:url value="/deconnectionDashboard"/>"> Deconnection </a>&nbsp;
+		<a  href="<c:url value="/dashboarddeconnection"/>"> Deconnection </a>&nbsp;
 		</h5>
 	    </div>
 	    </header>

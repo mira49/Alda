@@ -39,8 +39,8 @@
                     <td><c:out value="${users.email }"/></td>
                   
                       <td class="action">
-                        <a href="<c:url value="/deleteUser"><c:param name="delete" value="${ users.id }" /></c:url>">
-                            <img src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" />
+                        <a href="<c:url value="/dashboarddeleteUser"><c:param name="delete" value="${ users.id }" /></c:url>">
+                            <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
                         </a>
                     </td>
                 </tr>

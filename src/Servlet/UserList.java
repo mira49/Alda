@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import DAO.UserDAO;
 import Entities.User;
 
-@WebServlet("/userList")
+@WebServlet("/dashboarduserList")
 public class UserList extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/ShowUsers.jsp";
@@ -27,15 +27,12 @@ public class UserList extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("admin") == null) {
-			/* Redirection vers la page publique */
-			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		} else {
+	
 			List<User> users = userDao.getUsers();
 		
 		request.setAttribute("users", users);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
-	}}
+	}
 }

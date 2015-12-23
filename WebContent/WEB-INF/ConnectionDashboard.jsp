@@ -12,7 +12,7 @@
 
 <div  class="connection"  >
 
-      <form class="form-signin"  action="<c:url value="/connectionDashboard"/>" method="post">
+      <form class="form-signin"  action="<c:url value="/dashboardconnection"/>" method="post">
        <h3 class="access" > ACCESS DASHBOARD</h3> <br>
         <input type="text"  class="form-control composantCentre" name="Pseudo"  placeholder="Pseudo" required autofocus> <br>
        <input type="password"  class="form-control composantCentre" name="Password" placeholder="Password" required>

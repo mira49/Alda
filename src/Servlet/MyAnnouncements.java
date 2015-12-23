@@ -36,11 +36,7 @@ public class MyAnnouncements extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
-		
-		if (session.getAttribute("user") == null) {
-			/* Redirection vers la page publique */
-			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		} else {
+
 			
 			User user =user_dao.findByUser((User)session.getAttribute("user"));
 			List<Annonces> annoucements = new ArrayList<>();
@@ -50,7 +46,7 @@ public class MyAnnouncements extends HttpServlet {
 			}
 			session.setAttribute("user", user);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		}
+		
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

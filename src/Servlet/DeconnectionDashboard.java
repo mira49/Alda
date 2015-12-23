@@ -16,7 +16,7 @@ import DAO.AnnouncementDAO;
 import Entities.Administrator;
 import Entities.Annonces;
 import Entities.User;
-@WebServlet("/deconnectionDashboard")
+@WebServlet("/dashboarddeconnection")
 public class DeconnectionDashboard extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/ConnectionDashboard.jsp";

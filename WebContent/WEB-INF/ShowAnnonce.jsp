@@ -52,7 +52,7 @@
 							<td><c:out value="${annoucement.description}" /></td>
 							<td class="action"><a
 								href="<c:url value="/deleteUser"><c:param name="deleteA" value="${ annoucement.id }" /></c:url>">
-									<img src="<c:url value="/CSS/supprimer.png"/>" alt="Supprimer" />
+									<img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
 							</a></td>
 
 						</tr>

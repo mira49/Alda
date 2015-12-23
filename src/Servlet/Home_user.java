@@ -39,10 +39,6 @@ public class Home_user extends HttpServlet {
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("user") == null) {
-			/* Redirection vers la page publique */
-			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		} else {
 
 			User user_temp = user_dao.findByUser((User) session.getAttribute("user"));
 			long new_notification = dao.findAnnouncementSold(user_temp.getEmail());
@@ -55,7 +51,7 @@ public class Home_user extends HttpServlet {
 			}
 
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		}
+		
 	}
 
 	public String newAnnouncewithFactorUser(List<Annonces> announce, User user) {
