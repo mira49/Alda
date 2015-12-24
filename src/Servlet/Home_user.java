@@ -45,39 +45,41 @@ public class Home_user extends HttpServlet {
 			request.setAttribute("notifications", new_notification);
 
 			List<Annonces> annonce = announceDAO.findAll();
-			String news = newAnnouncewithFactorUser(annonce, (User) session.getAttribute("user"));
+			String news = newAnnouncewithFactorUser(annonce, user_temp);
 			if (news.equals("news")) {
 				request.setAttribute("news", news);
 			}
 
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		
 	}
 
 	public String newAnnouncewithFactorUser(List<Annonces> announce, User user) {
 
-		User user_tmp = user_dao.findByUser(user);
 		String answear = "";
-
+		String tmp = null;
 		for (Annonces a : announce) {
+			System.out.println(a.getUser().getEmail());
 			if(!(a.getUser().getEmail().equals(user.getEmail()))){
 				boolean check = true;
 				if (a.getDate().compareTo(user.getDate_connexion()) > 0) {
 					String factor[] = user.getFactor().split(";");
 					if (!StringUtils.isBlank(factor[0])) {
-						if (Integer.parseInt(factor[0]) > a.getPrice()) {
+						 tmp = factor[0].replaceAll(" ", "");
+						if (Integer.parseInt(tmp) > a.getPrice()) {
 							check = false;
 						}
 					}
 	
 					if (!StringUtils.isBlank(factor[1])) {
-						if (Integer.parseInt(factor[1]) < a.getPrice()) {
+						tmp = factor[1].replaceAll(" ", "");
+						if (Integer.parseInt(tmp) < a.getPrice()) {
 							check = false;
 						}
 					}
 	
 					if (!StringUtils.isBlank(factor[2])) {
-						if (Integer.parseInt(factor[2]) == a.getPostal_code()) {
+						tmp = factor[1].replaceAll(" ", "");
+						if (Integer.parseInt(tmp) != a.getPostal_code()) {
 							check = false;
 						}
 					}

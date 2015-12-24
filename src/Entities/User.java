@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -93,7 +94,7 @@ public void setDate_deconnection(Date date_deconnection) {
 	this.date_deconnection = date_deconnection;
 }
 
-@OneToMany(mappedBy="user")
+@OneToMany(mappedBy="user", cascade = { CascadeType.ALL})
 	List<Annonces> announcements;
   
   public String getFactor() {

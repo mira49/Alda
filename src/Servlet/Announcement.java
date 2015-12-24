@@ -103,9 +103,7 @@ public class Announcement extends AbstactQueryClass {
 		}
 
 		if (request.getParameter("favorite") != null) {
-
 			dao.addToFavoriteList(request.getParameter("favorite"));
-
 		}
 
 		if (request.getParameter("favoriteRemove") != null) {
@@ -156,5 +154,6 @@ public class Announcement extends AbstactQueryClass {
 		session.setAttribute("user", user);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		
 	}
 }

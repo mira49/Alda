@@ -2,6 +2,8 @@ package Servlet;
 
 import java.io.IOException;
 
+import javax.ejb.AccessTimeout;
+import javax.persistence.Access;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -80,6 +82,6 @@ public abstract class AbstactQueryClass extends HttpServlet {
 		
 	
 		return sql;
-
 	}
+
 }

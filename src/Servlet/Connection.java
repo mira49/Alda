@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,6 @@ import DAO.MessageDAO;
 import DAO.UserDAO;
 import Entities.Annonces;
 import Entities.User;
-import EntityManagerF.SingletonEntityManagerFactory;
 
 @WebServlet("/connexion")
 public class Connection extends HttpServlet {

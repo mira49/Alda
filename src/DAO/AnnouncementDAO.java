@@ -57,7 +57,6 @@ public class AnnouncementDAO {
 	public List<Annonces> findByFactor(String query) {
 
 		List<Annonces> announcement = null;
-		System.out.println("query :" + query);
 		announcement = em.createQuery(query, Annonces.class).getResultList();
 
 		return announcement;
@@ -114,8 +113,12 @@ public class AnnouncementDAO {
 
 		Annonces annonce = findById(factor[1]);
 		String fav = annonce.getFavorite();
-		annonce.setFavorite(fav + factor[0] + ";");
-
+		if(fav != null){
+			annonce.setFavorite(fav + factor[0] + ";");
+		}
+		else{
+			annonce.setFavorite(factor[0] + ";");
+		}
 	}
 
 	public Boolean findFavorite(String parameter) {
