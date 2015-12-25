@@ -154,6 +154,6 @@ public class Announcement extends AbstactQueryClass {
 		session.setAttribute("user", user);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		
+
 	}
 }

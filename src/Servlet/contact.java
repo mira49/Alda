@@ -36,8 +36,8 @@ public class contact extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		String annonce = request.getParameter("contact");
 
+		String annonce = request.getParameter("contact");
 		Annonces annonces = dao.findById(annonce);
 
 		request.setAttribute("current_announce", annonces);
@@ -49,10 +49,9 @@ public class contact extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String messages = request.getParameter("Message");
-
 		Annonces annonce = dao.findById(request.getParameter("annonces"));
-
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
+		msg.create(user, messages, annonce);
 
 		List<Annonces> annoucements = new ArrayList<>();
 		annoucements = dao.getAnnoucement_user(user);
@@ -60,7 +59,6 @@ public class contact extends HttpServlet {
 			request.setAttribute("annoucement_user", annoucements);
 		}
 
-		msg.create(user, messages, annonce);
 		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE_retour).forward(request, response);
 	}

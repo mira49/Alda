@@ -23,7 +23,7 @@ public class Registration extends HttpServlet {
 
 	private String resultat;
 	private Map<String, String> erreurs = new HashMap<String, String>();
-	
+
 	@EJB
 	private UserDAO userDAO;
 

@@ -15,7 +15,6 @@ public class Dashboard extends HttpServlet {
 	public static final String VUE = "/WEB-INF/Dashboard.jsp";
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
 
-	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Affichage de la page d'inscription */
 		HttpSession session = request.getSession();
@@ -23,6 +22,7 @@ public class Dashboard extends HttpServlet {
 			/* Redirection vers la page publique */
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		} else {
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-	}}
+			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		}
+	}
 }

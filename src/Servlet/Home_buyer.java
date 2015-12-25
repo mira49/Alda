@@ -33,25 +33,14 @@ public class Home_buyer extends AbstactQueryClass {
 
 		String sql_request2 = null;
 
-	
 		List<Annonces> announcement2 = new ArrayList<>();
 
-	
-		
-
-
-		
-			sql_request2 = "SELECT u FROM Annonces u where u.sold = 0";
-		
-
+		sql_request2 = "SELECT u FROM Annonces u where u.sold = 0";
 
 		announcement2 = dao.findByFactor(sql_request2);
 
-		
-
 		request.setAttribute("annoucement_user", announcement2);
 
-		
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
@@ -61,24 +50,24 @@ public class Home_buyer extends AbstactQueryClass {
 		String select_option = request.getParameter("select_option");
 		List<Annonces> announcement2 = new ArrayList<>();
 
-	
 		String factor[] = new String[5];
 
 		String sql_request2 = "SELECT u FROM Annonces u where u.sold = 0";
 
 		if (request.getParameter("factor_lower_price") != null || request.getParameter("factor_higher_price") != null
-				|| request.getParameter("factor_location") != null || request.getParameter("factor_lower_surface") != null
-|| request.getParameter("factor_higher_surface") != null) {
-			sql_request2 = sql_create_query_factor(request.getParameter("factor_lower_price"),request.getParameter("factor_higher_price"),request.getParameter("factor_location"),
-					request.getParameter("factor_lower_surface"),request.getParameter("factor_higher_surface")	) + " ";
-		factor[0]=request.getParameter("factor_lower_price");
-		factor[1]=request.getParameter("factor_higher_price");
-		factor[2]=request.getParameter("factor_location");
-		factor[3]=request.getParameter("factor_lower_surface");
-		factor[4]=request.getParameter("factor_higher_surface");
-		} 
+				|| request.getParameter("factor_location") != null
+				|| request.getParameter("factor_lower_surface") != null
+				|| request.getParameter("factor_higher_surface") != null) {
+			sql_request2 = sql_create_query_factor(request.getParameter("factor_lower_price"),
+					request.getParameter("factor_higher_price"), request.getParameter("factor_location"),
+					request.getParameter("factor_lower_surface"), request.getParameter("factor_higher_surface")) + " ";
+			factor[0] = request.getParameter("factor_lower_price");
+			factor[1] = request.getParameter("factor_higher_price");
+			factor[2] = request.getParameter("factor_location");
+			factor[3] = request.getParameter("factor_lower_surface");
+			factor[4] = request.getParameter("factor_higher_surface");
+		}
 
-		
 		if (select_option != null) {
 			if (select_option.equals("lower_Price")) {
 				sql_request2 = dao.findByLowerPrice(sql_request2);
@@ -89,14 +78,10 @@ public class Home_buyer extends AbstactQueryClass {
 			}
 		}
 
-
-
 		announcement2 = dao.findByFactor(sql_request2);
 		request.setAttribute("factor", factor);
 
-
 		request.setAttribute("annoucement_user", announcement2);
-	
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}

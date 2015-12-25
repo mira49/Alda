@@ -113,10 +113,9 @@ public class AnnouncementDAO {
 
 		Annonces annonce = findById(factor[1]);
 		String fav = annonce.getFavorite();
-		if(fav != null){
+		if (fav != null) {
 			annonce.setFavorite(fav + factor[0] + ";");
-		}
-		else{
+		} else {
 			annonce.setFavorite(factor[0] + ";");
 		}
 	}
@@ -128,8 +127,8 @@ public class AnnouncementDAO {
 		Boolean res = false;
 		Annonces annonce = findById(factor[1]);
 		String factor2[];
-		if(annonce.getFavorite() != null){
-		factor2 = annonce.getFavorite().split(";");
+		if (annonce.getFavorite() != null) {
+			factor2 = annonce.getFavorite().split(";");
 			for (String fact : factor2) {
 				if (fact.equals(factor[0]))
 					res = true;
@@ -146,8 +145,8 @@ public class AnnouncementDAO {
 		Annonces annonce = findById(factor[1]);
 		System.out.println(annonce.getName());
 		String factor2[];
-		if(annonce.getFavorite() != null){
-		factor2 = annonce.getFavorite().split(";");
+		if (annonce.getFavorite() != null) {
+			factor2 = annonce.getFavorite().split(";");
 			for (String fact : factor2) {
 
 				if (!fact.equals(factor[0])) {

@@ -1,6 +1,5 @@
 package Servlet;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,56 +21,53 @@ import Entities.User;
 @WebServlet("/connexion")
 public class Connection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 
-    public static final String VUESucess              = "/WEB-INF/Home_user.jsp";
-    public static final String VUE       			  = "/WEB-INF/Connection.jsp";
+	public static final String VUESucess = "/WEB-INF/Home_user.jsp";
+	public static final String VUE = "/WEB-INF/Connection.jsp";
 
-    @EJB
-    UserDAO user;
-    
-    @EJB
-    AnnouncementDAO dao;
- 
-    @EJB
-    MessageDAO message_dao;
-    
-    
-    public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-    
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-    }
+	@EJB
+	UserDAO user;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	@EJB
+	AnnouncementDAO dao;
+
+	@EJB
+	MessageDAO message_dao;
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User user_connexion = user.findUser(email, password);
-	
-		if (user_connexion != null){
-			
+
+		if (user_connexion != null) {
+
 			String format = "dd/MM/yy H:mm:ss";
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 			java.util.Date dt = new java.util.Date();
-			
+
 			user.updateDate(user_connexion, dt);
-			
+
 			List<Annonces> annoucements = new ArrayList<>();
-			
+
 			annoucements = dao.getAnnoucement_user(user_connexion);
 
 			if (!annoucements.isEmpty()) {
 				request.setAttribute("annoucement_user", annoucements);
 			}
-			
+
 			long new_notification = message_dao.findAnnouncementSold(email);
 			request.setAttribute("notifications", new_notification);
 			session.setAttribute("user", user_connexion);
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		}
-		else{
+		} else {
 			String error = "Bad email or bad password";
 			request.setAttribute("error", error);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

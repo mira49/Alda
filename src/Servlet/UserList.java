@@ -23,13 +23,12 @@ public class UserList extends HttpServlet {
 
 	@EJB
 	UserDAO userDao;
-	
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
-	
-			List<User> users = userDao.getUsers();
-		
+		List<User> users = userDao.getUsers();
+
 		request.setAttribute("users", users);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

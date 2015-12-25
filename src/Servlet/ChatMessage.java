@@ -33,7 +33,6 @@ public class ChatMessage {
 
 	@Override
 	public String toString() {
-		return "ChatMessage [message=" + message + ", sender=" + sender
-				+ ", received=" + received + "]";
+		return "ChatMessage [message=" + message + ", sender=" + sender + ", received=" + received + "]";
 	}
 }

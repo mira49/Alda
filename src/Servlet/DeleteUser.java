@@ -36,47 +36,45 @@ public class DeleteUser extends AbstactQueryClass {
 		/* Affichage de la page d'inscription */
 		HttpSession session = request.getSession();
 
-		
-			String idUser = request.getParameter("delete");
+		String idUser = request.getParameter("delete");
 
-			if (idUser != null) {
-				Long id = Long.parseLong(idUser);
-				dao.delete(id);
-				List<User> users = dao.getUsers();
-				request.setAttribute("users", users);
-				this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		if (idUser != null) {
+			Long id = Long.parseLong(idUser);
+			dao.delete(id);
+			List<User> users = dao.getUsers();
+			request.setAttribute("users", users);
+			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		} 
+		else {
+			String idA = request.getParameter("deleteA");
+			if (idA != null) {
+				Long idAN = Long.parseLong(idA);
 
-			} else {
-				String idA = request.getParameter("deleteA");
-				if (idA != null) {
-					Long idAN = Long.parseLong(idA);
+				dao2.delete(idAN);
+				String select_option = request.getParameter("select_option");
+				System.out.println("select_option :" + select_option);
+				String sql_request = null;
 
-					dao2.delete(idAN);
-					String select_option = request.getParameter("select_option");
-					System.out.println("select_option :" + select_option);
-					String sql_request = null;
-
-					List<Annonces> announcement = new ArrayList<>();
-					if ((User) session.getAttribute("user") != null) {
-						sql_request = sql_create_query((User) session.getAttribute("user")) + " ";
-						String factor[] = new String[3];
-						factor = dao.findFactor((User) session.getAttribute("user"));
-						session.setAttribute("factor", factor);
-					} else {
-						sql_request = "select * from Annonces";
-					}
-
-					System.out.println("sql_request:" + sql_request);
-					announcement = dao2.findByFactor(sql_request);
-
-					session.setAttribute("annoucement_user", announcement);
-					this.getServletContext().getRequestDispatcher(VUE2).forward(request, response);
-
+				List<Annonces> announcement = new ArrayList<>();
+				if ((User) session.getAttribute("user") != null) {
+					sql_request = sql_create_query((User) session.getAttribute("user")) + " ";
+					String factor[] = new String[3];
+					factor = dao.findFactor((User) session.getAttribute("user"));
+					session.setAttribute("factor", factor);
+				} else {
+					sql_request = "select * from Annonces";
 				}
+
+				System.out.println("sql_request:" + sql_request);
+				announcement = dao2.findByFactor(sql_request);
+
+				session.setAttribute("annoucement_user", announcement);
+				this.getServletContext().getRequestDispatcher(VUE2).forward(request, response);
 
 			}
 
-		
+		}
+
 	}
 
 	@Override

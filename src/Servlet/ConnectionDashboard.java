@@ -17,50 +17,47 @@ import DAO.AnnouncementDAO;
 import Entities.Administrator;
 import Entities.Annonces;
 import Entities.User;
+
 @WebServlet("/dashboardconnection")
 public class ConnectionDashboard extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/ConnectionDashboard.jsp";
 	public static final String VUESucess = "/WEB-INF/Dashboard.jsp";
-	
+
 	@EJB
 	AdministratorDAO dao;
-	
+
 	boolean instance = false;
 	Administrator admin = new Administrator();
 
-
-	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Affichage de la page d'inscription */
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String pseudo = request.getParameter("Pseudo");
 		String password = request.getParameter("Password");
-		
-		if(pseudo.equals(password) && pseudo.equals("admin")){
-		
-			if(!instance){
+
+		if (pseudo.equals(password) && pseudo.equals("admin")) {
+
+			if (!instance) {
 				admin.setPassword(password);
 				admin.setPseudo(pseudo);
 				dao.create(admin);
 				instance = true;
 			}
-		} 
-		
+		}
+
 		Administrator user_connexion = dao.findAdministrator(pseudo, password);
-		
-	
-		if (user_connexion!=null){
+
+		if (user_connexion != null) {
 			session.setAttribute("admin", user_connexion);
 
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
-		}
-		else{
+		} else {
 			String error = "Bad email or bad password";
 			request.setAttribute("error", error);
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

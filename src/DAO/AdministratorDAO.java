@@ -15,14 +15,14 @@ import Entities.User;
 @Stateless
 public class AdministratorDAO {
 
-	@PersistenceContext(unitName ="persistenceUnit")
-	private EntityManager em; 
-	
+	@PersistenceContext(unitName = "persistenceUnit")
+	private EntityManager em;
+
 	public void create(Administrator Administrator) {
 
-			em.persist(Administrator);
+		em.persist(Administrator);
 	}
-	
+
 	public Administrator findAdministrator(String pseudo, String password) {
 		List<Administrator> find_Administrator = new ArrayList<Administrator>();
 		Administrator Administrator;
@@ -32,11 +32,11 @@ public class AdministratorDAO {
 
 		if (find_Administrator.isEmpty()) {
 			Administrator = null;
-		} else {
+		} 
+		else {
 			Administrator = find_Administrator.get(0);
 		}
 		return Administrator;
 	}
-	
-	
+
 }

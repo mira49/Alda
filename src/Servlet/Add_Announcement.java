@@ -55,16 +55,15 @@ public class Add_Announcement extends HttpServlet {
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
 
-	
-			/* Affichage de la page restreinte */
-			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-		
+		/* Affichage de la page restreinte */
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		
+
 		Annonces annonce = new Annonces();
 		try {
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -132,7 +131,7 @@ public class Add_Announcement extends HttpServlet {
 		try {
 
 			if (erreurs.isEmpty()) {
-				
+
 				resultat = "Succès.";
 
 			} else {
@@ -143,11 +142,11 @@ public class Add_Announcement extends HttpServlet {
 			e.printStackTrace();
 		}
 		if ("Succès.".equals(resultat)) {
-		 
+
 			String format = "dd/MM/yy H:mm:ss";
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 			java.util.Date dt = new java.util.Date();
-	
+
 			annonce.setUser((User) session.getAttribute("user"));
 			annonce.setDate(dt);
 			annonce.setSold(0);

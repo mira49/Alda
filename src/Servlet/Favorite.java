@@ -16,20 +16,19 @@ import Entities.Annonces;
 import Entities.User;
 
 @WebServlet("/favorite")
-public class Favorite extends HttpServlet{
-	
-public static final String VUE = "/WEB-INF/Favorite.jsp";
-	
+public class Favorite extends HttpServlet {
+
+	public static final String VUE = "/WEB-INF/Favorite.jsp";
+
 	@EJB
 	AnnouncementDAO dao;
-	
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
-		
-		
-		List <Annonces> announces_favorite = dao.findAllByFavorite((User)session.getAttribute("user"));
-		
+
+		List<Annonces> announces_favorite = dao.findAllByFavorite((User) session.getAttribute("user"));
+
 		request.setAttribute("annoucement_user", announces_favorite);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
