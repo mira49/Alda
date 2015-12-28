@@ -39,7 +39,12 @@ public class contact extends HttpServlet {
 
 		String annonce = request.getParameter("contact");
 		Annonces annonces = dao.findById(annonce);
-
+		String con = userConnection(annonces);
+		
+		if (con.equals("con")){
+			request.setAttribute("connexion", con);
+		}
+		
 		request.setAttribute("current_announce", annonces);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
@@ -61,5 +66,13 @@ public class contact extends HttpServlet {
 
 		session.setAttribute("user", user);
 		this.getServletContext().getRequestDispatcher(VUE_retour).forward(request, response);
+	}
+	
+	public String userConnection(Annonces annonce) {
+			String con = "";
+			 if (annonce.getUser().getDate_connexion().compareTo(annonce.getUser().getDate_deconnection()) > 0){
+				 con = "con";
+			 }
+			return con;
 	}
 }

@@ -52,7 +52,7 @@ public class Add_Announcement extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération de la session depuis la requête */
+		/* Rï¿½cupï¿½ration de la session depuis la requï¿½te */
 		HttpSession session = request.getSession();
 
 		/* Affichage de la page restreinte */
@@ -65,6 +65,8 @@ public class Add_Announcement extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		Annonces annonce = new Annonces();
+		
+		
 		try {
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			for (FileItem item : items) {
@@ -76,7 +78,7 @@ public class Add_Announcement extends HttpServlet {
 					String nomChamp = item.getFieldName();
 					String valeurChamp = item.getString();
 					switch (nomChamp) {
-
+					
 					case "Description":
 						annonce.setDescription(valeurChamp);
 						break;
@@ -94,6 +96,10 @@ public class Add_Announcement extends HttpServlet {
 						break;
 					case "Name":
 						annonce.setName(valeurChamp);
+						break;
+					case "id":
+						System.out.println("la valeur du champ est:"  +valeurChamp);
+						annonce.setId(Long.parseLong(valeurChamp));
 						break;
 					default:
 						break;
@@ -126,22 +132,22 @@ public class Add_Announcement extends HttpServlet {
 				}
 			}
 		} catch (FileUploadException e) {
-			throw new ServletException("Échec de l'analyse de la requête multipart.", e);
+			throw new ServletException("ï¿½chec de l'analyse de la requï¿½te multipart.", e);
 		}
 		try {
 
 			if (erreurs.isEmpty()) {
 
-				resultat = "Succès.";
+				resultat = "Succï¿½s.";
 
 			} else {
-				resultat = "échec.";
+				resultat = "ï¿½chec.";
 			}
 		} catch (DAO.DAOException e) {
-			resultat = "échec : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+			resultat = "ï¿½chec : une erreur imprï¿½vue est survenue, merci de rï¿½essayer dans quelques instants.";
 			e.printStackTrace();
 		}
-		if ("Succès.".equals(resultat)) {
+		if ("Succï¿½s.".equals(resultat)) {
 
 			String format = "dd/MM/yy H:mm:ss";
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
@@ -150,6 +156,7 @@ public class Add_Announcement extends HttpServlet {
 			annonce.setUser((User) session.getAttribute("user"));
 			annonce.setDate(dt);
 			annonce.setSold(0);
+						
 			annoucement.create(annonce);
 			this.getServletContext().getRequestDispatcher(VUEAfter).forward(request, response);
 		} else {
@@ -173,26 +180,26 @@ public class Add_Announcement extends HttpServlet {
 	private String validationImage(HttpServletRequest request, String chemin, String nom, InputStream co,
 			String nomChamp) throws FormValidationException {
 		/*
-		 * Récupération du contenu du champ image du formulaire. Il faut ici
-		 * utiliser la méthode getPart().
+		 * Rï¿½cupï¿½ration du contenu du champ image du formulaire. Il faut ici
+		 * utiliser la mï¿½thode getPart().
 		 */
 		String nomFichier = nom;
 		InputStream contenuFichier = co;
 		try {
 			Part part = (Part) request.getPart(nomChamp);
 			/*
-			 * Si la méthode getNomFichier() a renvoyé quelque chose, il s'agit
+			 * Si la mï¿½thode getNomFichier() a renvoyï¿½ quelque chose, il s'agit
 			 * donc d'un champ de type fichier (input type="file").
 			 */
 			if (nomFichier != null && !nomFichier.isEmpty()) {
 				/*
 				 * Antibug pour Internet Explorer, qui transmet pour une raison
-				 * mystique le chemin du fichier local à la machine du client...
+				 * mystique le chemin du fichier local ï¿½ la machine du client...
 				 * 
 				 * Ex : C:/dossier/sous-dossier/fichier.ext
 				 * 
-				 * On doit donc faire en sorte de ne sélectionner que le nom et
-				 * l'extension du fichier, et de se débarrasser du superflu.
+				 * On doit donc faire en sorte de ne sï¿½lectionner que le nom et
+				 * l'extension du fichier, et de se dï¿½barrasser du superflu.
 				 */
 				nomFichier = nomFichier.substring(nomFichier.lastIndexOf('/') + 1)
 						.substring(nomFichier.lastIndexOf('\\') + 1);
@@ -202,40 +209,40 @@ public class Add_Announcement extends HttpServlet {
 				Collection<?> mimeTypes = MimeUtil.getMimeTypes(contenuFichier);
 
 				/*
-				 * Si le fichier est bien une image, alors son en-tête MIME
-				 * commence par la chaîne "image"
+				 * Si le fichier est bien une image, alors son en-tï¿½te MIME
+				 * commence par la chaï¿½ne "image"
 				 */
 				if (mimeTypes.toString().startsWith("image")) {
-					/* Écriture du fichier sur le disque */
+					/* ï¿½criture du fichier sur le disque */
 					ecrireFichier(contenuFichier, nomFichier, chemin);
 				} else {
-					throw new FormValidationException("Le fichier envoyé doit être une image.");
+					throw new FormValidationException("Le fichier envoyï¿½ doit ï¿½tre une image.");
 				}
 			}
 		} catch (IllegalStateException e) {
 			/*
-			 * Exception retournée si la taille des données dépasse les limites
-			 * définies dans la section <multipart-config> de la déclaration de
+			 * Exception retournï¿½e si la taille des donnï¿½es dï¿½passe les limites
+			 * dï¿½finies dans la section <multipart-config> de la dï¿½claration de
 			 * notre servlet d'upload dans le fichier web.xml
 			 */
 			e.printStackTrace();
-			throw new FormValidationException("Le fichier envoyé ne doit pas dépasser 1Mo.");
+			throw new FormValidationException("Le fichier envoyï¿½ ne doit pas dï¿½passer 1Mo.");
 		} catch (IOException e) {
 			/*
-			 * Exception retournée si une erreur au niveau des répertoires de
-			 * stockage survient (répertoire inexistant, droits d'accès
+			 * Exception retournï¿½e si une erreur au niveau des rï¿½pertoires de
+			 * stockage survient (rï¿½pertoire inexistant, droits d'accï¿½s
 			 * insuffisants, etc.)
 			 */
 			e.printStackTrace();
 			throw new FormValidationException("Erreur de configuration du serveur.");
 		} catch (ServletException e) {
 			/*
-			 * Exception retournée si la requête n'est pas de type
+			 * Exception retournï¿½e si la requï¿½te n'est pas de type
 			 * multipart/form-data.
 			 */
 			e.printStackTrace();
 			throw new FormValidationException(
-					"Ce type de requête n'est pas supporté, merci d'utiliser le formulaire prévu pour envoyer votre fichier.");
+					"Ce type de requï¿½te n'est pas supportï¿½, merci d'utiliser le formulaire prï¿½vu pour envoyer votre fichier.");
 		}
 
 		System.out.println(nomFichier);
@@ -251,7 +258,7 @@ public class Add_Announcement extends HttpServlet {
 			throws FormValidationException {
 		System.out.println("hhh");
 
-		/* Prépare les flux. */
+		/* Prï¿½pare les flux. */
 		BufferedInputStream entree = null;
 		BufferedOutputStream sortie = null;
 		try {
@@ -260,7 +267,7 @@ public class Add_Announcement extends HttpServlet {
 			sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)), TAILLE_TAMPON);
 
 			/*
-			 * Lit le fichier reçu et écrit son contenu dans un fichier sur le
+			 * Lit le fichier reï¿½u et ï¿½crit son contenu dans un fichier sur le
 			 * disque.
 			 */
 			byte[] tampon = new byte[TAILLE_TAMPON];
@@ -269,7 +276,7 @@ public class Add_Announcement extends HttpServlet {
 				sortie.write(tampon, 0, longueur);
 			}
 		} catch (Exception e) {
-			throw new FormValidationException("Erreur lors de l'écriture du fichier sur le disque.");
+			throw new FormValidationException("Erreur lors de l'ï¿½criture du fichier sur le disque.");
 		} finally {
 			try {
 				sortie.close();

@@ -25,6 +25,7 @@ import Entities.User;
 public class MyAnnouncements extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/MyAnnouncements.jsp";
+	public static final String VUE_Update = "/WEB-INF/Add_Announcement.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 
 	@EJB
@@ -37,7 +38,7 @@ public class MyAnnouncements extends HttpServlet {
 	private MessageDAO message_dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération de la session depuis la requête */
+
 		HttpSession session = request.getSession();
 
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
@@ -58,7 +59,8 @@ public class MyAnnouncements extends HttpServlet {
 		HttpSession session = request.getSession();
 		String idA = request.getParameter("delete");
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
-
+		List<Annonces> annoucements = new ArrayList<>();
+		
 		if (idA != null) {
 			Long id = Long.parseLong(idA);
 			dao.delete(id);
@@ -67,16 +69,23 @@ public class MyAnnouncements extends HttpServlet {
 		if (request.getParameter("sold") != null) {
 			sendMessages(dao.setAnnounceSold(request.getParameter("sold")));
 		}
-
-		List<Annonces> annoucements = new ArrayList<>();
+		
 		annoucements = dao.getAnnoucement_user(user);
 		if (!annoucements.isEmpty()) {
 			request.setAttribute("annoucement_user", annoucements);
 		}
 
 		session.setAttribute("user", user);
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-
+		
+		if (request.getParameter("edit") != null){
+			Annonces annonce = dao.findById(request.getParameter("edit"));
+			
+			request.setAttribute("current_annonce", annonce);
+			this.getServletContext().getRequestDispatcher(VUE_Update).forward(request, response);
+		}
+		else{
+			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		}
 	}
 
 	public void sendMessages(Annonces annonce) {
@@ -85,7 +94,7 @@ public class MyAnnouncements extends HttpServlet {
 		for (String f : favorites) {
 			if (!(StringUtils.isBlank(f))) {
 				Messages m = new Messages();
-				m.setMessage("L'annonce de " + annonce.getUser().getName() + ": " + annonce.getName() + " à été vendu");
+				m.setMessage("L'annonce de " + annonce.getUser().getName() + ": " + annonce.getName() + " ï¿½ ï¿½tï¿½ vendu");
 				m.setReceiver_message(f);
 				m.setSender_message("No reply");
 				m.setNotification(1);

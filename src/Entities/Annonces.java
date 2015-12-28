@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="Annonces.AnnouncementUser",
                 query="SELECT u FROM Annonces u WHERE u.user.email = :email"),
+    @NamedQuery(name="Annonces.AnnouncementMerge",
+    query="SELECT u FROM Annonces u WHERE u.user.email = :email AND u.date = :date"),
     @NamedQuery(name="Annonces.deleteAnnounce",
     query="delete from Annonces u where u.id = :id"),
     @NamedQuery(name="Annonces.findAll",

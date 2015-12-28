@@ -19,7 +19,14 @@ public class AnnouncementDAO {
 	private EntityManager em;
 
 	public void create(Annonces n) {
-		em.merge(n);
+
+		if (n.getId() != null){
+			em.merge(n);
+		}
+		else{
+			em.persist(n);
+		}
+		
 	}
 
 	public List<Annonces> getAnnoucement_user(User user) {
