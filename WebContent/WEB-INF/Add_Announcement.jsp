@@ -23,7 +23,7 @@
 			<form role="form" method="post" action="add_Announcement"
 				enctype="multipart/form-data">
 				<fieldset id="Field">
-					<legend>Informations pour the annoucement</legend>
+					<legend>Informations for the annoucement</legend>
 					
 					<c:if test="${empty current_annonce }">
 					<label> Name : <span class="requis">*</span>

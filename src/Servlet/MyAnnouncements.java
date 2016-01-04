@@ -27,6 +27,7 @@ public class MyAnnouncements extends HttpServlet {
 	public static final String VUE = "/WEB-INF/MyAnnouncements.jsp";
 	public static final String VUE_Update = "/WEB-INF/Add_Announcement.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
+	private static final String VUE_VISU = "/WEB-INF/visualisation.jsp";
 
 	@EJB
 	private AnnouncementDAO dao;
@@ -83,7 +84,14 @@ public class MyAnnouncements extends HttpServlet {
 			request.setAttribute("current_annonce", annonce);
 			this.getServletContext().getRequestDispatcher(VUE_Update).forward(request, response);
 		}
-		else{
+		else
+			if (request.getParameter("view") != null){
+				Annonces annonce = dao.findById(request.getParameter("view"));
+				
+				request.setAttribute("current_annonce", annonce);
+				this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
+			}
+			else{
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 	}

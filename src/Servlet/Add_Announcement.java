@@ -1,19 +1,33 @@
 package Servlet;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
 import javax.mail.Part;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +48,7 @@ import org.apache.commons.io.FilenameUtils;
 
 @WebServlet(name = "add_Announcement", urlPatterns = { "/add_Announcement" }, initParams = {
 		@WebInitParam(name = "chemin", value = "/fichiers/images/") })
+@MultipartConfig
 public class Add_Announcement extends HttpServlet {
 	private String resultat;
 	public static final String VUE = "/WEB-INF/Add_Announcement.jsp";
@@ -42,7 +57,7 @@ public class Add_Announcement extends HttpServlet {
 	public static final String VUEAfter = "/WEB-INF/Home_user.jsp";
 	private static final int TAILLE_TAMPON = 10240;// 10ko
 	private String filename;
-
+	
 	@EJB
 	private AnnouncementDAO annoucement;
 
@@ -170,11 +185,11 @@ public class Add_Announcement extends HttpServlet {
 	}
 
 	private void traiterImage(HttpServletRequest request, String chemin, String nom, InputStream co, String nomChamp) {
-		/*
-		 * String image = null; try { image = validationImage( request, chemin ,
-		 * nom, co, nomChamp); } catch ( FormValidationException e ) {
-		 * setErreur( nomChamp, e.getMessage() ); }
-		 */
+		
+		  String image = null; try { image = validationImage( request, chemin ,
+		  nom, co, nomChamp); } catch ( FormValidationException e ) {
+		  setErreur( nomChamp, e.getMessage() ); }
+		 
 	}
 
 	private String validationImage(HttpServletRequest request, String chemin, String nom, InputStream co,
@@ -205,19 +220,19 @@ public class Add_Announcement extends HttpServlet {
 						.substring(nomFichier.lastIndexOf('\\') + 1);
 
 				/* Extraction du type MIME du fichier depuis l'InputStream */
-				MimeUtil.registerMimeDetector("eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
-				Collection<?> mimeTypes = MimeUtil.getMimeTypes(contenuFichier);
-
-				/*
-				 * Si le fichier est bien une image, alors son en-t�te MIME
-				 * commence par la cha�ne "image"
-				 */
-				if (mimeTypes.toString().startsWith("image")) {
-					/* �criture du fichier sur le disque */
+			
+				MimeUtil.registerMimeDetector( "eu.medsea.mimeutil.detector.MagicMimeMimeDetector" );
+				//BufferedInputStream bufferedIs = new BufferedInputStream( contenuFichier );
+				Collection<?> mimeTypes = MimeUtil.getMimeTypes(contenuFichier );
+				 
+				if ( !mimeTypes.toString().startsWith( "image" )){
+				    throw new FormValidationException("Le type du fichier doit être une IMAGE");
+				} else 
+				{
 					ecrireFichier(contenuFichier, nomFichier, chemin);
-				} else {
-					throw new FormValidationException("Le fichier envoy� doit �tre une image.");
+
 				}
+				
 			}
 		} catch (IllegalStateException e) {
 			/*
@@ -254,10 +269,11 @@ public class Add_Announcement extends HttpServlet {
 		erreurs.put(champ, message);
 	}
 
+	
+	
 	private void ecrireFichier(InputStream contenuFichier, String nomFichier, String chemin)
 			throws FormValidationException {
-		System.out.println("hhh");
-
+		
 		/* Pr�pare les flux. */
 		BufferedInputStream entree = null;
 		BufferedOutputStream sortie = null;

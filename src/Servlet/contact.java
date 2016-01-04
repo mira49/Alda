@@ -23,6 +23,8 @@ public class contact extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/contact.jsp";
 	public static final String VUE_retour = "/WEB-INF/Home_user.jsp";
+	private static final String VUE_VISU = "/WEB-INF/visualisation.jsp";
+
 
 	@EJB
 	AnnouncementDAO dao;
@@ -37,7 +39,14 @@ public class contact extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		String annonce = request.getParameter("contact");
+		if (request.getParameter("view") != null){
+			Annonces annonce = dao.findById(request.getParameter("view"));
+			
+			request.setAttribute("current_annonce", annonce);
+			this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
+		}else{
+			String annonce = request.getParameter("contact");
+		
 		Annonces annonces = dao.findById(annonce);
 		String con = userConnection(annonces);
 		
@@ -46,7 +55,7 @@ public class contact extends HttpServlet {
 		}
 		
 		request.setAttribute("current_announce", annonces);
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
