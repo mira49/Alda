@@ -11,21 +11,30 @@
 </head>
 <body>
 
-<div  class="connection"  >
+	<div class="connection">
 
-      <form class="form-signin"  action="<c:url value="/connexion"/>" method="post">
-       <h3 class="access" > ACCESS PLATEFORM</h3> <br>
-        <input type="text"   maxlength="60" class="form-control composantCentre" name="email"  placeholder="exemple@exemple.exemple" required autofocus> <br>
-       <input type="password"   maxlength="20" class="form-control composantCentre" name="password" placeholder="Password" required>
-		<a class="composantCentre" href="forgetting"> Forgotten password ? </a>
-					 <br />
-                <a  class=" composantCentre" href="registration" > register ? </a>
-		<div>					<span id="error" class=" composantCentre erreur">${error}</span>		</div> <br> <br>                      
-        <button class="btn btn-lg btn-primary btn-block composantCentre"  type="submit">Sign in</button><br>
-      </form>
+		<form class="form-signin" action="<c:url value="/connexion"/>"
+			method="post">
+			<h3 class="access">ACCESS PLATEFORM</h3>
+			<br> <input type="text" maxlength="60"
+				class="form-control composantCentre" name="email"
+				placeholder="exemple@exemple.exemple" required autofocus> <br>
+			<input type="password" maxlength="20"
+				class="form-control composantCentre" name="password"
+				placeholder="Password" required> <a class="composantCentre"
+				href="forgetting"> Forgotten password ? </a> <br /> <a
+				class=" composantCentre" href="registration"> register ? </a>
+			<div>
+				<span id="error" class=" composantCentre erreur">${error}</span>
+			</div>
+			<br> <br>
+			<button class="btn btn-lg btn-primary btn-block composantCentre"
+				type="submit">Sign in</button>
+			<br>
+		</form>
 
- </div>
-    
+	</div>
+
 
 
 </body>

@@ -10,23 +10,38 @@
 <link type="text/css" rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
-<div  class="connection"  >
+	<div class="connection">
 
-      <form class="form-signin"  action="<c:url value="/registration"/>" method="post">
-       <h3 class="access" > REGISTRATION</h3> <br>
-        <input type="text"   maxlength="60" class="form-control composantCentre" name="email"  placeholder="exemple@exemple.exemple" required autofocus> <br>
-       <input type="password"   maxlength="20" class="form-control composantCentre" name="password" placeholder="Password" required> <br>
-	    <input type="password"   maxlength="20" class="form-control composantCentre" name="password_confirm" placeholder="password Confirmation" required>
-	      
-	      <a  class=" composantCentre" href="connexion" > Sign in ? </a>
-		<div><span id="error" class=" composantCentre erreur">${erreur['email']}</span>		</div>
-		<div><span id="error" class=" composantCentre erreur">${erreur['password']}</span>		</div> 
-		<div><span id="error" class=" composantCentre erreur">${erreur['confirmation']}</span>		</div>  <br> <br>                      
-        <button class="btn btn-lg btn-primary btn-block composantCentre"  type="submit">Sign up</button><br>
-      </form>
+		<form class="form-signin" action="<c:url value="/registration"/>"
+			method="post">
+			<h3 class="access">REGISTRATION</h3>
+			<br> <input type="text" maxlength="60"
+				class="form-control composantCentre" name="email"
+				placeholder="exemple@exemple.exemple" required autofocus> <br>
+			<input type="password" maxlength="20"
+				class="form-control composantCentre" name="password"
+				placeholder="Password" required> <br> <input
+				type="password" maxlength="20" class="form-control composantCentre"
+				name="password_confirm" placeholder="password Confirmation" required>
 
- </div>
-    
+			<a class=" composantCentre" href="connexion"> Sign in ? </a>
+			<div>
+				<span id="error" class=" composantCentre erreur">${erreur['email']}</span>
+			</div>
+			<div>
+				<span id="error" class=" composantCentre erreur">${erreur['password']}</span>
+			</div>
+			<div>
+				<span id="error" class=" composantCentre erreur">${erreur['confirmation']}</span>
+			</div>
+			<br> <br>
+			<button class="btn btn-lg btn-primary btn-block composantCentre"
+				type="submit">Sign up</button>
+			<br>
+		</form>
+
+	</div>
+
 
 
 </body>

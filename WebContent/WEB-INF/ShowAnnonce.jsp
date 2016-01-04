@@ -58,8 +58,6 @@
 						</tr>
 					</c:forEach>
 				</table>
-				
-			
 	</div>
 	</c:otherwise>
 	</c:choose>

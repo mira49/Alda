@@ -10,21 +10,30 @@
 <link type="text/css" rel="stylesheet" href="CSS/style.css" />
 </head>
 <body>
-<div  class="connection"  >
+	<div class="connection">
 
-      <form class="form-signin"  action="<c:url value="/forgetting"/>" method="post">
-       <h3 class="access" > REGENERATION PASSWORD</h3> <br>
-        <input type="text"   maxlength="60" class="form-control composantCentre" name="email"  placeholder="exemple@exemple.exemple" required autofocus>
-	      
-	     <h5> <a  class=" composantCentre" href="connexion" >  Sign in ? </a></h5>
-		<div><span id="error" class=" composantCentre erreur">${err['email']}</span>		</div> <br> <br>                      
-        <button class="btn btn-lg btn-primary btn-block composantCentre"  type="submit">Send</button><br>
-      </form>
+		<form class="form-signin" action="<c:url value="/forgetting"/>"
+			method="post">
+			<h3 class="access">REGENERATION PASSWORD</h3>
+			<br> <input type="text" maxlength="60"
+				class="form-control composantCentre" name="email"
+				placeholder="exemple@exemple.exemple" required autofocus>
 
- </div>
-    
+			<h5>
+				<a class=" composantCentre" href="connexion"> Sign in ? </a>
+			</h5>
+			<div>
+				<span id="error" class=" composantCentre erreur">${err['email']}</span>
+			</div>
+			<br> <br>
+			<button class="btn btn-lg btn-primary btn-block composantCentre"
+				type="submit">Send</button>
+			<br>
+		</form>
+
+	</div>
+
 
 
 </body>
 </html>
-      

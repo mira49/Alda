@@ -24,54 +24,102 @@
 				enctype="multipart/form-data">
 				<fieldset id="Field">
 					<legend>Informations pour the annoucement</legend>
-					
+
 					<c:if test="${empty current_annonce }">
-					<label> Name : <span class="requis">*</span>
-					</label><input name="Name" required autofocus><br> <br>
-					<label>Postal code : <span class="requis">*</span>
-					</label> <input type="text" name="postal_code" required> <br>
-					<br> <label>Town : <span class="requis">*</span>
-					</label><input name="Town" required><br> <br> <label>
-						Price : <span class="requis">*</span>
-					</label><input type="text" name="Price" required><br> <br>
-					<label> Surface : <span class="requis">*</span>
-					</label><input type="text" name="Surface" required><br> <br>
-					<label> Description : </label>
-					<textarea type="text" name="Description"> </textarea>
-					<br> <label> Picture 1 : <span class="requis">*</span>
-					</label><input type="file" name="picture1" required><br> <label>
-						Picture 2 : <span class="requis">*</span>
-					</label><input type="file" name="picture2" required> <a>Click
-						here to Add a picture</a> <br /> <span id="error" class="erreur">${erreur['picture1']}</span>
-					<span id="error" class="erreur">${erreur['picture2']}</span> <span
-						id="error" class="erreur">${erreur['picture3']}</span> <label
-						id="picture3"> Picture 3 : </label><input id="picture3"
-						type="file" name="picture3"> <br>
+						<label> Name : <span class="requis">*</span>
+						</label>
+						<input name="Name" required autofocus>
+						<br>
+						<br>
+						<label>Postal code : <span class="requis">*</span>
+						</label>
+						<input type="text" name="postal_code" required>
+						<br>
+						<br>
+						<label>Town : <span class="requis">*</span>
+						</label>
+						<input name="Town" required>
+						<br>
+						<br>
+						<label> Price : <span class="requis">*</span>
+						</label>
+						<input type="text" name="Price" required>
+						<br>
+						<br>
+						<label> Surface : <span class="requis">*</span>
+						</label>
+						<input type="text" name="Surface" required>
+						<br>
+						<br>
+						<label> Description : </label>
+						<textarea type="text" name="Description"> </textarea>
+						<br>
+						<label> Picture 1 : <span class="requis">*</span>
+						</label>
+						<input type="file" name="picture1" required>
+						<br>
+						<label> Picture 2 : <span class="requis">*</span>
+						</label>
+						<input type="file" name="picture2" required>
+						<a>Click here to Add a picture</a>
+						<br />
+						<span id="error" class="erreur">${erreur['picture1']}</span>
+						<span id="error" class="erreur">${erreur['picture2']}</span>
+						<span id="error" class="erreur">${erreur['picture3']}</span>
+						<label id="picture3"> Picture 3 : </label>
+						<input id="picture3" type="file" name="picture3">
+						<br>
 					</c:if>
-					
+
 					<c:if test="${!empty current_annonce }">
-					<input type="text" name="id" value="${current_annonce.id }" required/>
-					<label> Name : <span class="requis">*</span>
-					</label><input name="Name" value="${current_annonce.name }" required autofocus><br> <br>
-					<label>Postal code : <span class="requis">*</span>
-					</label> <input type="text" name="postal_code"  value="${current_annonce.postal_code }"  required> <br>
-					<br> <label>Town : <span class="requis">*</span>
-					</label><input name="Town" value="${current_annonce.town }" required><br> <br> 
-					<label>	Price : <span class="requis">*</span>
-					</label><input type="text" name="Price" value="${current_annonce.price }" required><br> <br>
-					<label> Surface : <span class="requis">*</span>
-					</label><input type="text" name="Surface" value="${current_annonce.surface }"  required/><br> <br>
-					<label> Description : </label>
-					<textarea type="text" name="Description" > ${current_annonce.description } </textarea>
-					<br> <label> Picture 1 : <span class="requis">*</span>
-					</label> <input type="file" name="picture1" required /><br>  <label>
-						Picture 2 : <span class="requis">*</span>
-					</label> <input type="file" name="picture2"  required> <a>Click
-						here to Add a picture</a> <br /> <span id="error" class="erreur">${erreur['picture1']}</span>
-					<span id="error" class="erreur">${erreur['picture2']}</span> <span
-						id="error" class="erreur">${erreur['picture3']}</span> <label
-						id="picture3"> Picture 3 : </label><input id="picture3"
-						type="file" name="picture3"> <br>
+						
+						<label> Name : <span class="requis">*</span>
+						</label>
+						<input name="Name" value="${current_annonce.name }" required
+							autofocus>
+						<br>
+						<br>
+						<label>Postal code : <span class="requis">*</span>
+						</label>
+						<input type="text" name="postal_code"
+							value="${current_annonce.postal_code }" required>
+						<br>
+						<br>
+						<label>Town : <span class="requis">*</span>
+						</label>
+						<input name="Town" value="${current_annonce.town }" required>
+						<br>
+						<br>
+						<label> Price : <span class="requis">*</span>
+						</label>
+						<input type="text" name="Price" value="${current_annonce.price }"
+							required>
+						<br>
+						<br>
+						<label> Surface : <span class="requis">*</span>
+						</label>
+						<input type="text" name="Surface"
+							value="${current_annonce.surface }" required />
+						<br>
+						<br>
+						<label> Description : </label>
+						<textarea type="text" name="Description"> ${current_annonce.description } </textarea>
+						<br>
+						<label> Picture 1 : <span class="requis">*</span>
+						</label>
+						<input type="file" name="picture1" required />
+						<br>
+						<label> Picture 2 : <span class="requis">*</span>
+						</label>
+						<input type="file" name="picture2" required>
+						<a>Click here to Add a picture</a>
+						<br />
+						<span id="error" class="erreur">${erreur['picture1']}</span>
+						<span id="error" class="erreur">${erreur['picture2']}</span>
+						<span id="error" class="erreur">${erreur['picture3']}</span>
+						<label id="picture3"> Picture 3 : </label>
+						<input id="picture3" type="file" name="picture3">
+						<br>
 					</c:if>
 					<button class="btn register" type="submit">Register</button>
 		</div>

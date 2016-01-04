@@ -170,11 +170,11 @@ public class Add_Announcement extends HttpServlet {
 	}
 
 	private void traiterImage(HttpServletRequest request, String chemin, String nom, InputStream co, String nomChamp) {
-		/*
-		 * String image = null; try { image = validationImage( request, chemin ,
-		 * nom, co, nomChamp); } catch ( FormValidationException e ) {
-		 * setErreur( nomChamp, e.getMessage() ); }
-		 */
+		
+		 String image = null; try { image = validationImage( request, chemin ,
+		  nom, co, nomChamp); } catch ( FormValidationException e ) {
+		  setErreur( nomChamp, e.getMessage() ); }
+		 
 	}
 
 	private String validationImage(HttpServletRequest request, String chemin, String nom, InputStream co,
@@ -206,7 +206,8 @@ public class Add_Announcement extends HttpServlet {
 
 				/* Extraction du type MIME du fichier depuis l'InputStream */
 				MimeUtil.registerMimeDetector("eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
-				Collection<?> mimeTypes = MimeUtil.getMimeTypes(contenuFichier);
+				BufferedInputStream bufferedIs = new BufferedInputStream( contenuFichier );
+				Collection<?> mimeTypes = MimeUtil.getMimeTypes(bufferedIs );
 
 				/*
 				 * Si le fichier est bien une image, alors son en-t�te MIME

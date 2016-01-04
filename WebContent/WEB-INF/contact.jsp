@@ -128,7 +128,11 @@
 		}
 
 		function connectToChatserver() {
-			room = ${current_announce.user.email};
+			room = $
+			{
+				current_announce.user.email
+			}
+			;
 			wsocket = new WebSocket(serviceLocation + room);
 			wsocket.onmessage = onMessageReceived;
 		}
@@ -143,7 +147,11 @@
 
 		$(document).ready(
 				function() {
-					$nickName = ${sessionScope.user.name};
+					$nickName = $
+					{
+						sessionScope.user.name
+					}
+					;
 					$message = $('#message');
 					$chatWindow = $('#response');
 					$('.chat-wrapper').hide();
