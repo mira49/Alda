@@ -47,7 +47,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
 @WebServlet(name = "add_Announcement", urlPatterns = { "/add_Announcement" }, initParams = {
-		@WebInitParam(name = "chemin", value = "/fichiers/images/") })
+		@WebInitParam(name = "chemin", value = "/images/") })
 @MultipartConfig
 public class Add_Announcement extends HttpServlet {
 	private String resultat;
