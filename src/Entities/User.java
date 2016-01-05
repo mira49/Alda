@@ -70,11 +70,11 @@ public class User  implements Serializable{
   @Column(nullable=true)
   private String factor;
   
-  @Basic
-	@Column(length = 50, nullable = true)
+  @Temporal(value = TemporalType.DATE)
+  @Column(length = 50, nullable = true)
   private Date date_connexion;
   
-  @Basic
+  @Temporal(value = TemporalType.DATE)
   @Column(length = 50, nullable = true)
   private Date date_deconnection;
   

@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -42,7 +44,7 @@ public class Annonces  implements Serializable {
 	@Column(length = 30, nullable = false)
 	private String name;
 	
-	@Basic
+	@Temporal(value = TemporalType.DATE)
 	@Column(length = 50, nullable = false)
     private Date date;
 

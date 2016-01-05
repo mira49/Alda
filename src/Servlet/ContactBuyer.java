@@ -21,6 +21,8 @@ import Entities.User;
 @WebServlet("/contactBuyer")
 public class ContactBuyer extends HttpServlet {
 
+	private static final String VUE_VISU = "/WEB-INF/visuBuyer.jsp";
+
 	public static final String VUE = "/WEB-INF/contactBuyer.jsp";
 
 	@EJB
@@ -34,11 +36,19 @@ public class ContactBuyer extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if (request.getParameter("view") != null){
+			Annonces annonce = dao.findById(request.getParameter("view"));
+			
+			request.setAttribute("current_annonce", annonce);
+			this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
+		}else{
 		String annonce = request.getParameter("contact");
 		Annonces annonces = dao.findById(annonce);
 
 		request.setAttribute("current_announce", annonces);
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
 	}
+	
+
 
 }

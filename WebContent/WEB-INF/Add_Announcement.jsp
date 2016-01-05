@@ -23,8 +23,9 @@
 			<form role="form" method="post" action="add_Announcement"
 				enctype="multipart/form-data">
 				<fieldset id="Field">
-					<legend>Informations pour the annoucement</legend>
 
+					<legend>Informations for the annoucement</legend>
+					
 					<c:if test="${empty current_annonce }">
 						<label> Name : <span class="requis">*</span>
 						</label>
@@ -105,14 +106,13 @@
 						<label> Description : </label>
 						<textarea type="text" name="Description"> ${current_annonce.description } </textarea>
 						<br>
-						<label> Picture 1 : <span class="requis">*</span>
-						</label>
-						<input type="file" name="picture1" required />
-						<br>
-						<label> Picture 2 : <span class="requis">*</span>
-						</label>
-						<input type="file" name="picture2" required>
-						<a>Click here to Add a picture</a>
+						
+						<input type="hidden" name="image1" value="${current_annonce.image1 }" />
+						<input type="hidden" name="image2" value="${current_annonce.image2 }" />
+						<input type="hidden" name="image3" value="${current_annonce.image3 }" />
+						<input type="hidden" name="id" value="${current_annonce.id }" />
+						
+						
 						<br />
 						<span id="error" class="erreur">${erreur['picture1']}</span>
 						<span id="error" class="erreur">${erreur['picture2']}</span>

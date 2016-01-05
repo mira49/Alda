@@ -1,19 +1,33 @@
 package Servlet;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
 import javax.mail.Part;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +47,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
 @WebServlet(name = "add_Announcement", urlPatterns = { "/add_Announcement" }, initParams = {
-		@WebInitParam(name = "chemin", value = "/fichiers/images/") })
+		@WebInitParam(name = "chemin", value = "/images/") })
+@MultipartConfig
 public class Add_Announcement extends HttpServlet {
 	private String resultat;
 	public static final String VUE = "/WEB-INF/Add_Announcement.jsp";
@@ -42,7 +57,7 @@ public class Add_Announcement extends HttpServlet {
 	public static final String VUEAfter = "/WEB-INF/Home_user.jsp";
 	private static final int TAILLE_TAMPON = 10240;// 10ko
 	private String filename;
-
+	
 	@EJB
 	private AnnouncementDAO annoucement;
 
@@ -98,8 +113,16 @@ public class Add_Announcement extends HttpServlet {
 						annonce.setName(valeurChamp);
 						break;
 					case "id":
-						System.out.println("la valeur du champ est:"  +valeurChamp);
 						annonce.setId(Long.parseLong(valeurChamp));
+						break;
+					case "image1":
+						annonce.setImage1(valeurChamp);
+						break;
+					case "image2":
+						annonce.setImage2(valeurChamp);
+						break;
+					case "image3":
+						annonce.setImage3(valeurChamp);
 						break;
 					default:
 						break;
@@ -171,7 +194,8 @@ public class Add_Announcement extends HttpServlet {
 
 	private void traiterImage(HttpServletRequest request, String chemin, String nom, InputStream co, String nomChamp) {
 		
-		 String image = null; try { image = validationImage( request, chemin ,
+
+		  String image = null; try { image = validationImage( request, chemin ,
 		  nom, co, nomChamp); } catch ( FormValidationException e ) {
 		  setErreur( nomChamp, e.getMessage() ); }
 		 
@@ -215,10 +239,11 @@ public class Add_Announcement extends HttpServlet {
 				 */
 				if (mimeTypes.toString().startsWith("image")) {
 					/* �criture du fichier sur le disque */
+
 					ecrireFichier(contenuFichier, nomFichier, chemin);
-				} else {
-					throw new FormValidationException("Le fichier envoy� doit �tre une image.");
+
 				}
+				
 			}
 		} catch (IllegalStateException e) {
 			/*
@@ -255,10 +280,11 @@ public class Add_Announcement extends HttpServlet {
 		erreurs.put(champ, message);
 	}
 
+	
+	
 	private void ecrireFichier(InputStream contenuFichier, String nomFichier, String chemin)
 			throws FormValidationException {
-		System.out.println("hhh");
-
+		
 		/* Pr�pare les flux. */
 		BufferedInputStream entree = null;
 		BufferedOutputStream sortie = null;

@@ -63,7 +63,7 @@
 								<th>Price</th>
 								<th>postal code</th>
 								<th>Favorite</th>
-								<th>Contact</th>
+								<th>Action</th>
 							</tr>
 
 
@@ -93,8 +93,12 @@
 									</form>
 
 									<form method="get" action="contact" id="contact_Form">
-										<td><button type="submit" name="contact"
-												value="${annoucement.id}">Contact</button></td>
+										<td><button type="submit" class="btn btn-link " name="contact"
+												value="${annoucement.id}">Contact</button>
+												<input type="image" style="float:right; margin-top:7px; " name="view"
+									value="${annoucement.id}"
+									onclick="document.contact_Form.submit();"
+									src="<c:url value="/inc/loupe.png"/>" alt="View" /> </td>
 									</form>
 									</c:if>
 									<c:if

@@ -48,6 +48,11 @@ public class RestrictionFilter implements Filter {
 	            chain.doFilter( request, response );
 	            return;
 	        }
+	        
+	        if ( chemin.startsWith( "/images" ) ) {
+	            chain.doFilter( request, response );
+	            return;
+	        }
 
 	        if ( chemin.startsWith( "/dashboard" ) ) {
 	        	 if ( chemin.startsWith( "/dashboardconnection" ) ) 
@@ -86,7 +91,7 @@ public class RestrictionFilter implements Filter {
         }
         /**
          * Si l'objet utilisateur n'existe pas dans la session en cours, alors
-         * l'utilisateur n'est pas connecté.
+         * l'utilisateur n'est pas connectï¿½.
          */
         else  if ( session.getAttribute( ATT_SESSION_USER ) == null ) {
             /* Redirection vers la page publique */

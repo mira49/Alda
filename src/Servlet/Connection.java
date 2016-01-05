@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import DAO.AnnouncementDAO;
 import DAO.MessageDAO;
 import DAO.UserDAO;
@@ -21,7 +23,6 @@ import Entities.User;
 @WebServlet("/connexion")
 public class Connection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	public static final String VUESucess = "/WEB-INF/Home_user.jsp";
 	public static final String VUE = "/WEB-INF/Connection.jsp";
 
@@ -42,7 +43,6 @@ public class Connection extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		User user_connexion = user.findUser(email, password);
