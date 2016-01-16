@@ -1,4 +1,4 @@
-package Servlet;
+package chat;
 
 import javax.json.Json;
 import javax.websocket.EncodeException;

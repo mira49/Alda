@@ -29,6 +29,5 @@ public class UserList extends HttpServlet {
 		request.setAttribute("users", users);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-
 	}
 }

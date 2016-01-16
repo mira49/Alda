@@ -1,4 +1,4 @@
-package Servlet;
+package chat;
 
 import java.io.StringReader;
 import java.util.Date;
