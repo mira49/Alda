@@ -15,7 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -78,9 +80,16 @@ public class User  implements Serializable{
   @Column(length = 50, nullable = true)
   private Date date_deconnection;
   
+  public User(){}
+  
+  public User(String email, String password){
+	  this.email = email;
+	  this.password = password;
+  }
+  
   public Date getDate_connexion() {
 	return date_connexion;
-}
+  }
 
 public void setDate_connexion(Date date_connexion) {
 	this.date_connexion = date_connexion;
@@ -96,8 +105,31 @@ public void setDate_deconnection(Date date_deconnection) {
 
 @OneToMany(mappedBy="user", cascade = { CascadeType.ALL})
 	List<Annonces> announcements;
-  
-  public String getFactor() {
+ 
+@ManyToMany(mappedBy="favorites")
+List<Annonces> favorite_user;
+
+  public List<Annonces> getFavorite_user() {
+	return favorite_user;
+}
+
+@OneToMany(mappedBy="user", cascade = { CascadeType.ALL})
+List <Messages> messages;
+
+
+public void setFavorite_user(List<Annonces> favorite_user) {
+	this.favorite_user = favorite_user;
+}
+
+public List<Annonces> getAnnouncements() {
+	return announcements;
+}
+
+public void setAnnouncements(List<Annonces> announcements) {
+	this.announcements = announcements;
+}
+
+public String getFactor() {
 	return factor;
 }
 
@@ -105,19 +137,6 @@ public void setFactor(String factor) {
 	this.factor = factor;
 }
 
-public User(){}
-  
-  /*public User(int i, String name,String firstName,String email ,String password,String adress,String phone){
-	  this.id = (long) i;
-	  this.name = name;
-	  this.firstName = firstName;
-	  this.email = email;
-	  this.password = password;
-	  this.address = adress;
-	  this.phone = phone;
-	  
-  }*/
-  
   public Long getId() {
     return id;
   }

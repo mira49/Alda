@@ -21,8 +21,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import DAO.FormValidationException;
 import DAO.UserDAO;
 import Entities.User;
@@ -63,12 +61,12 @@ public class Forgetting extends HttpServlet {
 				user2.setPassword(password);
 				userDao.UpdatePassword(user1, user2);
 				postMail(email, password);
-				resultat = "Succès.";
+				resultat = "Succï¿½s.";
 			} else {
-				resultat = "échec de la regénération.";
+				resultat = "ï¿½chec de la regï¿½nï¿½ration.";
 			}
 		} catch (DAO.DAOException e) {
-			resultat = "échec de la regénération : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+			resultat = "ï¿½chec de la regï¿½nï¿½ration : une erreur imprï¿½vue est survenue, merci de rï¿½essayer dans quelques instants.";
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -76,7 +74,7 @@ public class Forgetting extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		if ("Succès.".equals(resultat)) {
+		if ("Succï¿½s.".equals(resultat)) {
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
 		} else {
 			/* Stockage du formulaire et du bean dans l'objet request */
@@ -131,13 +129,13 @@ public class Forgetting extends HttpServlet {
 			throw new Exception("Impossible de charger le fichier properties " + FICHIER, e);
 		}
 
-		String subject = "Votre demande de code d'accès a été acceptée.";
+		String subject = "Votre demande de code d'accï¿½s a ï¿½tï¿½ acceptï¿½e.";
 		String msg = "Bonjour, \n"
-				+ "Voici le code confidentiels qui vous permettera d'accéder, dès à présent, à votre espace adhérents : \n"
+				+ "Voici le code confidentiels qui vous permettera d'accï¿½der, dï¿½s ï¿½ prï¿½sent, ï¿½ votre espace adhï¿½rents : \n"
 				+ "Mot de passe :" + password + "\n"
-				+ "Nous vous conseillons de conserver ce code, ils vous sera demandé à chaque visite sur votre espace sécurisé. \n"
-				+ "Important : lorsque vous saisissez vos codes, attention de bien respecter les majuscules/minuscules et de ne pas laisser d'espace avant/après après le mot de passe. \n"
-				+ "A bientôt ";
+				+ "Nous vous conseillons de conserver ce code, ils vous sera demandï¿½ ï¿½ chaque visite sur votre espace sï¿½curisï¿½. \n"
+				+ "Important : lorsque vous saisissez vos codes, attention de bien respecter les majuscules/minuscules et de ne pas laisser d'espace avant/aprï¿½s aprï¿½s le mot de passe. \n"
+				+ "A bientï¿½t ";
 
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "smtp");

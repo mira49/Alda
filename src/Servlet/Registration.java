@@ -47,21 +47,20 @@ public class Registration extends HttpServlet {
 			traitePassword(password, confirmation, user);
 
 			if (erreurs.isEmpty()) {
-				resultat = "Succès de l'inscription.";
+				resultat = "Succï¿½s de l'inscription.";
 
 			} else {
-				resultat = "échec de l'inscription.";
+				resultat = "ï¿½chec de l'inscription.";
 
 			}
 		} catch (DAO.DAOException e) {
-			resultat = "échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+			resultat = "ï¿½chec de l'inscription : une erreur imprï¿½vue est survenue, merci de rï¿½essayer dans quelques instants.";
 			e.printStackTrace();
 		}
 
-		if ("Succès de l'inscription.".equals(resultat)) {
+		if ("Succï¿½s de l'inscription.".equals(resultat)) {
 			String factor = " ; ; ";
 			user.setFactor(factor);
-			user.setName("");
 			userDAO.create(user);
 
 			this.getServletContext().getRequestDispatcher(VUESucess).forward(request, response);
@@ -108,6 +107,8 @@ public class Registration extends HttpServlet {
 	public void validationMotsDePasse(String motDePasse, String confirmation) throws FormValidationException {
 		if (motDePasse != null && confirmation != null) {
 			if (!(motDePasse.equals(confirmation))) {
+				System.out.println(motDePasse);
+				System.out.println(confirmation);
 				throw new FormValidationException("Entered passwords are different.");
 			} else if (motDePasse.length() < 7) {
 				throw new FormValidationException("Too less password .");

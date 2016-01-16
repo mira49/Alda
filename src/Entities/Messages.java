@@ -1,5 +1,7 @@
 package Entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,11 +17,11 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name="Messages.getAllByUser",
-                query="SELECT u FROM Messages u WHERE u.receiver_message = :email"),
+                query="SELECT u FROM Messages u WHERE u.user.email = :email"),
     @NamedQuery(name="Messages.CountSoldAnnouncement",
-    query="SELECT count(u.id) FROM Messages u WHERE u.receiver_message = :email AND u.notification = 1"),
+    query="SELECT count(u.id) FROM Messages u WHERE u.user.email = :email AND u.notification = 1"),
 })
-public class Messages {
+public class Messages implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +35,22 @@ public class Messages {
 	@Column(length = 90, nullable = false)
 	private String sender_message;
 	
-	@Basic
-	@Column(length = 90, nullable = false)
-	private String receiver_message;
+	@ManyToOne
+	private User user;
 	
 	@Basic
 	@Column(length = 1, nullable = true)
 	private int notification;
+	
+	
+	public Messages(String message, String sender_message, User user, int notif){
+		this.message = message;
+		this.sender_message = sender_message;
+		this.user = user;
+		this.notification = notif;
+	}
+	
+	public Messages(){}
 	
 	public int getNotification() {
 		return notification;
@@ -73,13 +84,13 @@ public class Messages {
 		this.sender_message = sender_message;
 	}
 
-
-	public String getReceiver_message() {
-		return receiver_message;
+	public User getUser() {
+		return user;
 	}
 
-	public void setReceiver_message(String receiver_message) {
-		this.receiver_message = receiver_message;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
 	
 }

@@ -37,7 +37,6 @@ public class contact extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
 
 		if (request.getParameter("view") != null){
 			Annonces annonce = dao.findById(request.getParameter("view"));

@@ -81,13 +81,13 @@
 											test="${annoucement.user.email != sessionScope.user.email}">
 											<c:if test="${liste[status.index] == false}">
 												<td><input type="image" name="favorite"
-													value="${sessionScope.user.email};${annoucement.id}"
+													value="${annoucement.id}"
 													src="<c:url value="/inc/add.jpg"/>" alt="Add" /></td>
 											</c:if>
 
 											<c:if test="${liste[status.index] == true}">
 												<td><input type="image" name="favoriteRemove"
-													value="${sessionScope.user.email};${annoucement.id}"
+													value="${annoucement.id}"
 													src="<c:url value="/inc/remove.jpg"/>" alt="Remove" /></td>
 											</c:if>
 									</form>
@@ -168,13 +168,13 @@
 										test="${annoucement.user.email != sessionScope.user.email}">
 										<c:if test="${liste2[status.index] == false}">
 											<td><input type="image" name="favorite"
-												value="${sessionScope.user.email};${annoucement.id}"
+												value="${annoucement.id}"
 												src="<c:url value="/inc/add.jpg"/>" alt="Add" /></td>
 										</c:if>
 
 										<c:if test="${liste2[status.index] == true}">
 											<td><input type="image" name="favoriteRemove"
-												value="${sessionScope.user.email};${annoucement.id}"
+												value="${annoucement.id}"
 												src="<c:url value="/inc/remove.jpg"/>" alt="Remove" /></td>
 										</c:if>
 								</form>

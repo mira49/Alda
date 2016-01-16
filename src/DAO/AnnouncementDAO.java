@@ -1,5 +1,6 @@
 package DAO;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang.StringUtils;
 
 import Entities.Annonces;
 import Entities.User;
@@ -100,80 +107,84 @@ public class AnnouncementDAO {
 			annonce = (Annonces) em.createNamedQuery("Annonces.findByID").setParameter("id", id).getSingleResult();
 		} catch (Exception e) {
 		}
+		
+		return annonce;
+	}
+	
+	public Annonces findFavorites(String annonce_id) {
+		Long id = Long.parseLong(annonce_id);
+		Annonces annonce = new Annonces();
+		try {
+			annonce = (Annonces) em.createNamedQuery("Annonces.findFavorite").setParameter("id", id).getSingleResult();
+		} catch (Exception e) {
+		}
 		return annonce;
 	}
 
 	public Annonces setAnnounceSold(String parameter) {
 
 		Annonces annonce = em.find(Annonces.class, parameter);
-
 		annonce.setSold(1);
-
 		return annonce;
-
 	}
 
-	public void addToFavoriteList(String parameter) {
-
-		String factor[] = new String[2];
-		factor = parameter.split(";");
-
-		Annonces annonce = findById(factor[1]);
-		String fav = annonce.getFavorite();
-		if (fav != null) {
-			annonce.setFavorite(fav + factor[0] + ";");
-		} else {
-			annonce.setFavorite(factor[0] + ";");
-		}
+	public void addToFavoriteList(String id, User user) {
+		
+		List <User> tmp ;
+		Annonces annonce = findById(id);
+		tmp = annonce.getFavorites();
+		tmp.add(user);
+		annonce.setFavorites(tmp);
 	}
 
-	public Boolean findFavorite(String parameter) {
-
-		String factor[] = new String[2];
-		factor = parameter.split(";");
+	public Boolean findFavorite(User user, String id) {
 		Boolean res = false;
-		Annonces annonce = findById(factor[1]);
-		String factor2[];
-		if (annonce.getFavorite() != null) {
-			factor2 = annonce.getFavorite().split(";");
-			for (String fact : factor2) {
-				if (fact.equals(factor[0]))
+		Annonces annonce = findById(id);
+		List <User> users;
+		if (annonce.getFavorites() != null) {
+			users = annonce.getFavorites();
+			for (User user_favorites : users) {
+				if (user_favorites.getEmail().equals(user.getEmail()))
 					res = true;
 			}
 		}
 		return res;
 	}
+	
 
-	public void removeToFavoriteList(String parameter) {
+	public List<User> findFavorite(Long id) {
+		Annonces annonce = em.find(Annonces.class, id);
+		return annonce.getFavorites();
+	}
 
-		String factor[] = new String[2];
-		factor = parameter.split(";");
-		String newfavortie = "";
-		Annonces annonce = findById(factor[1]);
-		System.out.println(annonce.getName());
-		String factor2[];
-		if (annonce.getFavorite() != null) {
-			factor2 = annonce.getFavorite().split(";");
-			for (String fact : factor2) {
-
-				if (!fact.equals(factor[0])) {
-					newfavortie += fact + ";";
-
-				}
+	public void removeToFavoriteList(String id, User user) {
+		Annonces annonce = findById(id);
+		List <User> list = new ArrayList<>();
+		for (User u : annonce.getFavorites()){
+			if (!u.getEmail().equals(user.getEmail())){
+				list.add(u);
 			}
 		}
-		annonce.setFavorite(newfavortie);
+		
+		annonce.setFavorites(list);
 	}
 
 	public List<Annonces> findAllByFavorite(User user) {
 
 		List<Annonces> announces = null;
+		
 		try {
 			announces = (List<Annonces>) em.createNamedQuery("Annonces.findAllByFavorite")
-					.setParameter("email", "%" + user.getEmail() + "%").getResultList();
+					.setParameter("id", user.getId()).getResultList();
 		} catch (Exception e) {
 		}
 		return announces;
+	}
+
+
+	public void resetFavorite(Long id) {
+		Annonces reset = em.find(Annonces.class, id);
+		reset.setFavorites(null);
 	}
 
 }

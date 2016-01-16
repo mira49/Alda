@@ -2,8 +2,6 @@ package Servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +23,6 @@ public class UserList extends HttpServlet {
 	UserDAO userDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 
 		List<User> users = userDao.getUsers();
 

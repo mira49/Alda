@@ -7,13 +7,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import DAO.AnnouncementDAO;
-import DAO.UserDAO;
 import Entities.Annonces;
 import Entities.User;
 
@@ -22,25 +18,14 @@ public class Announcement extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/User_announcement.jsp";
 
-	@EJB
-	private AnnouncementDAO dao;
-	@EJB
-	private UserDAO user_dao;
-
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
-		String select_option = request.getParameter("select_option");
-		String sql_request = null;
-		String sql_request2 = null;
-
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
+		
+		List<Annonces> announcement = getAnnoncesList(sql_create_query(user) + " ");
+		List<Annonces> announcement2 = getAnnoncesList("SELECT u FROM Annonces u where u.sold = 0");
 
-		List<Annonces> announcement = new ArrayList<>();
-		List<Annonces> announcement2 = new ArrayList<>();
-
-		sql_request = sql_create_query(user) + " ";
 		String factor[] = new String[3];
 
 		if (user_dao.findFactorBeta(user).equals(" ; ; ")) {
@@ -50,25 +35,9 @@ public class Announcement extends AbstactQueryClass {
 		}
 		request.setAttribute("factor", factor);
 
-		sql_request2 = "SELECT u FROM Annonces u where u.sold = 0";
+		List<Boolean> liste = getBooleanList(announcement, user);
+		List<Boolean> liste2 = getBooleanList(announcement2, user);
 
-		List<Boolean> liste = new ArrayList<>();
-		List<Boolean> liste2 = new ArrayList<>();
-
-		announcement = dao.findByFactor(sql_request);
-		announcement2 = dao.findByFactor(sql_request2);
-
-		for (Annonces annonce : announcement) {
-			String parameter;
-			parameter = user.getEmail() + ";" + annonce.getId();
-			liste.add(dao.findFavorite(parameter));
-		}
-
-		for (Annonces annonce : announcement2) {
-			String parameter;
-			parameter = user.getEmail() + ";" + annonce.getId();
-			liste2.add(dao.findFavorite(parameter));
-		}
 		request.setAttribute("liste", liste);
 		request.setAttribute("liste2", liste2);
 
@@ -83,8 +52,7 @@ public class Announcement extends AbstactQueryClass {
 
 		HttpSession session = request.getSession();
 		String select_option = request.getParameter("select_option");
-		List<Annonces> announcement = new ArrayList<>();
-		List<Annonces> announcement2 = new ArrayList<>();
+	
 
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
 		User user_tmp = new User();
@@ -103,13 +71,11 @@ public class Announcement extends AbstactQueryClass {
 		}
 
 		if (request.getParameter("favorite") != null) {
-			dao.addToFavoriteList(request.getParameter("favorite"));
+			dao.addToFavoriteList(request.getParameter("favorite"), user);
 		}
 
 		if (request.getParameter("favoriteRemove") != null) {
-
-			dao.removeToFavoriteList(request.getParameter("favoriteRemove"));
-
+			dao.removeToFavoriteList(request.getParameter("favoriteRemove"), user);
 		}
 
 		String sql_request2 = "SELECT u FROM Annonces u where u.sold = 0";
@@ -124,36 +90,29 @@ public class Announcement extends AbstactQueryClass {
 			}
 		}
 
-		announcement = dao.findByFactor(sql_request);
+		List<Annonces> announcement = getAnnoncesList(sql_request);
+		List<Annonces> announcement2 = getAnnoncesList(sql_request2);
+		
+		
 		if (user_dao.findFactorBeta(user).equals(" ; ; ")) {
 			factor = null;
 		} else {
 			factor = user_dao.findFactor(user);
 		}
-		List<Boolean> liste = new ArrayList<>();
-		List<Boolean> liste2 = new ArrayList<>();
-
-		for (Annonces annonce : announcement) {
-			String parameter;
-			parameter = user.getEmail() + ";" + annonce.getId();
-			liste.add(dao.findFavorite(parameter));
-		}
-
-		announcement2 = dao.findByFactor(sql_request2);
-		for (Annonces annonce2 : announcement2) {
-			String parameter;
-			parameter = user.getEmail() + ";" + annonce2.getId();
-			liste2.add(dao.findFavorite(parameter));
-		}
+		
+		
+		List<Boolean> liste = getBooleanList(announcement, user);
+		List<Boolean> liste2 = getBooleanList(announcement2, user);
+		
 		request.setAttribute("liste", liste);
 		request.setAttribute("liste2", liste2);
 		request.setAttribute("factor", factor);
+		
 		request.setAttribute("annoucement_user_factor", announcement);
-
 		request.setAttribute("annoucement_user", announcement2);
+		
 		session.setAttribute("user", user);
 
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-
 	}
 }

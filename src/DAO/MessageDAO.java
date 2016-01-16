@@ -21,12 +21,7 @@ public class MessageDAO {
 	private EntityManager em;
 
 	public void create(User user, String message, Annonces attribute) {
-
-		Messages msg = new Messages();
-		msg.setMessage(message);
-		msg.setReceiver_message((attribute.getUser().getEmail()));
-		msg.setSender_message(user.getName());
-
+		Messages msg = new Messages(message, user.getName() + user.getFirstName(),attribute.getUser(),0);
 		em.merge(msg);
 	}
 
@@ -60,7 +55,6 @@ public class MessageDAO {
 
 	public void update(Messages message) {
 
-		System.out.println(" l'ID du message est" + message.getId());
 		Messages mess = em.find(Messages.class, message.getId());
 		mess.setNotification(0);
 		em.persist(mess);

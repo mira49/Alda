@@ -68,7 +68,7 @@ public class MyAnnouncements extends HttpServlet {
 		}
 
 		if (request.getParameter("sold") != null) {
-			sendMessages(dao.setAnnounceSold(request.getParameter("sold")));
+			sendMessages(dao.setAnnounceSold(request.getParameter("sold")), user);
 		}
 		
 		annoucements = dao.getAnnoucement_user(user);
@@ -96,18 +96,13 @@ public class MyAnnouncements extends HttpServlet {
 		}
 	}
 
-	public void sendMessages(Annonces annonce) {
-
-		String[] favorites = annonce.getFavorite().split(";");
-		for (String f : favorites) {
-			if (!(StringUtils.isBlank(f))) {
-				Messages m = new Messages();
-				m.setMessage("L'annonce de " + annonce.getUser().getName() + ": " + annonce.getName() + " � �t� vendu");
-				m.setReceiver_message(f);
-				m.setSender_message("No reply");
-				m.setNotification(1);
+	public void sendMessages(Annonces annonce, User utmp) {
+		
+		List <User> tmp = dao.findFavorite(annonce.getId());
+			for (User u : tmp) {
+				Messages m = new Messages("L'annonce de " + utmp.getName() + " " +utmp.getFirstName() +": " + annonce.getName() + " est vendu","No reply", u , 1);
 				message_dao.create(m);
-			}
 		}
+		dao.resetFavorite(annonce.getId());
 	}
 }

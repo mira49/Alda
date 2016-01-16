@@ -2,6 +2,7 @@ package Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,10 +34,13 @@ import javax.persistence.TemporalType;
     query="SELECT u FROM Annonces u where u.sold = 0"),
     @NamedQuery(name="Annonces.findByID",
     query="SELECT u FROM Annonces u where u.id = :id"),
+    @NamedQuery(name="Annonces.findFavorite",
+    query="SELECT u FROM Annonces u join  u.favorites t where u.id = :id"),
     @NamedQuery(name="Annonces.findAllByFavorite",
-    query="SELECT u FROM Annonces u where u.favorite LIKE :email "),
-}) 
+    query="SELECT u FROM Annonces u join u.favorites t where t.id = :id "),
+})
 public class Annonces  implements Serializable {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,19 +69,10 @@ public class Annonces  implements Serializable {
 	@Basic
 	@Column(length = 3000, nullable = true)
 	private String description;
-
-	@Basic
-	@Column(nullable = true)
-	private String favorite;
 	
-	public String getFavorite() {
-		return favorite;
-	}
-
-	public void setFavorite(String favorite) {
-		this.favorite = favorite;
-	}
-
+	@ManyToMany
+	private List<User> favorites;
+	
 	@Basic
 	@Column(length = 30, nullable = true)
 	private String town;
@@ -204,6 +201,14 @@ public class Annonces  implements Serializable {
 
 	public void setSold(int sold) {
 		this.sold = sold;
+	}
+	
+	public List<User> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<User> favorites) {
+		this.favorites = favorites;
 	}
 
 }

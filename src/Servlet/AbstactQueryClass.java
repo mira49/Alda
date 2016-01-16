@@ -1,8 +1,11 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.AccessTimeout;
+import javax.ejb.EJB;
 import javax.persistence.Access;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
-import Entities.User;
+import DAO.AnnouncementDAO;
+import DAO.UserDAO;
+import Entities.*;
 
 public abstract class AbstactQueryClass extends HttpServlet {
 
+	@EJB
+	protected AnnouncementDAO dao;
+	@EJB
+	protected UserDAO user_dao;
+	
 	public abstract void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException;
 
@@ -24,46 +34,27 @@ public abstract class AbstactQueryClass extends HttpServlet {
 	public String sql_create_query(User user) {
 
 		String factor_user = user.getFactor();
-		String sql = "SELECT u FROM Annonces u where u.sold = 0";
 		String factor[] = new String[3];
 		factor = factor_user.split(";");
-
-		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price >=" + factor[0] + " AND u.sold = 0";
+		String sql ="SELECT u FROM Annonces u where ";
+		
+		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1]))){
+			sql += "u.price between " + factor[0] + " AND " + factor[1] + "AND ";
 		}
-
-		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1])) && (StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price <=" + factor[1] + " AND u.sold = 0";
+		else{
+			if (!(StringUtils.isBlank(factor[0]))){
+				sql += "u.price >=" + factor[0] + " AND ";
+			}
+			if (!(StringUtils.isBlank(factor[1]))){
+				sql += "u.price <=" + factor[1] + " AND ";
+			}
 		}
-
-		if ((StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1])) && !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.postal_code =" + factor[2] + " AND u.sold = 0";
+		
+		if (!(StringUtils.isBlank(factor[2]))){
+			sql += "u.postal_code =" + factor[2] + " AND ";
 		}
-
-		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1]))
-				&& (StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price between " + factor[0] + " AND " + factor[1]
-					+ " AND u.sold = 0";
-		}
-
-		if (!(StringUtils.isBlank(factor[0])) && (StringUtils.isBlank(factor[1]))
-				&& !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price >=" + factor[0] + " AND u.postal_code =" + factor[2]
-					+ " AND u.sold = 0";
-		}
-
-		if ((StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1]))
-				&& !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price <=" + factor[1] + " AND u.postal_code =" + factor[2]
-					+ " AND u.sold = 0";
-		}
-
-		if (!(StringUtils.isBlank(factor[0])) && !(StringUtils.isBlank(factor[1]))
-				&& !(StringUtils.isBlank(factor[2]))) {
-			sql = "SELECT u FROM Annonces u where u.price between " + factor[0] + " AND " + factor[1]
-					+ " AND u.postal_code =" + factor[2] + " AND u.sold = 0";
-		}
-
+		
+		sql += " u.sold = 0 ";
 		return sql;
 
 	}
@@ -97,6 +88,21 @@ public abstract class AbstactQueryClass extends HttpServlet {
 		}
 
 		return sql;
+	}
+	
+	public List <Annonces> getAnnoncesList(String request){
+		List<Annonces> list = new ArrayList<>();
+		list = dao.findByFactor(request);
+		return list;
+	}
+	
+	public List <Boolean> getBooleanList(List <Annonces> annonces_tmp, User user){
+		
+		List<Boolean> bool =  new ArrayList<>() ;
+		for (Annonces annonce : annonces_tmp) {
+			bool.add(dao.findFavorite(user, annonce.getId().toString()));
+		}
+		return bool;
 	}
 
 }

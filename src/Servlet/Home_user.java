@@ -1,9 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +34,7 @@ public class Home_user extends HttpServlet {
 	private AnnouncementDAO announceDAO;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération de la session depuis la requête */
+		/* Rï¿½cupï¿½ration de la session depuis la requï¿½te */
 		HttpSession session = request.getSession();
 
 		User user_temp = user_dao.findByUser((User) session.getAttribute("user"));

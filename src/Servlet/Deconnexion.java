@@ -21,7 +21,7 @@ public class Deconnexion extends HttpServlet {
 	UserDAO user_dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération et destruction de la session en cours */
+		/* Rï¿½cupï¿½ration et destruction de la session en cours */
 		HttpSession session = request.getSession();
 		updateDeconnexion((User) session.getAttribute("user"));
 		session.invalidate();
@@ -31,8 +31,6 @@ public class Deconnexion extends HttpServlet {
 	}
 
 	public void updateDeconnexion(User user) {
-		String format = "dd/MM/yy H:mm:ss";
-		java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 		java.util.Date dt = new java.util.Date();
 		user_dao.updateDateDeco(user, dt);
 	}
