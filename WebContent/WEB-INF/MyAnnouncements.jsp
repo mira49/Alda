@@ -71,6 +71,7 @@
 								<c:if test="${annoucement.sold=='1'}">
 									<td>vendu</td>
 								</c:if>
+								
 							</tr>
 						</c:forEach>
 					</form>

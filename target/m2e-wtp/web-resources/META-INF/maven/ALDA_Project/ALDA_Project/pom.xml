@@ -97,6 +97,11 @@
 		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>6.0</version>
 			<scope>provided</scope>
@@ -106,6 +111,7 @@
 			<artifactId>javax.json</artifactId>
 			<version>1.0.4</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.openjpa</groupId>
 			<artifactId>openjpa</artifactId>
@@ -147,10 +153,22 @@
 			<version>1.1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <version>4.12</version>
+		  <scope>test</scope>
 		</dependency>
+		<dependency>
+		 <groupId>org.mockito</groupId>
+		<artifactId>mockito-all</artifactId>
+		<version>1.9.5</version>
+		<scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.openejb</groupId>
+		  <artifactId>openejb-core</artifactId>
+		  <version>4.0.0</version>
+		</dependency>		
 	</dependencies>
 
 	<pluginRepositories>
