@@ -1,4 +1,4 @@
-package tests;
+package unit_tests;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -12,6 +12,8 @@ import javax.ejb.EJB;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import static org.junit.Assert.*;
 
@@ -33,6 +35,9 @@ public class UserDAOTest extends TestCase {
         System.out.println("Closing the container" );
     }
     
+    @PersistenceContext
+	EntityManager em;
+    
     
 	private UserDAO user_dao;
 	
@@ -48,11 +53,11 @@ public class UserDAOTest extends TestCase {
 		
 		User user_tmp = user_dao.findByUser(user);
 		
-		assertTrue(user_tmp == user);
+		assertTrue("Error in user create" , user_tmp == user);
 
 	}
 
-	
+	 @Test
 	public void testDelete() {
 		User user = new User("test@gmail.com", "blalbla123");
 		User user_to_delete = user_dao.findByUser(user);
@@ -60,21 +65,34 @@ public class UserDAOTest extends TestCase {
 		
 		User user_response = user_dao.findByUser(user);
 		
-		assertTrue(user_to_delete != user_response);
+		assertTrue("Error in user delete" , user_to_delete != user_response);
 	}
 
+	@Test
+	public void testFind(){
+		
+		User user_test = new User("guillaume@gmail.com", "test");
+		user_dao.create(user_test);
+		
+		User check = user_dao.find(user_test.getEmail());
+		
+		assertTrue("Error in user find" , check.equals(user_test));
+	}
 	
+	
+	 @Test
 	public void testFindUser() {
 		User user = new User("test@gmail.com", "blalbla123");
 		user_dao.create(user);
 		
 		User user_rep = user_dao.findByUser(user);
 		
-		assertTrue(user_rep != null);
+		assertTrue( "Error in user FindUser" , user_rep != null);
 		
 	}
 
-	
+	 
+	 @Test
 	public void testUpdate_or_insert() {
 		
 		User user_to_update = new User("test2255@gmail.com", "blalbl141a123");
@@ -87,15 +105,15 @@ public class UserDAOTest extends TestCase {
 		user_to_modify.setPhone("07 85 57 47 44");
 		
 		User check = user_dao.findByUser(user_to_update);
-		assertTrue(check.getFirstName().equals("coucou"));
-		assertTrue(check.getName().equals("hello"));
-		assertTrue(check.getAddress().equals("34 rue des fleurs"));
-		assertTrue(check.getPhone().equals("07 85 57 47 44"));
+		assertTrue("Error in user update_or_insert" , check.getFirstName().equals("coucou"));
+		assertTrue("Error in user update_or_insert" ,check.getName().equals("hello"));
+		assertTrue("Error in user update_or_insert" ,check.getAddress().equals("34 rue des fleurs"));
+		assertTrue("Error in user update_or_insert" ,check.getPhone().equals("07 85 57 47 44"));
 	}
 
 
 
-	
+	 @Test
 	public void testUpdateFactor() {
 		
 		User user = user_dao.find("test2255@gmail.com");
@@ -103,10 +121,10 @@ public class UserDAOTest extends TestCase {
 		
 		User check = user_dao.find("test2255@gmail.com");
 		
-		assertTrue(check.getFactor().equals("coucou;coucou;coucou"));
+		assertTrue("Error in user updateFactor" ,check.getFactor().equals("coucou;coucou;coucou"));
 	}
 
-	
+	 @Test
 	public void testUpdatePassword() {
 		
 		User user_update = new User("test2255@gmail.com", "test1234");
@@ -114,26 +132,27 @@ public class UserDAOTest extends TestCase {
 		
 		user_dao.UpdatePassword(current, user_update);
 		
-		assertTrue(current.getPassword().equals("test1234"));
+		assertTrue("Error in user updatePassword" ,current.getPassword().equals("test1234"));
 	}
 
-	
+
+	 @Test
 	public void testUpdateDate() {
 		User current = user_dao.find("test2255@gmail.com");
 		java.util.Date dt = new java.util.Date();
 		user_dao.updateDate(current, dt);
 		
-		assertTrue(current.getDate_connexion().equals(dt));
+		assertTrue("Error in user updateDate" ,current.getDate_connexion().equals(dt));
 		
 	}
 
-	
+	 @Test
 	public void testUpdateDateDeco() {
 		User current = user_dao.find("test2255@gmail.com");
 		java.util.Date dt = new java.util.Date();
 		user_dao.updateDateDeco(current, dt);
 		
-		assertTrue(current.getDate_deconnection().equals(dt));
+		assertTrue("Error in user UpdateDateDeco" ,current.getDate_deconnection().equals(dt));
 	}
 
 }

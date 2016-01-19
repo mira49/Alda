@@ -1,4 +1,4 @@
-package tests;
+package unit_tests;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +30,7 @@ public class AdministratorDAOTest {
 		
 		Administrator check = em.find(Administrator.class, 0);
 		
-		assertTrue(check == admin);
+		assertTrue("Error in Administration create" ,check == admin);
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class AdministratorDAOTest {
 		
 		Administrator check = admin_dao.findAdministrator("root", "root");
 		
-		assertTrue(check.getPassword() == "root" && check.getPseudo() == "root");
+		assertTrue("Error in Administration findAdministrator" ,check.getPassword() == "root" && check.getPseudo() == "root");
 	}
 
 }

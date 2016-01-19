@@ -163,11 +163,6 @@
 		<artifactId>mockito-all</artifactId>
 		<version>1.9.5</version>
 		<scope>test</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.openejb</groupId>
-		  <artifactId>openejb-core</artifactId>
-		  <version>4.0.0</version>
 		</dependency>		
 	</dependencies>
 

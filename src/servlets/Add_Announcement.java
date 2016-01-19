@@ -153,7 +153,7 @@ public class Add_Announcement extends HttpServlet {
 					default:
 						break;
 					}
-					traiterImage(request, filename, nomFichier, contenuFichier, nomChamp);
+					//traiterImage(request, filename, nomFichier, contenuFichier, nomChamp);
 				}
 			}
 		} catch (FileUploadException e) {

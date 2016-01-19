@@ -64,7 +64,6 @@ public class AnnouncementDAO {
 			announcement = em.createNamedQuery("Annonces.findAll").getResultList();
 		} catch (Exception e) {
 		}
-
 		return announcement;
 	}
 

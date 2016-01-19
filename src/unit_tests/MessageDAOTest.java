@@ -1,4 +1,4 @@
-package tests;
+package unit_tests;
 
 import static org.junit.Assert.*;
 
@@ -36,8 +36,8 @@ public class MessageDAOTest {
 		msg_check1 = em.find(Messages.class, msg.getMessage());
 		msg_check2 = em.find(Messages.class, 2);
 		
-		assertTrue(msg_check1 == msg);
-		assertTrue(msg_check2 == msg);
+		assertTrue( "Error in Messages create" ,msg_check1 == msg);
+		assertTrue("Error in Messages create" ,msg_check2 == msg);
 		
 	}
 
@@ -46,7 +46,7 @@ public class MessageDAOTest {
 		
 		Long count = mess_test.findAnnouncementSold("test@gmail.com");
 		
-		assertTrue(count == 2);
+		assertTrue("Error in Messages FindAnnouncementSold" ,count == 2);
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class MessageDAOTest {
 		mess_test.update(msg);
 		
 		Messages msg_check = em.find(Messages.class, msg.getMessage());
-		assertTrue(msg_check.getNotification() == 0);
+		assertTrue("Error in Messages Update" ,msg_check.getNotification() == 0);
 	}
 
 }
