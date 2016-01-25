@@ -15,7 +15,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +40,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.AnnouncementDAO;
 import dao.FormValidationException;
+import dao.UserDAO;
 import entities.Annonces;
 import entities.User;
 import eu.medsea.mimeutil.MimeUtil;
@@ -79,10 +83,7 @@ public class Add_Announcement extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
 		Annonces annonce = new Annonces();
-		
-		
 		try {
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			for (FileItem item : items) {
@@ -116,15 +117,6 @@ public class Add_Announcement extends HttpServlet {
 					case "id":
 						annonce.setId(Long.parseLong(valeurChamp));
 						break;
-					case "image1":
-						annonce.setImage1(valeurChamp);
-						break;
-					case "image2":
-						annonce.setImage2(valeurChamp);
-						break;
-					case "image3":
-						annonce.setImage3(valeurChamp);
-						break;
 					default:
 						break;
 					}
@@ -134,47 +126,73 @@ public class Add_Announcement extends HttpServlet {
 					 * Traiter les champs de type fichier (input type="file").
 					 */
 					String nomChamp = item.getFieldName();
-					String nomFichier = FilenameUtils.getName(item.getName());
-					InputStream contenuFichier = item.getInputStream();
+					String nameFile = FilenameUtils.getName(item.getName());
 					
+					if(nameFile != null && !nameFile.isEmpty()){
+						nameFile = nameFile.substring(nameFile.lastIndexOf('/')+1).substring( nameFile.lastIndexOf('\\')+1);
+						if (nameFile.lastIndexOf(".") > 0) {
+						    String ext = nameFile.substring(nameFile.lastIndexOf("."));
+						    if (ext.equals(".png") || ext.equals(".jpeg") || ext.equals(".jpg")) {
+						    	InputStream file = item.getInputStream();
+						    	
+						    	switch (nomChamp) {
 
-					switch (nomChamp) {
+								case "picture3":
+									annonce.setImage3(nameFile);
+									break;
+								case "picture2":
+									annonce.setImage2(nameFile);
+									break;
+								case "picture1":
+									annonce.setImage1(nameFile);
+									break;
 
-					case "picture3":
-						annonce.setImage3(nomFichier);
-						break;
-					case "picture2":
-						annonce.setImage2(nomFichier);
-						break;
-					case "picture1":
-						annonce.setImage1(nomFichier);
-						break;
-
-					default:
-						break;
+								default:
+									break;
+								}
+						    	
+								writeFile(file,nameFile,filename);
+								
+								
+						    }else{
+						    	String error = "Unsupported format, the supported formats are .jpg and .png";
+								setErreur( nomChamp, error );
+								
+						    }
+						} else {
+							String error = "Unsupported format, the supported formats are .jpg and .png";
+							setErreur( nomChamp, error );
+							
+						}
 					}
-					//traiterImage(request, filename, nomFichier, contenuFichier, nomChamp);
+					
+					
+					
+					
 				}
 			}
 		} catch (FileUploadException e) {
-			throw new ServletException("�chec de l'analyse de la requ�te multipart.", e);
+			throw new ServletException("echec de l'analyse de la requete multipart.", e);
 		}
+		
 		try {
 
 			if (erreurs.isEmpty()) {
 
-				resultat = "Succ�s.";
+				resultat = "Succes.";
 
 			} else {
-				resultat = "�chec.";
+				resultat = "echec.";
 			}
 		} catch (dao.DAOException e) {
-			resultat = "�chec : une erreur impr�vue est survenue, merci de r�essayer dans quelques instants.";
+			resultat = "echec : une erreur impr�vue est survenue, merci de r�essayer dans quelques instants.";
 			e.printStackTrace();
 		}
-		if ("Succ�s.".equals(resultat)) {
+		if ("Succes.".equals(resultat)) {
 
+			
 			String format = "dd/MM/yy H:mm:ss";
+
 			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 			java.util.Date dt = new java.util.Date();
 
@@ -191,127 +209,39 @@ public class Add_Announcement extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 		}
-
-	}
-
-	private void traiterImage(HttpServletRequest request, String chemin, String nom, InputStream co, String nomChamp) {
 		
-
-		  String image = null; try { image = validationImage( request, chemin ,
-		  nom, co, nomChamp); } catch ( FormValidationException e ) {
-		  setErreur( nomChamp, e.getMessage() ); }
-		 
 	}
 
-	private String validationImage(HttpServletRequest request, String chemin, String nom, InputStream co,
-			String nomChamp) throws FormValidationException {
-		/*
-		 * R�cup�ration du contenu du champ image du formulaire. Il faut ici
-		 * utiliser la m�thode getPart().
-		 */
-		String nomFichier = nom;
-		InputStream contenuFichier = co;
+	
+	
+	private void writeFile( InputStream file, String nomFichier, String chemin ) throws IOException {
+		int SIZE_CACHE = 10240;
+		BufferedInputStream in = null;
+		BufferedOutputStream out = null;
+		System.out.println(chemin + nomFichier );
+
+		File f = new File( chemin + nomFichier );
 		try {
-			Part part = (Part) request.getPart(nomChamp);
-			/*
-			 * Si la m�thode getNomFichier() a renvoy� quelque chose, il s'agit
-			 * donc d'un champ de type fichier (input type="file").
-			 */
-			if (nomFichier != null && !nomFichier.isEmpty()) {
-				/*
-				 * Antibug pour Internet Explorer, qui transmet pour une raison
-				 * mystique le chemin du fichier local � la machine du client...
-				 * 
-				 * Ex : C:/dossier/sous-dossier/fichier.ext
-				 * 
-				 * On doit donc faire en sorte de ne s�lectionner que le nom et
-				 * l'extension du fichier, et de se d�barrasser du superflu.
-				 */
-				nomFichier = nomFichier.substring(nomFichier.lastIndexOf('/') + 1)
-						.substring(nomFichier.lastIndexOf('\\') + 1);
+			in = new BufferedInputStream( file, SIZE_CACHE );
+			out = new BufferedOutputStream( new FileOutputStream( f ),SIZE_CACHE );
 
-				MimeUtil.registerMimeDetector( "eu.medsea.mimeutil.detector.MagicMimeMimeDetector" );
-				//BufferedInputStream bufferedIs = new BufferedInputStream( contenuFichier );
-				Collection<?> mimeTypes = MimeUtil.getMimeTypes(contenuFichier );
-				 				 
-				if ( !mimeTypes.toString().startsWith( "image" )){
-						throw new FormValidationException("Le type du fichier doit être une IMAGE");
-				 } else 
-				 {
+			byte[] cache = new byte[SIZE_CACHE];
+			int size = in.read(cache);
 
-					ecrireFichier(contenuFichier, nomFichier, chemin);
-
-				}
+			while ( size > 0 ) {
+				out.write( cache, 0, size );
+				size = in.read(cache);
 			}
-		} catch (IllegalStateException e) {
-			/*
-			 * Exception retourn�e si la taille des donn�es d�passe les limites
-			 * d�finies dans la section <multipart-config> de la d�claration de
-			 * notre servlet d'upload dans le fichier web.xml
-			 */
-			e.printStackTrace();
-			throw new FormValidationException("Le fichier envoy� ne doit pas d�passer 1Mo.");
-		} catch (IOException e) {
-			/*
-			 * Exception retourn�e si une erreur au niveau des r�pertoires de
-			 * stockage survient (r�pertoire inexistant, droits d'acc�s
-			 * insuffisants, etc.)
-			 */
-			e.printStackTrace();
-			throw new FormValidationException("Erreur de configuration du serveur.");
-		} catch (ServletException e) {
-			/*
-			 * Exception retourn�e si la requ�te n'est pas de type
-			 * multipart/form-data.
-			 */
-			e.printStackTrace();
-			throw new FormValidationException(
-					"Ce type de requ�te n'est pas support�, merci d'utiliser le formulaire pr�vu pour envoyer votre fichier.");
-		}
 
-		System.out.println(nomFichier);
+			out.close();
+			in.close();
 
-		return nomFichier;
+		} catch ( IOException ignore ) {}
 	}
-
+	
+	
 	private void setErreur(String champ, String message) {
 		erreurs.put(champ, message);
 	}
-
 	
-	
-	private void ecrireFichier(InputStream contenuFichier, String nomFichier, String chemin)
-			throws FormValidationException {
-		
-		/* Pr�pare les flux. */
-		BufferedInputStream entree = null;
-		BufferedOutputStream sortie = null;
-		try {
-			/* Ouvre les flux. */
-			entree = new BufferedInputStream(contenuFichier, TAILLE_TAMPON);
-			sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)), TAILLE_TAMPON);
-
-			/*
-			 * Lit le fichier re�u et �crit son contenu dans un fichier sur le
-			 * disque.
-			 */
-			byte[] tampon = new byte[TAILLE_TAMPON];
-			int longueur = 0;
-			while ((longueur = entree.read(tampon)) > 0) {
-				sortie.write(tampon, 0, longueur);
-			}
-		} catch (Exception e) {
-			throw new FormValidationException("Erreur lors de l'�criture du fichier sur le disque.");
-		} finally {
-			try {
-				sortie.close();
-			} catch (IOException ignore) {
-			}
-			try {
-				entree.close();
-			} catch (IOException ignore) {
-			}
-		}
-	}
-
 }
