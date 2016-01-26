@@ -13,8 +13,8 @@ import ejb.AnnouncementDAO;
 import ejb.UserDAO;
 import entities.Annonces;
 
-@WebServlet("/homeBuyer")
-public class Home_buyer extends AbstactQueryClass {
+@WebServlet("/home_list")
+public class Home_people extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/homeSite.jsp";
 

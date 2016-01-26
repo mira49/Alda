@@ -21,7 +21,7 @@ import entities.Messages;
 import entities.User;
 
 @WebServlet("/messages_user")
-public class messages extends HttpServlet {
+public class UserMessages extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/Message.jsp";
 

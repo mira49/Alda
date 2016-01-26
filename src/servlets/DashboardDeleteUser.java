@@ -17,7 +17,7 @@ import entities.Annonces;
 import entities.User;
 
 @WebServlet("/dashboarddeleteUser")
-public class DeleteUser extends AbstactQueryClass {
+public class DashboardDeleteUser extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/ShowUsers.jsp";
 	public static final String VUE2 = "/WEB-INF/ShowAnnonce.jsp";

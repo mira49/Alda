@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -50,7 +52,8 @@ public class Connection extends HttpServlet {
 
 		if (user_connexion != null) {
 
-			java.util.Date dt = new java.util.Date();
+			Calendar calendar = Calendar.getInstance();
+			Date dt =  calendar.getTime();
 
 			user.updateDate(user_connexion, dt);
 

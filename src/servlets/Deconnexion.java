@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -32,7 +34,8 @@ public class Deconnexion extends HttpServlet {
 	}
 
 	public void updateDeconnexion(User user) {
-		java.util.Date dt = new java.util.Date();
+		Calendar calendar = Calendar.getInstance();
+		Date dt =  calendar.getTime();
 		user_dao.updateDateDeco(user, dt);
 	}
 }

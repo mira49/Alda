@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,12 +168,8 @@ public class Add_Announcement extends HttpServlet {
 			e.printStackTrace();
 		}
 		if ("Succes.".equals(resultat)) {
-
-			
-			String format = "dd/MM/yy H:mm:ss";
-
-			java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
-			java.util.Date dt = new java.util.Date();
+			Calendar calendar = Calendar.getInstance();
+			Date dt =  calendar.getTime();
 
 			annonce.setUser((User) session.getAttribute("user"));
 			annonce.setDate(dt);

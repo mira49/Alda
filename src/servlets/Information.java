@@ -20,7 +20,7 @@ import entities.Annonces;
 import entities.User;
 
 @WebServlet("/user_Informations")
-public class User_Informations extends HttpServlet {
+public class Information extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/User_Informations.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";

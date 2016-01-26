@@ -15,7 +15,7 @@ import ejb.UserItf;
 import entities.User;
 
 @WebServlet("/dashboarduserList")
-public class UserList extends HttpServlet {
+public class DashboardUserList extends HttpServlet {
 
 	public static final String VUE = "/WEB-INF/ShowUsers.jsp";
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";

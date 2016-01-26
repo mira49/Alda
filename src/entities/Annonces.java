@@ -52,9 +52,9 @@ public class Annonces  implements Serializable {
 	@Column(length = 30, nullable = false)
 	private String name;
 	
-	@Temporal(value = TemporalType.DATE)
+	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(length = 50, nullable = false)
-    private Date date;
+	private Date date;
 
 	@Basic
 	@Column(length = 30, nullable = false)
@@ -120,8 +120,8 @@ public class Annonces  implements Serializable {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date dt) {
+		this.date = dt;
 	}
 
 	public int getSurface() {

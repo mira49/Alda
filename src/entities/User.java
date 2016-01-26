@@ -71,12 +71,12 @@ public class User  implements Serializable{
   @Column(nullable=true)
   private String factor;
   
-  @Temporal(value = TemporalType.DATE)
-  @Column(length = 50, nullable = true)
+  @Temporal(value = TemporalType.TIMESTAMP)
+	@Column(length = 50, nullable = true)
   private Date date_connexion;
   
-  @Temporal(value = TemporalType.DATE)
-  @Column(length = 50, nullable = true)
+  @Temporal(value = TemporalType.TIMESTAMP)
+	@Column(length = 50, nullable = true)
   private Date date_deconnection;
   
   public User(){}

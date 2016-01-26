@@ -19,8 +19,11 @@ import entities.Annonces;
 import entities.User;
 
 @WebServlet("/dashboardannonceList")
-public class AnnonceList extends AbstactQueryClass {
+public class DashboardAnnounceList extends AbstactQueryClass {
 
+	/**
+	 * 
+	 */
 	public static final String VUE = "/WEB-INF/ShowAnnonce.jsp";
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
 

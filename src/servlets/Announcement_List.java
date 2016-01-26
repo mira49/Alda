@@ -15,7 +15,7 @@ import entities.Annonces;
 import entities.User;
 
 @WebServlet("/announcement")
-public class Announcement extends AbstactQueryClass {
+public class Announcement_List extends AbstactQueryClass {
 
 	public static final String VUE = "/WEB-INF/User_announcement.jsp";
 
