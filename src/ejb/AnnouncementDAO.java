@@ -1,26 +1,17 @@
-package dao;
+package ejb;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
-
-import org.apache.commons.lang.StringUtils;
 
 import entities.Annonces;
 import entities.User;
 
 @Stateless
-public class AnnouncementDAO {
+public class AnnouncementDAO implements AnnouncementItf{
 
 	@PersistenceContext(unitName = "persistenceUnit")
 	private EntityManager em;

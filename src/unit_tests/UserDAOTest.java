@@ -4,7 +4,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import dao.UserDAO;
+import ejb.UserDAO;
 import entities.User;
 import junit.framework.TestCase;
 

@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import dao.AdministratorDAO;
+import ejb.AdministratorDAO;
 import entities.Administrator;
 
 public class AdministratorDAOTest {

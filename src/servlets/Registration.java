@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.FormValidationException;
-import dao.UserDAO;
+import ejb.FormValidationException;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.User;
 
 @WebServlet("/registration")
@@ -25,7 +26,7 @@ public class Registration extends HttpServlet {
 	private Map<String, String> erreurs = new HashMap<String, String>();
 
 	@EJB
-	private UserDAO userDAO;
+	private UserItf userDAO;
 
 	private User user = new User();
 
@@ -53,7 +54,7 @@ public class Registration extends HttpServlet {
 				resultat = "�chec de l'inscription.";
 
 			}
-		} catch (dao.DAOException e) {
+		} catch (ejb.DAOException e) {
 			resultat = "�chec de l'inscription : une erreur impr�vue est survenue, merci de r�essayer dans quelques instants.";
 			e.printStackTrace();
 		}

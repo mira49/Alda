@@ -53,6 +53,7 @@
 								<td><c:out value="${annoucement.surface}" /></td>
 								<td><c:out value="${annoucement.postal_code}" /></td>
 								<td><c:out value="${annoucement.price}" /></td>
+								<td> <img alt="" height="50px" width="50px" src="<c:url value="${annoucement_user.image1}"/>"> </td>
 								<td><input type="image" name="view"
 									value="${annoucement.id}"
 									onclick="document.announcement_Form.submit();"

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnnouncementDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.AnnouncementItf;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.Annonces;
 import entities.User;
 
@@ -25,10 +27,10 @@ public class User_Informations extends HttpServlet {
 	public static final String VUEAfter = "/WEB-INF/Home_user.jsp";
 
 	@EJB
-	private UserDAO user_dao = new UserDAO();
+	private UserItf user_dao;
 
 	@EJB
-	private AnnouncementDAO dao;
+	private AnnouncementItf dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* R�cup�ration de la session depuis la requ�te */

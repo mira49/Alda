@@ -12,9 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import dao.AnnouncementDAO;
-import dao.MessageDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.AnnouncementItf;
+import ejb.MessageDAO;
+import ejb.MessageItf;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.Annonces;
 import entities.User;
 
@@ -25,13 +28,13 @@ public class Home_user extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 
 	@EJB
-	private MessageDAO dao;
+	private MessageItf dao;
 
 	@EJB
-	private UserDAO user_dao;
+	private UserItf user_dao;
 
 	@EJB
-	private AnnouncementDAO announceDAO;
+	private AnnouncementItf announceDAO;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* R�cup�ration de la session depuis la requ�te */

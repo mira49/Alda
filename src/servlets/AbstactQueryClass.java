@@ -3,27 +3,27 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.ejb.AccessTimeout;
 import javax.ejb.EJB;
-import javax.persistence.Access;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-
-import dao.AnnouncementDAO;
-import dao.UserDAO;
+import ejb.AnnouncementItf;
+import ejb.UserItf;
 import entities.*;
 
 public abstract class AbstactQueryClass extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@EJB
-	protected AnnouncementDAO dao;
+	protected AnnouncementItf dao;
 	@EJB
-	protected UserDAO user_dao;
+	protected UserItf user_dao;
 	
 	public abstract void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException;

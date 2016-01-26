@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnnouncementDAO;
+import ejb.AnnouncementDAO;
+import ejb.AnnouncementItf;
 import entities.Annonces;
 import entities.User;
 
@@ -21,7 +22,7 @@ public class Favorite extends HttpServlet {
 	public static final String VUE = "/WEB-INF/Favorite.jsp";
 
 	@EJB
-	AnnouncementDAO dao;
+	AnnouncementItf dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

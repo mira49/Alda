@@ -9,8 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AnnouncementDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.UserDAO;
 import entities.Annonces;
 
 @WebServlet("/homeBuyer")

@@ -22,8 +22,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.FormValidationException;
-import dao.UserDAO;
+import ejb.FormValidationException;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.User;
 
 @WebServlet("/forgetting")
@@ -38,7 +39,7 @@ public class Forgetting extends HttpServlet {
 	private Map<String, String> erreurs = new HashMap<String, String>();
 
 	@EJB
-	private UserDAO userDao;
+	private UserItf userDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -66,7 +67,7 @@ public class Forgetting extends HttpServlet {
 			} else {
 				resultat = "�chec de la reg�n�ration.";
 			}
-		} catch (dao.DAOException e) {
+		} catch (ejb.DAOException e) {
 			resultat = "�chec de la reg�n�ration : une erreur impr�vue est survenue, merci de r�essayer dans quelques instants.";
 			e.printStackTrace();
 		} catch (MessagingException e) {

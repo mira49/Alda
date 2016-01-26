@@ -1,13 +1,10 @@
-package dao;
+package ejb;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.jms.Message;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import entities.Annonces;
@@ -15,7 +12,7 @@ import entities.Messages;
 import entities.User;
 
 @Stateless
-public class MessageDAO {
+public class MessageDAO implements MessageItf {
 	@PersistenceContext(unitName = "persistenceUnit")
 	private EntityManager em;
 

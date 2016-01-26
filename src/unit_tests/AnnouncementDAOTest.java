@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import dao.AnnouncementDAO;
+import ejb.AnnouncementDAO;
 import entities.Annonces;
 import entities.User;
 

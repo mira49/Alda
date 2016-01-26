@@ -14,9 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import dao.AnnouncementDAO;
-import dao.MessageDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.AnnouncementItf;
+import ejb.MessageDAO;
+import ejb.MessageItf;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.Annonces;
 import entities.Messages;
 import entities.User;
@@ -30,13 +33,13 @@ public class MyAnnouncements extends HttpServlet {
 	private static final String VUE_VISU = "/WEB-INF/visualisation.jsp";
 
 	@EJB
-	private AnnouncementDAO dao;
+	private AnnouncementItf dao;
 
 	@EJB
-	private UserDAO user_dao;
+	private UserItf user_dao;
 
 	@EJB
-	private MessageDAO message_dao;
+	private MessageItf message_dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

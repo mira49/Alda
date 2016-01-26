@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.User;
 
 @WebServlet("/dashboarduserList")
@@ -20,7 +21,7 @@ public class UserList extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/ConnectionDashboard.jsp";
 
 	@EJB
-	UserDAO userDao;
+	UserItf userDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

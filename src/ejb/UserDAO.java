@@ -1,4 +1,4 @@
-package dao;
+package ejb;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import entities.User;
 
 @Stateless
-public class UserDAO {
+public class UserDAO implements UserItf {
 
 	@PersistenceContext(unitName = "persistenceUnit")
 	private EntityManager em;
@@ -86,7 +86,6 @@ public class UserDAO {
 	public String findFactorBeta(User user) {
 
 		User user_temp = new User();
-		String factor = "";
 
 		user_temp = em.find(User.class, user.getId());
 

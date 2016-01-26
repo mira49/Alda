@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MessageDAO;
-import dao.UserDAO;
+import ejb.MessageDAO;
+import ejb.MessageItf;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.Annonces;
 import entities.Messages;
 import entities.User;
@@ -24,10 +26,10 @@ public class messages extends HttpServlet {
 	public static final String VUE = "/WEB-INF/Message.jsp";
 
 	@EJB
-	MessageDAO mess_dao;
+	MessageItf mess_dao;
 
 	@EJB
-	UserDAO dao;
+	UserItf dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

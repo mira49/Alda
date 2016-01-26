@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnnouncementDAO;
-import dao.MessageDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.AnnouncementItf;
+import ejb.MessageDAO;
+import ejb.MessageItf;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.Annonces;
 import entities.User;
 
@@ -27,13 +30,13 @@ public class contact extends HttpServlet {
 
 
 	@EJB
-	AnnouncementDAO dao;
+	AnnouncementItf dao;
 
 	@EJB
-	UserDAO user_dao;
+	UserItf user_dao;
 
 	@EJB
-	MessageDAO msg;
+	MessageItf msg;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

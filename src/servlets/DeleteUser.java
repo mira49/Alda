@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnnouncementDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.UserDAO;
 import entities.Annonces;
 import entities.User;
 
@@ -55,8 +55,6 @@ public class DeleteUser extends AbstactQueryClass {
 				} else {
 					sql_request = "select * from Annonces";
 				}
-
-				System.out.println("sql_request:" + sql_request);
 				announcement = dao.findByFactor(sql_request);
 
 				session.setAttribute("annoucement_user", announcement);

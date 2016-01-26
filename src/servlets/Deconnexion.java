@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.User;
 
 @WebServlet("/deconnection")
@@ -18,7 +19,7 @@ public class Deconnexion extends HttpServlet {
 	public static final String VUE = "/WEB-INF/Connection.jsp";
 
 	@EJB
-	UserDAO user_dao;
+	UserItf user_dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* R�cup�ration et destruction de la session en cours */

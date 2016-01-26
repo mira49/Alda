@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AnnouncementDAO;
-import dao.MessageDAO;
-import dao.UserDAO;
+import ejb.AnnouncementDAO;
+import ejb.AnnouncementItf;
+import ejb.MessageDAO;
+import ejb.MessageItf;
+import ejb.UserDAO;
+import ejb.UserItf;
 import entities.Annonces;
 import entities.User;
 
@@ -25,13 +28,13 @@ public class Connection extends HttpServlet {
 	public static final String VUE = "/WEB-INF/Connection.jsp";
 
 	@EJB
-	UserDAO user;
+	UserItf user;
 
 	@EJB
-	AnnouncementDAO dao;
+	AnnouncementItf dao;
 
 	@EJB
-	MessageDAO message_dao;
+	MessageItf message_dao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

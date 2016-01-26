@@ -7,7 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.junit.Test;
-import dao.MessageDAO;
+
+import ejb.MessageDAO;
 import entities.Annonces;
 import entities.Messages;
 import entities.User;
