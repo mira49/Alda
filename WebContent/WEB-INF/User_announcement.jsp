@@ -109,9 +109,6 @@
 									</c:if>
 								</tr>
 							</c:forEach>
-
-
-
 						</table>
 				</c:otherwise>
 			</c:choose>
@@ -121,8 +118,6 @@
 
 
 	<div id="corpsDa">
-
-
 		<fieldset id="Field">
 			<legend>the latest announcements</legend>
 

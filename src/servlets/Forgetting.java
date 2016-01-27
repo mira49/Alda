@@ -114,17 +114,17 @@ public class Forgetting extends HttpServlet {
 	public void postMail(String to, String password) throws Exception {
 
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		InputStream fichierProperties = classLoader.getResourceAsStream(FICHIER);
+		InputStream fileProperties = classLoader.getResourceAsStream(FICHIER);
 		Properties properties = new Properties();
 		final String from;
 		final String passwordMail;
 
-		if (fichierProperties == null) {
+		if (fileProperties == null) {
 			throw new Exception("Le fichier properties " + FICHIER + " est introuvable.");
 		}
 
 		try {
-			properties.load(fichierProperties);
+			properties.load(fileProperties);
 			from = properties.getProperty("mail");
 			passwordMail = properties.getProperty("password");
 		} catch (IOException e) {

@@ -39,7 +39,6 @@ public class Add_Announcement extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 	private Map<String, String> erreurs = new HashMap<String, String>();
 	public static final String VUEAfter = "/WEB-INF/Home_user.jsp";
-	private static final int TAILLE_TAMPON = 10240;// 10ko
 	private String filename;
 	
 	@EJB
@@ -51,9 +50,7 @@ public class Add_Announcement extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* R�cup�ration de la session depuis la requ�te */
-		HttpSession session = request.getSession();
-
+		
 		/* Affichage de la page restreinte */
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 

@@ -36,15 +36,15 @@ public class ContactBuyer extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if (request.getParameter("view") != null){
-			Annonces annonce = dao.findById(request.getParameter("view"));
+			Annonces announce = dao.findById(request.getParameter("view"));
 			
-			request.setAttribute("current_annonce", annonce);
+			request.setAttribute("current_annonce", announce);
 			this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
 		}else{
-		String annonce = request.getParameter("contact");
-		Annonces annonces = dao.findById(annonce);
+		String annonce_contact = request.getParameter("contact");
+		Annonces current_annonces = dao.findById(annonce_contact);
 
-		request.setAttribute("current_announce", annonces);
+		request.setAttribute("current_announce", current_annonces);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
 	}
 	

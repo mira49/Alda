@@ -105,13 +105,13 @@ public class Registration extends HttpServlet {
 		}
 	}
 
-	public void validationMotsDePasse(String motDePasse, String confirmation) throws FormValidationException {
-		if (motDePasse != null && confirmation != null) {
-			if (!(motDePasse.equals(confirmation))) {
+	public void validationMotsDePasse(String password, String confirmation) throws FormValidationException {
+		if (password != null && confirmation != null) {
+			if (!(password.equals(confirmation))) {
 				throw new FormValidationException("Entered passwords are different.");
-			} else if (motDePasse.length() < 7) {
+			} else if (password.length() < 7) {
 				throw new FormValidationException("Too less password .");
-			} else if (motDePasse.length() > 20) {
+			} else if (password.length() > 20) {
 				throw new FormValidationException("Too long password .");
 			}
 		} else {

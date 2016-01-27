@@ -46,21 +46,21 @@ public class Contact extends HttpServlet {
 
 
 		if (request.getParameter("view") != null){
-			Annonces annonce = dao.findById(request.getParameter("view"));
+			Annonces announce = dao.findById(request.getParameter("view"));
 			
-			request.setAttribute("current_annonce", annonce);
+			request.setAttribute("current_annonce", announce);
 			this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
 		}else{
-			String annonce = request.getParameter("contact");
+			String announce_contact = request.getParameter("contact");
 		
-		Annonces annonces = dao.findById(annonce);
+		Annonces annonces = dao.findById(announce_contact);
 		String con = userConnection(annonces);
 		
 		if (con.equals("con")){
 			request.setAttribute("connexion", con);
 		}
 		
-		request.setAttribute("current_announce", annonces);
+		request.setAttribute("current_announce", announce_contact);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
 	}
 
@@ -69,9 +69,9 @@ public class Contact extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String messages = request.getParameter("Message");
-		Annonces annonce = dao.findById(request.getParameter("annonces"));
+		Annonces announce = dao.findById(request.getParameter("annonces"));
 		User user = user_dao.findByUser((User) session.getAttribute("user"));
-		msg.create(user, messages, annonce);
+		msg.create(user, messages, announce);
 
 		List<Annonces> annoucements = new ArrayList<>();
 		annoucements = dao.getAnnoucement_user(user);

@@ -36,11 +36,11 @@ public class Announcement_List extends AbstactQueryClass {
 		}
 		request.setAttribute("factor", factor);
 
-		List<Boolean> liste = getBooleanList(announcement, user);
-		List<Boolean> liste2 = getBooleanList(announcement2, user);
+		List<Boolean> list = getBooleanList(announcement, user);
+		List<Boolean> list2 = getBooleanList(announcement2, user);
 
-		request.setAttribute("liste", liste);
-		request.setAttribute("liste2", liste2);
+		request.setAttribute("liste", list);
+		request.setAttribute("liste2", list2);
 
 		request.setAttribute("annoucement_user_factor", announcement);
 		request.setAttribute("annoucement_user", announcement2);
@@ -102,11 +102,11 @@ public class Announcement_List extends AbstactQueryClass {
 		}
 		
 		
-		List<Boolean> liste = getBooleanList(announcement, user);
-		List<Boolean> liste2 = getBooleanList(announcement2, user);
+		List<Boolean> list = getBooleanList(announcement, user);
+		List<Boolean> list2 = getBooleanList(announcement2, user);
 		
-		request.setAttribute("liste", liste);
-		request.setAttribute("liste2", liste2);
+		request.setAttribute("liste", list);
+		request.setAttribute("liste2", list2);
 		request.setAttribute("factor", factor);
 		
 		request.setAttribute("annoucement_user_factor", announcement);
