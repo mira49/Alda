@@ -72,6 +72,7 @@ public class AnnouncementList extends AbstactQueryClass {
 		}
 
 		if (request.getParameter("favorite") != null) {
+			System.out.println("les favorites sont" + request.getParameter("favorite"));
 			dao.addToFavoriteList(request.getParameter("favorite"), user);
 		}
 

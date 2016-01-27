@@ -34,6 +34,7 @@ public class Deconnexion extends HttpServlet {
 	}
 
 	public void updateDeconnexion(User user) {
+		System.out.println("le user est" + user.getEmail());
 		Calendar calendar = Calendar.getInstance();
 		Date dt =  calendar.getTime();
 		user_dao.updateDateDeco(user, dt);

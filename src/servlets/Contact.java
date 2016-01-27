@@ -12,11 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejb.AnnouncementDAO;
 import ejb.AnnouncementItf;
-import ejb.MessageDAO;
 import ejb.MessageItf;
-import ejb.UserDAO;
 import ejb.UserItf;
 import entities.Annonces;
 import entities.User;
@@ -43,10 +40,11 @@ public class Contact extends HttpServlet {
 	MessageItf msg;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
 
 		if (request.getParameter("view") != null){
 			Annonces announce = dao.findById(request.getParameter("view"));
+			
 			
 			request.setAttribute("current_annonce", announce);
 			this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
@@ -60,7 +58,7 @@ public class Contact extends HttpServlet {
 			request.setAttribute("connexion", con);
 		}
 		
-		request.setAttribute("current_announce", announce_contact);
+		request.setAttribute("current_announce", annonces);
 		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);}
 	}
 
