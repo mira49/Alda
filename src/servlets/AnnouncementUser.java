@@ -90,8 +90,11 @@ public class AnnouncementUser extends HttpServlet {
 		}
 		else
 			if (request.getParameter("view") != null){
+				ServletContext context = request.getServletContext();
+				String path = context.getRealPath("/");
+				String filename = path+"WEB-INF\\images\\";
 				Annonces annonce = dao.findById(request.getParameter("view"));
-				
+				request.setAttribute("filename", filename);
 				request.setAttribute("current_annonce", annonce);
 				this.getServletContext().getRequestDispatcher(VUE_VISU).forward(request, response);
 			}

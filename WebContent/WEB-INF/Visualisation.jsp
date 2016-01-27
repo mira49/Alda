@@ -43,13 +43,13 @@
 					<textarea type="text" name="Description" disabled > ${current_annonce.description }  </textarea>
 			<br><br>
 					<label> Image 1 : </label>
-			            <a href="<c:url value=" WEB-INF/images/${ current_annonce.image1 }"/>">Show</a><br><br>
+			            <a href="<c:url value="${ filename }${ current_annonce.image1 }"/>">Show</a><br><br>
 			        <label> Image 2 : </label>                 
-			        	<a href="<c:url value=" WEB-INF/images/${ current_annonce.image2 }"/>">Show</a>
+			        	<a href="<c:url value=" ${ filename }${ current_annonce.image2 }"/>">Show</a>
 			<c:if test="${ !empty current_annonce.image3 }">
 					<br><br>
 			        <label> Image 3 : </label>                 
-			        	<a href="<c:url value="WEB-INF/images/${ current_annonce.image3 }"/>">Show</a>
+			        	<a href="<c:url value="${ filename }${ current_annonce.image3 }"/>">Show</a>
 					</c:if>
 					
 					</c:if>
