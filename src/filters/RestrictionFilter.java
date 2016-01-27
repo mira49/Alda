@@ -19,7 +19,7 @@ public class RestrictionFilter implements Filter {
 	    public static final String ATT_SESSION_USER = "user";
 		private static final String ACCES_Inscription = "/WEB-INF/Inscription.jsp";
 		private static final String ACCES_Home_buyer = "/WEB-INF/homeSite.jsp";
-		private static final String ACCES_contactB = "/WEB-INF/contactBuyer.jsp";
+		private static final String ACCES_contactB = "/WEB-INF/ContactBuyer.jsp";
 		private static final String ACCES_Oubli = "/WEB-INF/Forgetting.jsp";
 		private static final String ACCES_ConnectionDashboard = "/WEB-INF/ConnectionDashboard.jsp";
 		private static final String ATT_SESSION_admin = "admin";

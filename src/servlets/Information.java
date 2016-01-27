@@ -22,9 +22,9 @@ import entities.User;
 @WebServlet("/user_Informations")
 public class Information extends HttpServlet {
 
-	public static final String VUE = "/WEB-INF/User_Informations.jsp";
+	public static final String VUE = "/WEB-INF/UserInformation.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
-	public static final String VUEAfter = "/WEB-INF/Home_user.jsp";
+	public static final String VUEAfter = "/WEB-INF/HomeUser.jsp";
 
 	@EJB
 	private UserItf user_dao;

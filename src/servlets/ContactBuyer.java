@@ -20,9 +20,9 @@ import entities.Annonces;
 @WebServlet("/contactBuyer")
 public class ContactBuyer extends HttpServlet {
 
-	private static final String VUE_VISU = "/WEB-INF/visuBuyer.jsp";
+	private static final String VUE_VISU = "/WEB-INF/VisuBuyer.jsp";
 
-	public static final String VUE = "/WEB-INF/contactBuyer.jsp";
+	public static final String VUE = "/WEB-INF/ContactBuyer.jsp";
 
 	@EJB
 	AnnouncementItf dao;

@@ -26,7 +26,7 @@ import entities.User;
 @WebServlet("/connexion")
 public class Connection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String VUESucess = "/WEB-INF/Home_user.jsp";
+	public static final String VUESucess = "/WEB-INF/HomeUser.jsp";
 	public static final String VUE = "/WEB-INF/Connection.jsp";
 
 	@EJB

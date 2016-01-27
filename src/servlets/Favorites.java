@@ -17,9 +17,9 @@ import entities.Annonces;
 import entities.User;
 
 @WebServlet("/favorite")
-public class Favorite extends HttpServlet {
+public class Favorites extends HttpServlet {
 
-	public static final String VUE = "/WEB-INF/Favorite.jsp";
+	public static final String VUE = "/WEB-INF/Favorites.jsp";
 
 	@EJB
 	AnnouncementItf dao;

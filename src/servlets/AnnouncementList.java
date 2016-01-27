@@ -15,9 +15,9 @@ import entities.Annonces;
 import entities.User;
 
 @WebServlet("/announcement")
-public class Announcement_List extends AbstactQueryClass {
+public class AnnouncementList extends AbstactQueryClass {
 
-	public static final String VUE = "/WEB-INF/User_announcement.jsp";
+	public static final String VUE = "/WEB-INF/AnnouncementList.jsp";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

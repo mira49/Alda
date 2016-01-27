@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,12 +26,12 @@ import entities.Messages;
 import entities.User;
 
 @WebServlet("/myAnnouncements")
-public class MyAnnouncements extends HttpServlet {
+public class AnnouncementUser extends HttpServlet {
 
-	public static final String VUE = "/WEB-INF/MyAnnouncements.jsp";
-	public static final String VUE_Update = "/WEB-INF/Add_Announcement.jsp";
+	public static final String VUE = "/WEB-INF/AnnouncementUser.jsp";
+	public static final String VUE_Update = "/WEB-INF/AddAnnouncement.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
-	private static final String VUE_VISU = "/WEB-INF/visualisation.jsp";
+	private static final String VUE_VISU = "/WEB-INF/Visualisation.jsp";
 
 	@EJB
 	private AnnouncementItf dao;

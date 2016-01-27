@@ -28,9 +28,9 @@ public class Contact extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final String VUE = "/WEB-INF/contact.jsp";
-	public static final String VUE_retour = "/WEB-INF/Home_user.jsp";
-	private static final String VUE_VISU = "/WEB-INF/visualisation.jsp";
+	public static final String VUE = "/WEB-INF/ContactPeople.jsp";
+	public static final String VUE_retour = "/WEB-INF/HomeUser.jsp";
+	private static final String VUE_VISU = "/WEB-INF/Visualisation.jsp";
 
 
 	@EJB

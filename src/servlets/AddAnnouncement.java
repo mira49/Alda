@@ -33,12 +33,12 @@ import org.apache.commons.io.FilenameUtils;
 
 @WebServlet(name = "add_Announcement", urlPatterns = { "/add_Announcement" })
 @MultipartConfig
-public class Add_Announcement extends HttpServlet {
+public class AddAnnouncement extends HttpServlet {
 	private String resultat;
-	public static final String VUE = "/WEB-INF/Add_Announcement.jsp";
+	public static final String VUE = "/WEB-INF/AddAnnouncement.jsp";
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 	private Map<String, String> erreurs = new HashMap<String, String>();
-	public static final String VUEAfter = "/WEB-INF/Home_user.jsp";
+	public static final String VUEAfter = "/WEB-INF/HomeUser.jsp";
 	private String filename;
 	
 	@EJB
@@ -56,7 +56,7 @@ public class Add_Announcement extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		String path = context.getRealPath("/");
-		filename = path+"WEB-INF\\images";
+		filename = path+"WEB-INF\\images\\";
 		HttpSession session = request.getSession();
 		Annonces annonce = new Annonces();
 		try {
@@ -97,9 +97,8 @@ public class Add_Announcement extends HttpServlet {
 					}
 
 				} else {
-					/*
-					 * Traiter les champs de type fichier (input type="file").
-					 */
+
+					
 					String nomChamp = item.getFieldName();
 					String nameFile = FilenameUtils.getName(item.getName());
 					
