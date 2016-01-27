@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebInitParam;
@@ -30,8 +31,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
-@WebServlet(name = "add_Announcement", urlPatterns = { "/add_Announcement" }, initParams = {
-		@WebInitParam(name = "chemin", value = "/images/") })
+@WebServlet(name = "add_Announcement", urlPatterns = { "/add_Announcement" })
 @MultipartConfig
 public class Add_Announcement extends HttpServlet {
 	private String resultat;
@@ -44,10 +44,7 @@ public class Add_Announcement extends HttpServlet {
 	@EJB
 	private AnnouncementItf annoucement;
 
-	@Override
-	public void init() throws ServletException {
-		filename = getInitParameter("chemin");
-	}
+	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -57,7 +54,9 @@ public class Add_Announcement extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		ServletContext context = request.getServletContext();
+		String path = context.getRealPath("/");
+		filename = path+"WEB-INF\\images";
 		HttpSession session = request.getSession();
 		Annonces annonce = new Annonces();
 		try {

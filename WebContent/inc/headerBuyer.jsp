@@ -8,8 +8,8 @@
 		</div> 
 		<div id="option"  >
 		<h5>
-		<a  href="<c:url value="/connexion"/>"> Sing in </a>&nbsp;&nbsp;
-		<a  href="<c:url value="/registration"/>"> Sing up </a>&nbsp;
+		<a  href="<c:url value="/connexion"/>"> Sign in </a>&nbsp;&nbsp;
+		<a  href="<c:url value="/registration"/>"> Sign up </a>&nbsp;
 		</h5>
 	    </div>
 	    </header>
