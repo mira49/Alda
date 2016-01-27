@@ -9,10 +9,8 @@
             <li class="menuLi"><a href="<c:url value="/myAnnouncements"/>">My announcements </a></li>
             <li class="menuLi"><a href="<c:url value="/messages_user"/>">My messages </a></li>
             <li class="menuLi"><a href="<c:url value="/favorite"/>">Favorite </a></li>
-            
             <li class="menuLi"><a href="<c:url value="/announcement"/>">Actuality </a></li>
-            
-           
+            <li class="menuLi"><a href="<c:url value="/chat"/>">Chat </a></li>
           </ul>
           
         </div>
