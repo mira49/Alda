@@ -67,6 +67,9 @@
 						<span id="error" class="erreur">${erreur['picture1']}</span>
 						<span id="error" class="erreur">${erreur['picture2']}</span>
 						<span id="error" class="erreur">${erreur['picture3']}</span>
+						<span id="error" class="erreur">${erreur['postal_code']}</span>
+						<span id="error" class="erreur">${erreur['Price']}</span>
+						<span id="error" class="erreur">${erreur['Surface']}</span>
 						<label id="picture3"> Picture 3 : </label>
 						<input id="picture3" type="file" name="picture3">
 						<br>

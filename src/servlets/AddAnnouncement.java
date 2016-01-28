@@ -54,9 +54,14 @@ public class AddAnnouncement extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ServletContext context = request.getServletContext();
 		String path = context.getRealPath("/");
 		file_path = path+"WEB-INF\\images\\";
+		if (!new File(file_path).exists())
+	        {
+	           new File(file_path).mkdirs();
+	 	        }
 		HttpSession session = request.getSession();
 		Annonces annonce = new Annonces();
 		try {
@@ -75,12 +80,15 @@ public class AddAnnouncement extends HttpServlet {
 						annonce.setDescription(valeurChamp);
 						break;
 					case "postal_code":
+						traiteNumber(nomChamp,valeurChamp);
 						annonce.setPostal_code(Integer.parseInt(valeurChamp));
 						break;
 					case "Price":
+						traiteNumber(nomChamp,valeurChamp);
 						annonce.setPrice(Integer.parseInt(valeurChamp));
 						break;
 					case "Surface":
+						traiteNumber(nomChamp,valeurChamp);
 						annonce.setSurface(Integer.parseInt(valeurChamp));
 						break;
 					case "Town":
@@ -150,7 +158,8 @@ public class AddAnnouncement extends HttpServlet {
 		}
 		
 		try {
-
+			
+			
 			if (erreurs.isEmpty()) {
 
 				resultat = "Succes.";
@@ -184,6 +193,19 @@ public class AddAnnouncement extends HttpServlet {
 
 	
 	
+
+	
+
+	private void traiteNumber(String nomChamp, String valeurChamp) {
+		try{
+			Float.parseFloat(valeurChamp);
+		}
+		catch(NumberFormatException e){
+			String error = "Veuillez entrer un chiffre pour le champ :" + nomChamp;
+			setErreur( nomChamp, error );
+	    }
+	}
+
 	private void CopyImage( InputStream file, String namefile, String path ) throws IOException {
 		int SIZE_CACHE = 10240;
 		BufferedInputStream in = null;
