@@ -1,4 +1,5 @@
 C:\Users\guigu\Documents\GitHub\Alda\src\entities\Messages.java
+C:\Users\guigu\Documents\GitHub\Alda\src\unit_tests\AnnouncementDAOTest.java
 C:\Users\guigu\Documents\GitHub\Alda\src\entities\Administrator.java
 C:\Users\guigu\Documents\GitHub\Alda\src\ejb\UserDAO.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\AddAnnouncement.java
@@ -9,12 +10,15 @@ C:\Users\guigu\Documents\GitHub\Alda\src\ejb\UserItf.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Contact.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\DeconnectionDashboard.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Deconnexion.java
+C:\Users\guigu\Documents\GitHub\Alda\src\validation_tests\selenium_connexion.java
 C:\Users\guigu\Documents\GitHub\Alda\src\ejb\MessageItf.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Dashboard.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Home_people.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Information.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\ConnectionDashboard.java
+C:\Users\guigu\Documents\GitHub\Alda\src\validation_tests\favorite_message.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\AnnouncementList.java
+C:\Users\guigu\Documents\GitHub\Alda\src\unit_tests\MessageDAOTest.java
 C:\Users\guigu\Documents\GitHub\Alda\src\filters\RestrictionFilter.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\AnnouncementUser.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\DashboardDeleteUser.java
@@ -32,6 +36,9 @@ C:\Users\guigu\Documents\GitHub\Alda\src\ejb\AdministratorDAO.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\DashboardAnnounceList.java
 C:\Users\guigu\Documents\GitHub\Alda\src\chat\ChatMessageDecoder.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Connection.java
+C:\Users\guigu\Documents\GitHub\Alda\src\unit_tests\AdministratorDAOTest.java
+C:\Users\guigu\Documents\GitHub\Alda\src\servlets\ChatUser.java
+C:\Users\guigu\Documents\GitHub\Alda\src\unit_tests\UserDAOTest.java
 C:\Users\guigu\Documents\GitHub\Alda\src\servlets\Registration.java
 C:\Users\guigu\Documents\GitHub\Alda\src\chat\ChatEndpoint.java
 C:\Users\guigu\Documents\GitHub\Alda\src\ejb\AnnouncementItf.java
