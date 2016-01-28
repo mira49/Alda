@@ -13,6 +13,9 @@
 	<c:import url="/inc/headerUser.jsp" />
 	<h1 class="welcome">Welcome on your account
 		${sessionScope.user.firstName} ${sessionScope.user.name}</h1>
+	
+	<br>
+	<center>
 	<c:if test="${(notifications gt 0) && (notifications) != null}">
 		<h3>You have ${notifications} notifications. Check your messages.</h3>
 	</c:if>
@@ -20,8 +23,6 @@
 	<c:if test="${(news) != null}">
 		<h3>One or more announcement for your factors found</h3>
 	</c:if>
-	<br>
-	<center>
 		<a href="<c:url value="/add_Announcement"/>"> <img id="imghome"
 			src="<c:url value="/inc/adda.png"/>"
 			onMouseOver="changeimage('<c:url value="/inc/addah.png"/>',this);"
