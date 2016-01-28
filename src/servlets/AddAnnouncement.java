@@ -39,7 +39,7 @@ public class AddAnnouncement extends HttpServlet {
 	public static final String VUESucess = "/WEB-INF/Connection.jsp";
 	private Map<String, String> erreurs = new HashMap<String, String>();
 	public static final String VUEAfter = "/WEB-INF/HomeUser.jsp";
-	private String filename;
+	private String file_path;
 	
 	@EJB
 	private AnnouncementItf annoucement;
@@ -56,7 +56,7 @@ public class AddAnnouncement extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
 		String path = context.getRealPath("/");
-		filename = path+"WEB-INF\\images\\";
+		file_path = path+"WEB-INF\\images\\";
 		HttpSession session = request.getSession();
 		Annonces annonce = new Annonces();
 		try {
@@ -112,20 +112,20 @@ public class AddAnnouncement extends HttpServlet {
 						    	switch (nomChamp) {
 
 								case "picture3":
-									annonce.setImage3(nameFile);
+									annonce.setImage3(file_path + nameFile);
 									break;
 								case "picture2":
-									annonce.setImage2(nameFile);
+									annonce.setImage2(file_path + nameFile);
 									break;
 								case "picture1":
-									annonce.setImage1(nameFile);
+									annonce.setImage1(file_path + nameFile);
 									break;
 
 								default:
 									break;
 								}
 						    	
-								writeFile(file,nameFile,filename);
+								CopyImage(file,nameFile,file_path);
 								
 								
 						    }else{
@@ -159,7 +159,7 @@ public class AddAnnouncement extends HttpServlet {
 				resultat = "echec.";
 			}
 		} catch (ejb.DAOException e) {
-			resultat = "echec : une erreur impr�vue est survenue, merci de r�essayer dans quelques instants.";
+			resultat = "fail : there is an error in add announcement.";
 			e.printStackTrace();
 		}
 		if ("Succes.".equals(resultat)) {
@@ -184,13 +184,12 @@ public class AddAnnouncement extends HttpServlet {
 
 	
 	
-	private void writeFile( InputStream file, String nomFichier, String chemin ) throws IOException {
+	private void CopyImage( InputStream file, String namefile, String path ) throws IOException {
 		int SIZE_CACHE = 10240;
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
-		System.out.println(chemin + nomFichier );
 
-		File f = new File( chemin + nomFichier );
+		File f = new File( path + namefile );
 		try {
 			in = new BufferedInputStream( file, SIZE_CACHE );
 			out = new BufferedOutputStream( new FileOutputStream( f ),SIZE_CACHE );
