@@ -77,7 +77,7 @@ public class RestrictionFilter implements Filter {
         	chain.doFilter( request, response );
 
         }
-        else if ( chemin.equals( "/homeBuyer" ) ) {
+        else if ( chemin.equals( "/home_list" ) ) {
         	chain.doFilter( request, response );
 
         }
