@@ -18,7 +18,7 @@
 	<br>
 	<div id="corpsSa">
 
-		<form action="homeBuyer" method="post" name="announcement_Form">
+		<form action="home_list" method="post" name="announcement_Form">
 			<label style="padding: 15px;">Filter</label> <input type="text"
 				id="factor_lower_price" name="factor_lower_price" size="20"
 				placeholder="Price lower" maxlength="60"
