@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class selenium_connexion {
+public class ConnexionaddTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -24,19 +24,19 @@ public class selenium_connexion {
 
   @Test
   public void testAldaConnexionRegisterAdd() throws Exception {
-    driver.get(baseUrl + "/ALDA_Project/connexion");
+    driver.get(baseUrl + "/Alda_Project/connexion");
     driver.findElement(By.linkText("register ?")).click();
     driver.findElement(By.name("email")).clear();
     driver.findElement(By.name("email")).sendKeys("guillaume.ver@gmail.com");
     driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("istball21");
+    driver.findElement(By.name("password")).sendKeys("test1234");
     driver.findElement(By.name("password_confirm")).clear();
-    driver.findElement(By.name("password_confirm")).sendKeys("istball21");
+    driver.findElement(By.name("password_confirm")).sendKeys("test1234");
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     driver.findElement(By.name("email")).clear();
     driver.findElement(By.name("email")).sendKeys("guillaume.ver@gmail.com");
     driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("istball21");
+    driver.findElement(By.name("password")).sendKeys("test1234");
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     driver.findElement(By.xpath("(//img[@id='imghome'])[2]")).click();
     driver.findElement(By.linkText("Favorite")).click();

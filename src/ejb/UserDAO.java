@@ -16,7 +16,6 @@ public class UserDAO implements UserItf {
 	private EntityManager em;
 
 	public void create(User user) {
-		System.out.println("test");
 		em.persist(user);
 		
 	}
